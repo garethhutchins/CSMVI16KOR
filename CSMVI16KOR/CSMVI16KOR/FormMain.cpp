@@ -1,4 +1,5 @@
 #include "FormMain.h"
+#include "freenect-playback-wrapper.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
