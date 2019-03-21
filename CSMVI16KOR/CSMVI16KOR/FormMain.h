@@ -1,5 +1,9 @@
 
 #pragma once
+#include "FormMain.h"
+#include <string>
+#include <msclr\marshal_cppstd.h>
+#include "TrainFolder.h"
 
 namespace CSMVI16KOR {
 
@@ -23,6 +27,8 @@ namespace CSMVI16KOR {
 			//TODO: Add the constructor code here
 			//
 		}
+	
+		
 
 	protected:
 		/// <summary>
@@ -74,10 +80,10 @@ namespace CSMVI16KOR {
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(34, 64);
+			this->tabControl1->Location = System::Drawing::Point(12, 33);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(901, 506);
+			this->tabControl1->Size = System::Drawing::Size(793, 472);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -88,7 +94,7 @@ namespace CSMVI16KOR {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(893, 480);
+			this->tabPage1->Size = System::Drawing::Size(785, 446);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Training";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -119,8 +125,7 @@ namespace CSMVI16KOR {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Training Set:";
 			// 
-			// TrainImageWindow
-			
+			// tabPage2
 			// 
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
@@ -134,7 +139,7 @@ namespace CSMVI16KOR {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(977, 629);
+			this->ClientSize = System::Drawing::Size(871, 607);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"FormMain";
 			this->Text = L"FormMain";
@@ -148,6 +153,9 @@ namespace CSMVI16KOR {
 	private: System::Void btn_trn_folder_Click(System::Object^  sender, System::EventArgs^  e) {
 		TrainDlg->ShowDialog();
 		txt_trainFldr->Text = TrainDlg->SelectedPath;
+		msclr::interop::marshal_context context;
+		std::string tf = context.marshal_as<std::string>(txt_trainFldr->Text);
+		TrainFolder(tf);
 		
 	}
 };

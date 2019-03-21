@@ -21,12 +21,18 @@
     <ClCompile Include="freenect-playback-wrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TrainFolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FormMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="freenect-playback-wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainFolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

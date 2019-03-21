@@ -138,12 +138,14 @@
   <ItemGroup>
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="freenect-playback-wrapper.cpp" />
+    <ClCompile Include="TrainFolder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="freenect-playback-wrapper.h" />
+    <ClInclude Include="TrainFolder.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormMain.resx">
