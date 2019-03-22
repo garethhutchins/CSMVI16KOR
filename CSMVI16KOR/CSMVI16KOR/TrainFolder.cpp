@@ -1,11 +1,24 @@
 #include "TrainFolder.h"
 #include "freenect-playback-wrapper.h"
+#include <Unknwn.h>    
+#include <windows.h>
+#include <objidl.h>
+#include <shellapi.h>
+#include <iostream>
+#include <fstream>
+#include <cstdint>
+#include <filesystem>
+#pragma comment(lib, "shell32")
 
 
-TrainFolder::TrainFolder(std::string path)
+
+TrainFolder::TrainFolder(std::string path, std::string temp)
 {
-	//FreenectPlaybackWrapper wrap("B:/ExampleVideo");
-	//FreenectPlaybackWrapper wrap("C:/Users/ghutchin/Documents/UOR/Visual I/Kinnect Object Recognition/Set1");
+	namespace fs = std::experimental::filesystem;
+	//Create Directory
+	fs::create_directory(temp +  "/images");
+
+	int Frame = 0;
 	FreenectPlaybackWrapper wrap(path);
 
 	cv::Mat currentRGB;
@@ -35,6 +48,7 @@ TrainFolder::TrainFolder(std::string path)
 		// wrapper. Also pauses between the frames depending
 		// on the time between frames.
 		status = wrap.GetNextFrame();
+		Frame++;
 
 		// Determine if RGB is updated, and grabs the image
 		// if it has been updated
@@ -49,10 +63,18 @@ TrainFolder::TrainFolder(std::string path)
 		// Show the images in the windows
 		cv::imshow("RGB", currentRGB);
 		cv::imshow("Depth", currentDepth);
+		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".bmp";
+		cv::imwrite(iFile, currentRGB);
 
 		// Check for keyboard input
 		key = cv::waitKey(10);
 	}
 
-	//return 0;
+	//Open the folder so you can see the frames
+	std::string t = temp + "/images";
+	std::wstring stemp = std::wstring(t.begin(), t.end());
+	LPCWSTR sw = stemp.c_str();
+	ShellExecute(NULL, NULL,sw , NULL, NULL, SW_SHOWDEFAULT);
 }
+
+

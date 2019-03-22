@@ -3,7 +3,7 @@
 class TrainFolder
 {
 public:
-	TrainFolder(std::string);
+	TrainFolder(std::string, std::string);
 
 	
 private:
