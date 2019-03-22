@@ -268,6 +268,7 @@ namespace CSMVI16KOR {
 			this->btn_label->TabIndex = 1;
 			this->btn_label->Text = L"Label";
 			this->btn_label->UseVisualStyleBackColor = true;
+			this->btn_label->Click += gcnew System::EventHandler(this, &FormMain::btn_label_Click);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -358,7 +359,6 @@ namespace CSMVI16KOR {
 			this->label3->Size = System::Drawing::Size(38, 13);
 			this->label3->TabIndex = 0;
 			this->label3->Text = L"Label";
-			this->label3->Click += gcnew System::EventHandler(this, &FormMain::label3_Click);
 			// 
 			// label4
 			// 
@@ -597,7 +597,6 @@ namespace CSMVI16KOR {
 			this->dog_e->Name = L"dog_e";
 			this->dog_e->Size = System::Drawing::Size(100, 20);
 			this->dog_e->TabIndex = 23;
-			this->dog_e->TextChanged += gcnew System::EventHandler(this, &FormMain::textBox4_TextChanged);
 			// 
 			// dino_s
 			// 
@@ -874,5 +873,10 @@ private: System::Void btn_temp_Click(System::Object^  sender, System::EventArgs^
 	txt_tmp->Text = TrainDlg->SelectedPath;
 }
 
+
+private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Now label all of the images
+	//Pass to a function that accepts label name, temp directory, start and end frame.
+}
 };
 }
