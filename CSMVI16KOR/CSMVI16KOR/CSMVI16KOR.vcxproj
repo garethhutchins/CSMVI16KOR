@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="freenect-playback-wrapper.cpp" />
+    <ClCompile Include="LabelFolder.cpp" />
     <ClCompile Include="TrainFolder.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="freenect-playback-wrapper.h" />
+    <ClInclude Include="LabelFolder.h" />
     <ClInclude Include="TrainFolder.h" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include <string>
 #include <msclr\marshal_cppstd.h>
 #include "TrainFolder.h"
+#include "LabelFolder.h"
 
 namespace CSMVI16KOR {
 
@@ -78,7 +79,8 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::Label^  label21;
 	private: System::Windows::Forms::Label^  label22;
 	private: System::Windows::Forms::TextBox^  baby_s;
-	private: System::Windows::Forms::TextBox^  baby_n;
+	private: System::Windows::Forms::TextBox^  baby_e;
+
 	private: System::Windows::Forms::TextBox^  dog_s;
 	private: System::Windows::Forms::TextBox^  dog_e;
 	private: System::Windows::Forms::TextBox^  dino_s;
@@ -96,7 +98,8 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::TextBox^  koala_s;
 	private: System::Windows::Forms::TextBox^  koala_e;
 	private: System::Windows::Forms::TextBox^  blackberry_s;
-	private: System::Windows::Forms::TextBox^  blackbery_e;
+	private: System::Windows::Forms::TextBox^  blackberry_e;
+
 	private: System::Windows::Forms::TextBox^  diet_s;
 	private: System::Windows::Forms::TextBox^  diet_e;
 	private: System::Windows::Forms::TextBox^  duck_s;
@@ -179,7 +182,7 @@ namespace CSMVI16KOR {
 			this->label21 = (gcnew System::Windows::Forms::Label());
 			this->label22 = (gcnew System::Windows::Forms::Label());
 			this->baby_s = (gcnew System::Windows::Forms::TextBox());
-			this->baby_n = (gcnew System::Windows::Forms::TextBox());
+			this->baby_e = (gcnew System::Windows::Forms::TextBox());
 			this->dog_s = (gcnew System::Windows::Forms::TextBox());
 			this->dog_e = (gcnew System::Windows::Forms::TextBox());
 			this->dino_s = (gcnew System::Windows::Forms::TextBox());
@@ -197,7 +200,7 @@ namespace CSMVI16KOR {
 			this->koala_s = (gcnew System::Windows::Forms::TextBox());
 			this->koala_e = (gcnew System::Windows::Forms::TextBox());
 			this->blackberry_s = (gcnew System::Windows::Forms::TextBox());
-			this->blackbery_e = (gcnew System::Windows::Forms::TextBox());
+			this->blackberry_e = (gcnew System::Windows::Forms::TextBox());
 			this->diet_s = (gcnew System::Windows::Forms::TextBox());
 			this->diet_e = (gcnew System::Windows::Forms::TextBox());
 			this->duck_s = (gcnew System::Windows::Forms::TextBox());
@@ -306,7 +309,7 @@ namespace CSMVI16KOR {
 			this->tableLayoutPanel1->Controls->Add(this->label21, 3, 6);
 			this->tableLayoutPanel1->Controls->Add(this->label22, 3, 7);
 			this->tableLayoutPanel1->Controls->Add(this->baby_s, 1, 1);
-			this->tableLayoutPanel1->Controls->Add(this->baby_n, 2, 1);
+			this->tableLayoutPanel1->Controls->Add(this->baby_e, 2, 1);
 			this->tableLayoutPanel1->Controls->Add(this->dog_s, 1, 2);
 			this->tableLayoutPanel1->Controls->Add(this->dog_e, 2, 2);
 			this->tableLayoutPanel1->Controls->Add(this->dino_s, 1, 3);
@@ -324,7 +327,7 @@ namespace CSMVI16KOR {
 			this->tableLayoutPanel1->Controls->Add(this->koala_s, 4, 2);
 			this->tableLayoutPanel1->Controls->Add(this->koala_e, 5, 2);
 			this->tableLayoutPanel1->Controls->Add(this->blackberry_s, 4, 3);
-			this->tableLayoutPanel1->Controls->Add(this->blackbery_e, 5, 3);
+			this->tableLayoutPanel1->Controls->Add(this->blackberry_e, 5, 3);
 			this->tableLayoutPanel1->Controls->Add(this->diet_s, 4, 4);
 			this->tableLayoutPanel1->Controls->Add(this->diet_e, 5, 4);
 			this->tableLayoutPanel1->Controls->Add(this->duck_s, 4, 5);
@@ -577,12 +580,12 @@ namespace CSMVI16KOR {
 			this->baby_s->TabIndex = 20;
 			this->baby_s->UseSystemPasswordChar = true;
 			// 
-			// baby_n
+			// baby_e
 			// 
-			this->baby_n->Location = System::Drawing::Point(241, 32);
-			this->baby_n->Name = L"baby_n";
-			this->baby_n->Size = System::Drawing::Size(100, 20);
-			this->baby_n->TabIndex = 21;
+			this->baby_e->Location = System::Drawing::Point(241, 32);
+			this->baby_e->Name = L"baby_e";
+			this->baby_e->Size = System::Drawing::Size(100, 20);
+			this->baby_e->TabIndex = 21;
 			// 
 			// dog_s
 			// 
@@ -703,12 +706,12 @@ namespace CSMVI16KOR {
 			this->blackberry_s->Size = System::Drawing::Size(100, 20);
 			this->blackberry_s->TabIndex = 38;
 			// 
-			// blackbery_e
+			// blackberry_e
 			// 
-			this->blackbery_e->Location = System::Drawing::Point(598, 90);
-			this->blackbery_e->Name = L"blackbery_e";
-			this->blackbery_e->Size = System::Drawing::Size(100, 20);
-			this->blackbery_e->TabIndex = 39;
+			this->blackberry_e->Location = System::Drawing::Point(598, 90);
+			this->blackberry_e->Name = L"blackberry_e";
+			this->blackberry_e->Size = System::Drawing::Size(100, 20);
+			this->blackberry_e->TabIndex = 39;
 			// 
 			// diet_s
 			// 
@@ -876,7 +879,82 @@ private: System::Void btn_temp_Click(System::Object^  sender, System::EventArgs^
 
 private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs^  e) {
 	//Now label all of the images
-	//Pass to a function that accepts label name, temp directory, start and end frame.
+	//Pass to a function that accepts label name, temp directory, start and end frame
+	//Set the Label Folder
+	msclr::interop::marshal_context context;
+	std::string im = context.marshal_as<std::string>(txt_tmp->Text);
+	im = im + "/images";
+	
+	
+	//Baby
+	std::int16_t bs = context.marshal_as<std::int16_t>(baby_s->Text);
+	std::int16_t be = context.marshal_as<std::int16_t>(baby_e->Text);
+	LabelFolder::LabelFolder(im, "Baby", bs, be);
+
+	//Dog
+	std::int16_t ds = context.marshal_as<std::int16_t>(dog_s->Text);
+	std::int16_t de = context.marshal_as<std::int16_t>(dog_e->Text);
+	LabelFolder::LabelFolder(im, "Dog", ds, de);
+
+	//Dinosaur
+	std::int16_t dinos = context.marshal_as<std::int16_t>(dino_s->Text);
+	std::int16_t dinoe = context.marshal_as<std::int16_t>(dino_e->Text);
+	LabelFolder::LabelFolder(im, "Dinosaur", dinos, dinoe);
+
+	//CoffeeTin
+	std::int16_t coffees = context.marshal_as<std::int16_t>(coffee_s->Text);
+	std::int16_t coffeee = context.marshal_as<std::int16_t>(coffee_e->Text);
+	LabelFolder::LabelFolder(im, "Coffee Tin", coffees, coffeee);
+
+	//Mug
+	std::int16_t ms = context.marshal_as<std::int16_t>(mug_s->Text);
+	std::int16_t me = context.marshal_as<std::int16_t>(mug_e->Text);
+	LabelFolder::LabelFolder(im, "Mug", ms, me);
+
+	//Car
+	std::int16_t cs = context.marshal_as<std::int16_t>(car_s->Text);
+	std::int16_t ce = context.marshal_as<std::int16_t>(car_e->Text);
+	LabelFolder::LabelFolder(im, "Car", cs, ce);
+
+	//Camera
+	std::int16_t cams = context.marshal_as<std::int16_t>(cam_s->Text);
+	std::int16_t came = context.marshal_as<std::int16_t>(cam_e->Text);
+	LabelFolder::LabelFolder(im, "Camera", cams, came);
+
+	//Keyboard
+	std::int16_t ks = context.marshal_as<std::int16_t>(key_s->Text);
+	std::int16_t ke = context.marshal_as<std::int16_t>(key_e->Text);
+	LabelFolder::LabelFolder(im, "Keybaord", ks, ke);
+
+	//Koala
+	std::int16_t kos = context.marshal_as<std::int16_t>(koala_s->Text);
+	std::int16_t koe = context.marshal_as<std::int16_t>(koala_e->Text);
+	LabelFolder::LabelFolder(im, "Koala", ks, ke);
+
+	//Blackberry
+	std::int16_t blackberrys = context.marshal_as<std::int16_t>(blackberry_s->Text);
+	std::int16_t blackberrye = context.marshal_as<std::int16_t>(blackberry_e->Text);
+	LabelFolder::LabelFolder(im, "Blackberry", blackberrys, blackberrye);
+
+	//Diet Coke
+	std::int16_t dcs = context.marshal_as<std::int16_t>(diet_s->Text);
+	std::int16_t dce = context.marshal_as<std::int16_t>(diet_e->Text);
+	LabelFolder::LabelFolder(im, "Diet Coke", dcs, dce);
+
+	//Duck
+	std::int16_t ducks = context.marshal_as<std::int16_t>(duck_s->Text);
+	std::int16_t ducke = context.marshal_as<std::int16_t>(duck_e->Text);
+	LabelFolder::LabelFolder(im, "Duck", ducks, ducke);
+
+	//Dragon
+	std::int16_t dragons = context.marshal_as<std::int16_t>(dragon_s->Text);
+	std::int16_t dragone = context.marshal_as<std::int16_t>(dragon_e->Text);
+	LabelFolder::LabelFolder(im, "Dragon", dragons, dragone);
+
+	//Android
+	std::int16_t androids = context.marshal_as<std::int16_t>(android_s->Text);
+	std::int16_t androide = context.marshal_as<std::int16_t>(android_e->Text);
+	LabelFolder::LabelFolder(im, "Android", androids, androide);
 }
 };
 }

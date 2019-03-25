@@ -15,8 +15,10 @@
 TrainFolder::TrainFolder(std::string path, std::string temp)
 {
 	namespace fs = std::experimental::filesystem;
-	//Create Directory
+	//Create images Directory
 	fs::create_directory(temp +  "/images");
+	//Create the depth directory
+	fs::create_directory(temp + "/depth");
 
 	int Frame = 0;
 	FreenectPlaybackWrapper wrap(path);
@@ -65,6 +67,10 @@ TrainFolder::TrainFolder(std::string path, std::string temp)
 		cv::imshow("Depth", currentDepth);
 		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".bmp";
 		cv::imwrite(iFile, currentRGB);
+
+		//depth
+		std::string dFile = temp + "/depth/" + std::to_string(Frame) + ".bmp";
+		cv::imwrite(dFile, currentDepth);
 
 		// Check for keyboard input
 		key = cv::waitKey(10);
