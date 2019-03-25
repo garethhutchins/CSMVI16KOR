@@ -887,73 +887,73 @@ private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs
 	
 	
 	//Baby
-	std::int16_t bs = context.marshal_as<std::int16_t>(baby_s->Text);
-	std::int16_t be = context.marshal_as<std::int16_t>(baby_e->Text);
+	int bs = std::stoi(context.marshal_as<std::string>(baby_s->Text));
+	int be = std::stoi(context.marshal_as<std::string>(baby_e->Text));
 	LabelFolder::LabelFolder(im, "Baby", bs, be);
 
 	//Dog
-	std::int16_t ds = context.marshal_as<std::int16_t>(dog_s->Text);
-	std::int16_t de = context.marshal_as<std::int16_t>(dog_e->Text);
+	int ds = std::stoi(context.marshal_as<std::string>(dog_s->Text));
+	int de = std::stoi(context.marshal_as<std::string>(dog_e->Text));
 	LabelFolder::LabelFolder(im, "Dog", ds, de);
 
 	//Dinosaur
-	std::int16_t dinos = context.marshal_as<std::int16_t>(dino_s->Text);
-	std::int16_t dinoe = context.marshal_as<std::int16_t>(dino_e->Text);
+	int dinos = std::stoi(context.marshal_as<std::string>(dino_s->Text));
+	int dinoe = std::stoi(context.marshal_as<std::string>(dino_e->Text));
 	LabelFolder::LabelFolder(im, "Dinosaur", dinos, dinoe);
 
 	//CoffeeTin
-	std::int16_t coffees = context.marshal_as<std::int16_t>(coffee_s->Text);
-	std::int16_t coffeee = context.marshal_as<std::int16_t>(coffee_e->Text);
+	int coffees = std::stoi(context.marshal_as<std::string>(coffee_s->Text));
+	int coffeee = std::stoi(context.marshal_as<std::string>(coffee_e->Text));
 	LabelFolder::LabelFolder(im, "Coffee Tin", coffees, coffeee);
 
 	//Mug
-	std::int16_t ms = context.marshal_as<std::int16_t>(mug_s->Text);
-	std::int16_t me = context.marshal_as<std::int16_t>(mug_e->Text);
+	int ms = std::stoi(context.marshal_as<std::string>(mug_s->Text));
+	int me = std::stoi(context.marshal_as<std::string>(mug_e->Text));
 	LabelFolder::LabelFolder(im, "Mug", ms, me);
 
 	//Car
-	std::int16_t cs = context.marshal_as<std::int16_t>(car_s->Text);
-	std::int16_t ce = context.marshal_as<std::int16_t>(car_e->Text);
+	int cs = std::stoi(context.marshal_as<std::string>(car_s->Text));
+	int ce = std::stoi(context.marshal_as<std::string>(car_e->Text));
 	LabelFolder::LabelFolder(im, "Car", cs, ce);
 
 	//Camera
-	std::int16_t cams = context.marshal_as<std::int16_t>(cam_s->Text);
-	std::int16_t came = context.marshal_as<std::int16_t>(cam_e->Text);
+	int cams = std::stoi(context.marshal_as<std::string>(cam_s->Text));
+	int came = std::stoi(context.marshal_as<std::string>(cam_e->Text));
 	LabelFolder::LabelFolder(im, "Camera", cams, came);
 
 	//Keyboard
-	std::int16_t ks = context.marshal_as<std::int16_t>(key_s->Text);
-	std::int16_t ke = context.marshal_as<std::int16_t>(key_e->Text);
+	int ks = std::stoi(context.marshal_as<std::string>(key_s->Text));
+	int ke = std::stoi(context.marshal_as<std::string>(key_e->Text));
 	LabelFolder::LabelFolder(im, "Keybaord", ks, ke);
 
 	//Koala
-	std::int16_t kos = context.marshal_as<std::int16_t>(koala_s->Text);
-	std::int16_t koe = context.marshal_as<std::int16_t>(koala_e->Text);
+	int kos = std::stoi(context.marshal_as<std::string>(koala_s->Text));
+	int koe = std::stoi(context.marshal_as<std::string>(koala_e->Text));
 	LabelFolder::LabelFolder(im, "Koala", ks, ke);
 
 	//Blackberry
-	std::int16_t blackberrys = context.marshal_as<std::int16_t>(blackberry_s->Text);
-	std::int16_t blackberrye = context.marshal_as<std::int16_t>(blackberry_e->Text);
+	int blackberrys = std::stoi(context.marshal_as<std::string>(blackberry_s->Text));
+	int blackberrye = std::stoi(context.marshal_as<std::string>(blackberry_e->Text));
 	LabelFolder::LabelFolder(im, "Blackberry", blackberrys, blackberrye);
 
 	//Diet Coke
-	std::int16_t dcs = context.marshal_as<std::int16_t>(diet_s->Text);
-	std::int16_t dce = context.marshal_as<std::int16_t>(diet_e->Text);
+	int dcs = std::stoi(context.marshal_as<std::string>(diet_s->Text));
+	int dce = std::stoi(context.marshal_as<std::string>(diet_e->Text));
 	LabelFolder::LabelFolder(im, "Diet Coke", dcs, dce);
 
 	//Duck
-	std::int16_t ducks = context.marshal_as<std::int16_t>(duck_s->Text);
-	std::int16_t ducke = context.marshal_as<std::int16_t>(duck_e->Text);
+	int ducks = std::stoi(context.marshal_as<std::string>(duck_s->Text));
+	int ducke = std::stoi(context.marshal_as<std::string>(duck_e->Text));
 	LabelFolder::LabelFolder(im, "Duck", ducks, ducke);
 
 	//Dragon
-	std::int16_t dragons = context.marshal_as<std::int16_t>(dragon_s->Text);
-	std::int16_t dragone = context.marshal_as<std::int16_t>(dragon_e->Text);
+	int dragons = std::stoi(context.marshal_as<std::string>(dragon_s->Text));
+	int dragone = std::stoi(context.marshal_as<std::string>(dragon_e->Text));
 	LabelFolder::LabelFolder(im, "Dragon", dragons, dragone);
 
 	//Android
-	std::int16_t androids = context.marshal_as<std::int16_t>(android_s->Text);
-	std::int16_t androide = context.marshal_as<std::int16_t>(android_e->Text);
+	int androids = std::stoi(context.marshal_as<std::string>(android_s->Text));
+	int androide = std::stoi(context.marshal_as<std::string>(android_e->Text));
 	LabelFolder::LabelFolder(im, "Android", androids, androide);
 }
 };
