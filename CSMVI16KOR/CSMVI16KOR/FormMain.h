@@ -5,6 +5,7 @@
 #include <msclr\marshal_cppstd.h>
 #include "TrainFolder.h"
 #include "LabelFolder.h"
+#include "Unlabelled.h"
 
 namespace CSMVI16KOR {
 
@@ -108,6 +109,8 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::TextBox^  dragon_e;
 	private: System::Windows::Forms::TextBox^  android_s;
 	private: System::Windows::Forms::TextBox^  android_e;
+	private: System::Windows::Forms::TextBox^  txt_EndFrame;
+	private: System::Windows::Forms::Label^  label23;
 
 
 
@@ -159,6 +162,8 @@ namespace CSMVI16KOR {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->txt_EndFrame = (gcnew System::Windows::Forms::TextBox());
+			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->btn_label = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -254,6 +259,8 @@ namespace CSMVI16KOR {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->txt_EndFrame);
+			this->groupBox1->Controls->Add(this->label23);
 			this->groupBox1->Controls->Add(this->btn_label);
 			this->groupBox1->Controls->Add(this->tableLayoutPanel1);
 			this->groupBox1->Location = System::Drawing::Point(9, 148);
@@ -263,13 +270,31 @@ namespace CSMVI16KOR {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Labels";
 			// 
+			// txt_EndFrame
+			// 
+			this->txt_EndFrame->Location = System::Drawing::Point(488, 261);
+			this->txt_EndFrame->Name = L"txt_EndFrame";
+			this->txt_EndFrame->Size = System::Drawing::Size(100, 20);
+			this->txt_EndFrame->TabIndex = 3;
+			// 
+			// label23
+			// 
+			this->label23->AutoSize = true;
+			this->label23->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label23->Location = System::Drawing::Point(395, 268);
+			this->label23->Name = L"label23";
+			this->label23->Size = System::Drawing::Size(71, 13);
+			this->label23->TabIndex = 2;
+			this->label23->Text = L"End Frame:";
+			// 
 			// btn_label
 			// 
-			this->btn_label->Location = System::Drawing::Point(337, 258);
+			this->btn_label->Location = System::Drawing::Point(271, 261);
 			this->btn_label->Name = L"btn_label";
-			this->btn_label->Size = System::Drawing::Size(75, 23);
+			this->btn_label->Size = System::Drawing::Size(101, 23);
 			this->btn_label->TabIndex = 1;
-			this->btn_label->Text = L"Label";
+			this->btn_label->Text = L"Label Frames";
 			this->btn_label->UseVisualStyleBackColor = true;
 			this->btn_label->Click += gcnew System::EventHandler(this, &FormMain::btn_label_Click);
 			// 
@@ -578,7 +603,6 @@ namespace CSMVI16KOR {
 			this->baby_s->Name = L"baby_s";
 			this->baby_s->Size = System::Drawing::Size(100, 20);
 			this->baby_s->TabIndex = 20;
-			this->baby_s->UseSystemPasswordChar = true;
 			// 
 			// baby_e
 			// 
@@ -785,7 +809,7 @@ namespace CSMVI16KOR {
 			this->btn_run->Name = L"btn_run";
 			this->btn_run->Size = System::Drawing::Size(75, 23);
 			this->btn_run->TabIndex = 5;
-			this->btn_run->Text = L"Run";
+			this->btn_run->Text = L"Split Frames";
 			this->btn_run->UseVisualStyleBackColor = true;
 			this->btn_run->Click += gcnew System::EventHandler(this, &FormMain::btn_run_Click);
 			// 
@@ -853,6 +877,7 @@ namespace CSMVI16KOR {
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
 			this->ResumeLayout(false);
@@ -882,79 +907,99 @@ private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs
 	//Pass to a function that accepts label name, temp directory, start and end frame
 	//Set the Label Folder
 	msclr::interop::marshal_context context;
-	std::string im = context.marshal_as<std::string>(txt_tmp->Text);
-	im = im + "/images";
-	
+	std::string tDir = context.marshal_as<std::string>(txt_tmp->Text);
+	//Set the Directories
+	std::string im = tDir + "/images";
+	std::string dp = tDir + "/depth";
 	
 	//Baby
 	int bs = std::stoi(context.marshal_as<std::string>(baby_s->Text));
 	int be = std::stoi(context.marshal_as<std::string>(baby_e->Text));
 	LabelFolder::LabelFolder(im, "Baby", bs, be);
+	LabelFolder::LabelFolder(dp, "Baby", bs, be);
 
 	//Dog
 	int ds = std::stoi(context.marshal_as<std::string>(dog_s->Text));
 	int de = std::stoi(context.marshal_as<std::string>(dog_e->Text));
 	LabelFolder::LabelFolder(im, "Dog", ds, de);
+	LabelFolder::LabelFolder(dp, "Dog", ds, de);
 
 	//Dinosaur
 	int dinos = std::stoi(context.marshal_as<std::string>(dino_s->Text));
 	int dinoe = std::stoi(context.marshal_as<std::string>(dino_e->Text));
 	LabelFolder::LabelFolder(im, "Dinosaur", dinos, dinoe);
+	LabelFolder::LabelFolder(dp, "Dinosaur", dinos, dinoe);
 
 	//CoffeeTin
 	int coffees = std::stoi(context.marshal_as<std::string>(coffee_s->Text));
 	int coffeee = std::stoi(context.marshal_as<std::string>(coffee_e->Text));
 	LabelFolder::LabelFolder(im, "Coffee Tin", coffees, coffeee);
+	LabelFolder::LabelFolder(dp, "Coffee Tin", coffees, coffeee);
 
 	//Mug
 	int ms = std::stoi(context.marshal_as<std::string>(mug_s->Text));
 	int me = std::stoi(context.marshal_as<std::string>(mug_e->Text));
 	LabelFolder::LabelFolder(im, "Mug", ms, me);
+	LabelFolder::LabelFolder(dp, "Mug", ms, me);
 
 	//Car
 	int cs = std::stoi(context.marshal_as<std::string>(car_s->Text));
 	int ce = std::stoi(context.marshal_as<std::string>(car_e->Text));
 	LabelFolder::LabelFolder(im, "Car", cs, ce);
+	LabelFolder::LabelFolder(dp, "Car", cs, ce);
 
 	//Camera
 	int cams = std::stoi(context.marshal_as<std::string>(cam_s->Text));
 	int came = std::stoi(context.marshal_as<std::string>(cam_e->Text));
 	LabelFolder::LabelFolder(im, "Camera", cams, came);
+	LabelFolder::LabelFolder(dp, "Camera", cams, came);
 
 	//Keyboard
 	int ks = std::stoi(context.marshal_as<std::string>(key_s->Text));
 	int ke = std::stoi(context.marshal_as<std::string>(key_e->Text));
 	LabelFolder::LabelFolder(im, "Keybaord", ks, ke);
+	LabelFolder::LabelFolder(dp, "Keybaord", ks, ke);
 
 	//Koala
 	int kos = std::stoi(context.marshal_as<std::string>(koala_s->Text));
 	int koe = std::stoi(context.marshal_as<std::string>(koala_e->Text));
-	LabelFolder::LabelFolder(im, "Koala", ks, ke);
+	LabelFolder::LabelFolder(im, "Koala", kos, koe);
+	LabelFolder::LabelFolder(dp, "Koala", kos, koe);
 
 	//Blackberry
 	int blackberrys = std::stoi(context.marshal_as<std::string>(blackberry_s->Text));
 	int blackberrye = std::stoi(context.marshal_as<std::string>(blackberry_e->Text));
 	LabelFolder::LabelFolder(im, "Blackberry", blackberrys, blackberrye);
+	LabelFolder::LabelFolder(dp, "Blackberry", blackberrys, blackberrye);
 
 	//Diet Coke
 	int dcs = std::stoi(context.marshal_as<std::string>(diet_s->Text));
 	int dce = std::stoi(context.marshal_as<std::string>(diet_e->Text));
 	LabelFolder::LabelFolder(im, "Diet Coke", dcs, dce);
+	LabelFolder::LabelFolder(dp, "Diet Coke", dcs, dce);
 
 	//Duck
 	int ducks = std::stoi(context.marshal_as<std::string>(duck_s->Text));
 	int ducke = std::stoi(context.marshal_as<std::string>(duck_e->Text));
 	LabelFolder::LabelFolder(im, "Duck", ducks, ducke);
+	LabelFolder::LabelFolder(dp, "Duck", ducks, ducke);
 
 	//Dragon
 	int dragons = std::stoi(context.marshal_as<std::string>(dragon_s->Text));
 	int dragone = std::stoi(context.marshal_as<std::string>(dragon_e->Text));
 	LabelFolder::LabelFolder(im, "Dragon", dragons, dragone);
+	LabelFolder::LabelFolder(dp, "Dragon", dragons, dragone);
 
 	//Android
 	int androids = std::stoi(context.marshal_as<std::string>(android_s->Text));
 	int androide = std::stoi(context.marshal_as<std::string>(android_e->Text));
 	LabelFolder::LabelFolder(im, "Android", androids, androide);
+	LabelFolder::LabelFolder(dp, "Android", androids, androide);
+
+	//Now move everything that isn't labelled to an unlabelled directory
+	int eFrame = std::stoi(context.marshal_as<std::string>(txt_EndFrame->Text));
+	Unlabelled::Unlabelled(im,eFrame);
+	Unlabelled::Unlabelled(dp,eFrame);
 }
 };
 }

@@ -1,15 +1,17 @@
-#include "LabelFolder.h"
+#include "Unlabelled.h"
 #include <string>
 #include "windows.h"
 #include "Winbase.h"
 
-LabelFolder::LabelFolder(std::string path, std::string label, int sFrame,int eFrame){
-	std::string t = path + "/" + label;
+Unlabelled::Unlabelled(std::string path, int endFrame)
+{
+//This will move all of the files that haven't been labelled
+	std::string t = path + "/unlabelled";
 	std::wstring stemp = std::wstring(t.begin(), t.end());
 	LPCWSTR sw = stemp.c_str();
 	CreateDirectory(sw, NULL);
-	int start = sFrame;
-	int end = eFrame + 1;
+	int start = 1;
+	int end = endFrame +1;
 	while (start < end) {
 		//Set the new file name
 		std::string newFile = t + "/" + std::to_string(start) + ".bmp";
@@ -26,4 +28,4 @@ LabelFolder::LabelFolder(std::string path, std::string label, int sFrame,int eFr
 		start++;
 	}
 
-	}
+}
