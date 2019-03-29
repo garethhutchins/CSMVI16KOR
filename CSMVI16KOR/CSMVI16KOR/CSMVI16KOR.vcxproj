@@ -139,6 +139,7 @@
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="freenect-playback-wrapper.cpp" />
     <ClCompile Include="LabelFolder.cpp" />
+    <ClCompile Include="ObjectPCA.cpp" />
     <ClCompile Include="TrainFolder.cpp" />
     <ClCompile Include="Unlabelled.cpp" />
   </ItemGroup>
@@ -148,6 +149,7 @@
     </ClInclude>
     <ClInclude Include="freenect-playback-wrapper.h" />
     <ClInclude Include="LabelFolder.h" />
+    <ClInclude Include="ObjectPCA.h" />
     <ClInclude Include="TrainFolder.h" />
     <ClInclude Include="Unlabelled.h" />
   </ItemGroup>

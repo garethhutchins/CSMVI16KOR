@@ -6,6 +6,7 @@
 #include "TrainFolder.h"
 #include "LabelFolder.h"
 #include "Unlabelled.h"
+#include "ObjectPCA.h"
 
 namespace CSMVI16KOR {
 
@@ -111,40 +112,7 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::TextBox^  android_e;
 	private: System::Windows::Forms::TextBox^  txt_EndFrame;
 	private: System::Windows::Forms::Label^  label23;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::Button^  btn_class;
 
 	private:
 		/// <summary>
@@ -223,6 +191,7 @@ namespace CSMVI16KOR {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -236,11 +205,12 @@ namespace CSMVI16KOR {
 			this->tabControl1->Location = System::Drawing::Point(12, 33);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(793, 472);
+			this->tabControl1->Size = System::Drawing::Size(793, 512);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->btn_class);
 			this->tabPage1->Controls->Add(this->groupBox1);
 			this->tabPage1->Controls->Add(this->btn_temp);
 			this->tabPage1->Controls->Add(this->btn_run);
@@ -252,7 +222,7 @@ namespace CSMVI16KOR {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(785, 446);
+			this->tabPage1->Size = System::Drawing::Size(785, 486);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Training";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -860,10 +830,20 @@ namespace CSMVI16KOR {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(785, 446);
+			this->tabPage2->Size = System::Drawing::Size(785, 486);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Testing";
 			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// btn_class
+			// 
+			this->btn_class->Location = System::Drawing::Point(318, 446);
+			this->btn_class->Name = L"btn_class";
+			this->btn_class->Size = System::Drawing::Size(137, 23);
+			this->btn_class->TabIndex = 1;
+			this->btn_class->Text = L"Create Classifications";
+			this->btn_class->UseVisualStyleBackColor = true;
+			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
 			// 
 			// FormMain
 			// 
@@ -957,8 +937,8 @@ private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs
 	//Keyboard
 	int ks = std::stoi(context.marshal_as<std::string>(key_s->Text));
 	int ke = std::stoi(context.marshal_as<std::string>(key_e->Text));
-	LabelFolder::LabelFolder(im, "Keybaord", ks, ke);
-	LabelFolder::LabelFolder(dp, "Keybaord", ks, ke);
+	LabelFolder::LabelFolder(im, "Keyboard", ks, ke);
+	LabelFolder::LabelFolder(dp, "Keyboard", ks, ke);
 
 	//Koala
 	int kos = std::stoi(context.marshal_as<std::string>(koala_s->Text));
@@ -1000,6 +980,68 @@ private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs
 	int eFrame = std::stoi(context.marshal_as<std::string>(txt_EndFrame->Text));
 	Unlabelled::Unlabelled(im,eFrame);
 	Unlabelled::Unlabelled(dp,eFrame);
+}
+private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Set the Directories
+	msclr::interop::marshal_context context;
+	std::string tDir = context.marshal_as<std::string>(txt_tmp->Text);
+	//Set the Directories
+	std::string im = tDir + "/images";
+	std::string dp = tDir + "/depth";
+	//PCA
+	ObjectPCA::ObjectPCA(im + "/Android", "Android");
+	ObjectPCA::ObjectPCA(dp + "/Android", "Android");
+	//PCA for Baby
+	ObjectPCA::ObjectPCA(im + "/Baby", "Baby");
+	ObjectPCA::ObjectPCA(dp + "/Baby", "Baby");
+
+	//Blackberry
+	ObjectPCA::ObjectPCA(im + "/Blackberry", "Blackberry");
+	ObjectPCA::ObjectPCA(dp + "/Blackberry", "Blackberry");
+
+	//Camera
+	ObjectPCA::ObjectPCA(im + "/Camera", "Camera");
+	ObjectPCA::ObjectPCA(dp + "/Camera", "Camera");
+
+	//Car
+	ObjectPCA::ObjectPCA(im + "/Car", "Car");
+	ObjectPCA::ObjectPCA(dp + "/Car", "Car");
+
+	//Coffee Tin
+	ObjectPCA::ObjectPCA(im + "/Coffee Tin", "Coffee Tin");
+	ObjectPCA::ObjectPCA(dp + "/Coffee Tin", "Coffee Tin");
+
+	//Diet Coke
+	ObjectPCA::ObjectPCA(im + "/Diet Coke", "CDiet Coke");
+	ObjectPCA::ObjectPCA(dp + "/Diet Coke", "Diet Coke");
+
+	//Dinosaur
+	ObjectPCA::ObjectPCA(im + "/Dinosaur", "Dinosaur");
+	ObjectPCA::ObjectPCA(dp + "/Dinosaur", "Dinosaur");
+
+	//Dog
+	ObjectPCA::ObjectPCA(im + "/Dog", "Dog");
+	ObjectPCA::ObjectPCA(dp + "/Dog", "Dog");
+
+	//Dragon
+	ObjectPCA::ObjectPCA(im + "/Dragon", "Dragon");
+	ObjectPCA::ObjectPCA(dp + "/Dragon", "Dragon");
+
+	//Duck
+	ObjectPCA::ObjectPCA(im + "/Duck", "Duck");
+	ObjectPCA::ObjectPCA(dp + "/Duck", "Duck");
+
+	//Keyboard
+	ObjectPCA::ObjectPCA(im + "/Keyboard", "Keyboard");
+	ObjectPCA::ObjectPCA(dp + "/Keyboard", "Keyboard");
+
+	//Koala
+	ObjectPCA::ObjectPCA(im + "/Koala", "Koala");
+	ObjectPCA::ObjectPCA(dp + "/Koala", "Koala");
+
+	//Mug
+	ObjectPCA::ObjectPCA(im + "/Mug", "Mug");
+	ObjectPCA::ObjectPCA(dp + "/Mug", "Mug");
 }
 };
 }

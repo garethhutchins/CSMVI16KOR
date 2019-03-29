@@ -22,7 +22,7 @@ TrainFolder::TrainFolder(std::string path, std::string temp)
 
 	int Frame = 0;
 	FreenectPlaybackWrapper wrap(path);
-
+	
 	cv::Mat currentRGB;
 	cv::Mat currentDepth;
 
