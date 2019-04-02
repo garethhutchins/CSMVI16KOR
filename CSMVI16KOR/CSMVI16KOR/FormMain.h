@@ -7,6 +7,8 @@
 #include "LabelFolder.h"
 #include "Unlabelled.h"
 #include "TrainGMM.h"
+#include <iostream>
+#include <fstream>
 
 namespace CSMVI16KOR {
 
@@ -120,7 +122,8 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::TextBox^  txt_test;
 
 	private: System::Windows::Forms::Label^  label25;
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  btn_Analyze;
+
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
 private: System::Windows::Forms::TabControl^  tabControl2;
 private: System::Windows::Forms::TabPage^  tabPage3;
@@ -208,7 +211,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->txt_test = (gcnew System::Windows::Forms::TextBox());
 			this->label25 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btn_Analyze = (gcnew System::Windows::Forms::Button());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btn_trn = (gcnew System::Windows::Forms::Button());
 			this->txt_trn = (gcnew System::Windows::Forms::TextBox());
@@ -870,7 +873,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tabPage2->Controls->Add(this->button2);
 			this->tabPage2->Controls->Add(this->txt_test);
 			this->tabPage2->Controls->Add(this->label25);
-			this->tabPage2->Controls->Add(this->button1);
+			this->tabPage2->Controls->Add(this->btn_Analyze);
 			this->tabPage2->Controls->Add(this->btn_trn);
 			this->tabPage2->Controls->Add(this->txt_trn);
 			this->tabPage2->Controls->Add(this->label24);
@@ -909,15 +912,15 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label25->TabIndex = 12;
 			this->label25->Text = L"Testing Images";
 			// 
-			// button1
+			// btn_Analyze
 			// 
-			this->button1->Location = System::Drawing::Point(335, 76);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 11;
-			this->button1->Text = L"Analyze";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
+			this->btn_Analyze->Location = System::Drawing::Point(335, 76);
+			this->btn_Analyze->Name = L"btn_Analyze";
+			this->btn_Analyze->Size = System::Drawing::Size(75, 23);
+			this->btn_Analyze->TabIndex = 11;
+			this->btn_Analyze->Text = L"Analyze";
+			this->btn_Analyze->UseVisualStyleBackColor = true;
+			this->btn_Analyze->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
 			// 
 			// chart1
 			// 
@@ -1208,6 +1211,20 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Now Analyze the Testing Images
+	msclr::interop::marshal_context context;
+	std::string tf = context.marshal_as<std::string>(txt_test->Text);
+	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
+	//Load all of the Training
+	//Depth
+	//Android
+	std::string fileName = ft + "/depth/Android/Android.dat";
+	//cv::FileStorage fs(fileName, cv::FileStorage::READ);
+	//fs["cov"] >> Cov;
+	//fs["mean"] >> Mean;
+	//cv::Mat depth_Andoird_mu =
+
+	//TrainFolder::TrainFolder(tf, ft);
 }
 };
 }
