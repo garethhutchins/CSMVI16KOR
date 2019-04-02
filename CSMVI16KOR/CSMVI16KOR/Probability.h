@@ -3,8 +3,8 @@
 public class Probability
 {
 public:
-	Probability(cv::Mat, cv::Mat, cv::Mat);
-	cv::MatExpr CalcGMM(std::string, std::string);
+
+	Probability(std::string , cv::Mat, cv::Mat);
 };
 
 

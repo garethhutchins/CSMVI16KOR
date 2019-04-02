@@ -9,6 +9,7 @@
 #include "TrainGMM.h"
 #include <iostream>
 #include <fstream>
+#include "TestFolder.h"
 
 namespace CSMVI16KOR {
 
@@ -1215,16 +1216,12 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	msclr::interop::marshal_context context;
 	std::string tf = context.marshal_as<std::string>(txt_test->Text);
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
-	//Load all of the Training
-	//Depth
-	//Android
-	std::string fileName = ft + "/depth/Android/Android.dat";
-	//cv::FileStorage fs(fileName, cv::FileStorage::READ);
-	//fs["cov"] >> Cov;
-	//fs["mean"] >> Mean;
-	//cv::Mat depth_Andoird_mu =
+	ft = ft + "/depth";
+	//Load all of the Training for Depth
+	TestFolder::TestFolder(tf, ft);
+	
 
-	//TrainFolder::TrainFolder(tf, ft);
+	
 }
 };
 }
