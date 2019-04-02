@@ -14,9 +14,9 @@ Unlabelled::Unlabelled(std::string path, int endFrame)
 	int end = endFrame +1;
 	while (start < end) {
 		//Set the new file name
-		std::string newFile = t + "/" + std::to_string(start) + ".bmp";
+		std::string newFile = t + "/" + std::to_string(start) + ".png";
 		//Get the old file name
-		std::string oldFile = path + "/" + std::to_string(start) + ".bmp";
+		std::string oldFile = path + "/" + std::to_string(start) + ".png";
 		//Convert the String formats
 		std::wstring of = std::wstring(oldFile.begin(), oldFile.end());
 		LPCTSTR lpold = of.c_str();

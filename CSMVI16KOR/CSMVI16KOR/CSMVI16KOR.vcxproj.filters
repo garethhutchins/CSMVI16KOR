@@ -30,7 +30,10 @@
     <ClCompile Include="Unlabelled.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPCA.cpp">
+    <ClCompile Include="TrainGMM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Probability.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +53,10 @@
     <ClInclude Include="Unlabelled.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPCA.h">
+    <ClInclude Include="TrainGMM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Probability.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

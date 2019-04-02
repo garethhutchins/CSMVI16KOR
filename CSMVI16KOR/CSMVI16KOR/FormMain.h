@@ -6,7 +6,7 @@
 #include "TrainFolder.h"
 #include "LabelFolder.h"
 #include "Unlabelled.h"
-#include "ObjectPCA.h"
+#include "TrainGMM.h"
 
 namespace CSMVI16KOR {
 
@@ -113,6 +113,18 @@ namespace CSMVI16KOR {
 	private: System::Windows::Forms::TextBox^  txt_EndFrame;
 	private: System::Windows::Forms::Label^  label23;
 	private: System::Windows::Forms::Button^  btn_class;
+	private: System::Windows::Forms::Button^  btn_trn;
+	private: System::Windows::Forms::TextBox^  txt_trn;
+	private: System::Windows::Forms::Label^  label24;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::TextBox^  txt_test;
+
+	private: System::Windows::Forms::Label^  label25;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+private: System::Windows::Forms::TabControl^  tabControl2;
+private: System::Windows::Forms::TabPage^  tabPage3;
+private: System::Windows::Forms::TabPage^  tabPage4;
 
 	private:
 		/// <summary>
@@ -127,8 +139,11 @@ namespace CSMVI16KOR {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->txt_EndFrame = (gcnew System::Windows::Forms::TextBox());
 			this->label23 = (gcnew System::Windows::Forms::Label());
@@ -190,12 +205,26 @@ namespace CSMVI16KOR {
 			this->txt_trainFldr = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->txt_test = (gcnew System::Windows::Forms::TextBox());
+			this->label25 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->btn_trn = (gcnew System::Windows::Forms::Button());
+			this->txt_trn = (gcnew System::Windows::Forms::TextBox());
+			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
-			this->btn_class = (gcnew System::Windows::Forms::Button());
+			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
+			this->tabPage2->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
+			this->tabControl2->SuspendLayout();
+			this->tabPage3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -226,6 +255,16 @@ namespace CSMVI16KOR {
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Training";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// btn_class
+			// 
+			this->btn_class->Location = System::Drawing::Point(318, 446);
+			this->btn_class->Name = L"btn_class";
+			this->btn_class->Size = System::Drawing::Size(137, 23);
+			this->btn_class->TabIndex = 1;
+			this->btn_class->Text = L"Create Classifications";
+			this->btn_class->UseVisualStyleBackColor = true;
+			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
 			// 
 			// groupBox1
 			// 
@@ -795,9 +834,9 @@ namespace CSMVI16KOR {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(6, 57);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(79, 13);
+			this->label2->Size = System::Drawing::Size(76, 13);
 			this->label2->TabIndex = 3;
-			this->label2->Text = L"Temp Directory";
+			this->label2->Text = L"Train Directory";
 			// 
 			// btn_trn_folder
 			// 
@@ -827,6 +866,14 @@ namespace CSMVI16KOR {
 			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->tabControl2);
+			this->tabPage2->Controls->Add(this->button2);
+			this->tabPage2->Controls->Add(this->txt_test);
+			this->tabPage2->Controls->Add(this->label25);
+			this->tabPage2->Controls->Add(this->button1);
+			this->tabPage2->Controls->Add(this->btn_trn);
+			this->tabPage2->Controls->Add(this->txt_trn);
+			this->tabPage2->Controls->Add(this->label24);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
@@ -835,21 +882,118 @@ namespace CSMVI16KOR {
 			this->tabPage2->Text = L"Testing";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
-			// btn_class
+			// button2
 			// 
-			this->btn_class->Location = System::Drawing::Point(318, 446);
-			this->btn_class->Name = L"btn_class";
-			this->btn_class->Size = System::Drawing::Size(137, 23);
-			this->btn_class->TabIndex = 1;
-			this->btn_class->Text = L"Create Classifications";
-			this->btn_class->UseVisualStyleBackColor = true;
-			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
+			this->button2->Location = System::Drawing::Point(680, 50);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(75, 23);
+			this->button2->TabIndex = 14;
+			this->button2->Text = L"Browse";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &FormMain::button2_Click);
+			// 
+			// txt_test
+			// 
+			this->txt_test->Location = System::Drawing::Point(106, 50);
+			this->txt_test->Name = L"txt_test";
+			this->txt_test->Size = System::Drawing::Size(559, 20);
+			this->txt_test->TabIndex = 13;
+			this->txt_test->TextChanged += gcnew System::EventHandler(this, &FormMain::textBox1_TextChanged);
+			// 
+			// label25
+			// 
+			this->label25->AutoSize = true;
+			this->label25->Location = System::Drawing::Point(6, 53);
+			this->label25->Name = L"label25";
+			this->label25->Size = System::Drawing::Size(79, 13);
+			this->label25->TabIndex = 12;
+			this->label25->Text = L"Testing Images";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(335, 76);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 11;
+			this->button1->Text = L"Analyze";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			this->chart1->Location = System::Drawing::Point(6, 6);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(716, 329);
+			this->chart1->TabIndex = 10;
+			this->chart1->Text = L"Classification";
+			// 
+			// btn_trn
+			// 
+			this->btn_trn->Location = System::Drawing::Point(680, 16);
+			this->btn_trn->Name = L"btn_trn";
+			this->btn_trn->Size = System::Drawing::Size(75, 23);
+			this->btn_trn->TabIndex = 9;
+			this->btn_trn->Text = L"Browse";
+			this->btn_trn->UseVisualStyleBackColor = true;
+			this->btn_trn->Click += gcnew System::EventHandler(this, &FormMain::btn_trn_Click);
+			// 
+			// txt_trn
+			// 
+			this->txt_trn->Location = System::Drawing::Point(106, 16);
+			this->txt_trn->Name = L"txt_trn";
+			this->txt_trn->Size = System::Drawing::Size(559, 20);
+			this->txt_trn->TabIndex = 8;
+			// 
+			// label24
+			// 
+			this->label24->AutoSize = true;
+			this->label24->Location = System::Drawing::Point(6, 19);
+			this->label24->Name = L"label24";
+			this->label24->Size = System::Drawing::Size(90, 13);
+			this->label24->TabIndex = 7;
+			this->label24->Text = L"Training Directory";
+			// 
+			// tabControl2
+			// 
+			this->tabControl2->Controls->Add(this->tabPage3);
+			this->tabControl2->Controls->Add(this->tabPage4);
+			this->tabControl2->Location = System::Drawing::Point(18, 107);
+			this->tabControl2->Name = L"tabControl2";
+			this->tabControl2->SelectedIndex = 0;
+			this->tabControl2->Size = System::Drawing::Size(761, 383);
+			this->tabControl2->TabIndex = 15;
+			// 
+			// tabPage3
+			// 
+			this->tabPage3->Controls->Add(this->chart1);
+			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Name = L"tabPage3";
+			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage3->Size = System::Drawing::Size(753, 357);
+			this->tabPage3->TabIndex = 0;
+			this->tabPage3->Text = L"Depth GMM";
+			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// tabPage4
+			// 
+			this->tabPage4->Location = System::Drawing::Point(4, 22);
+			this->tabPage4->Name = L"tabPage4";
+			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage4->Size = System::Drawing::Size(753, 357);
+			this->tabPage4->TabIndex = 1;
+			this->tabPage4->Text = L"RGB GMM";
+			this->tabPage4->UseVisualStyleBackColor = true;
 			// 
 			// FormMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(871, 607);
+			this->ClientSize = System::Drawing::Size(871, 640);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"FormMain";
 			this->Text = L"FormMain";
@@ -860,6 +1004,11 @@ namespace CSMVI16KOR {
 			this->groupBox1->PerformLayout();
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
+			this->tabPage2->ResumeLayout(false);
+			this->tabPage2->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
+			this->tabControl2->ResumeLayout(false);
+			this->tabPage3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -879,6 +1028,7 @@ private: System::Void btn_temp_Click(System::Object^  sender, System::EventArgs^
 	TrainDlg->SelectedPath = "";
 	TrainDlg->ShowDialog();
 	txt_tmp->Text = TrainDlg->SelectedPath;
+	txt_trn->Text = TrainDlg->SelectedPath;
 }
 
 
@@ -988,60 +1138,76 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	//Set the Directories
 	std::string im = tDir + "/images";
 	std::string dp = tDir + "/depth";
-	//PCA
-	ObjectPCA::ObjectPCA(im + "/Android", "Android");
-	ObjectPCA::ObjectPCA(dp + "/Android", "Android");
-	//PCA for Baby
-	ObjectPCA::ObjectPCA(im + "/Baby", "Baby");
-	ObjectPCA::ObjectPCA(dp + "/Baby", "Baby");
+	//GMM
+	//Android
+	TrainGMM::TrainGMM(im + "/Android", "Android");
+	TrainGMM::TrainGMM(dp + "/Android", "Android");
+	//Baby
+	TrainGMM::TrainGMM(im + "/Baby", "Baby");
+	TrainGMM::TrainGMM(dp + "/Baby", "Baby");
 
 	//Blackberry
-	ObjectPCA::ObjectPCA(im + "/Blackberry", "Blackberry");
-	ObjectPCA::ObjectPCA(dp + "/Blackberry", "Blackberry");
+	TrainGMM::TrainGMM(im + "/Blackberry", "Blackberry");
+	TrainGMM::TrainGMM(dp + "/Blackberry", "Blackberry");
 
 	//Camera
-	ObjectPCA::ObjectPCA(im + "/Camera", "Camera");
-	ObjectPCA::ObjectPCA(dp + "/Camera", "Camera");
+	TrainGMM::TrainGMM(im + "/Camera", "Camera");
+	TrainGMM::TrainGMM(dp + "/Camera", "Camera");
 
 	//Car
-	ObjectPCA::ObjectPCA(im + "/Car", "Car");
-	ObjectPCA::ObjectPCA(dp + "/Car", "Car");
+	TrainGMM::TrainGMM(im + "/Car", "Car");
+	TrainGMM::TrainGMM(dp + "/Car", "Car");
 
 	//Coffee Tin
-	ObjectPCA::ObjectPCA(im + "/Coffee Tin", "Coffee Tin");
-	ObjectPCA::ObjectPCA(dp + "/Coffee Tin", "Coffee Tin");
+	TrainGMM::TrainGMM(im + "/Coffee Tin", "Coffee Tin");
+	TrainGMM::TrainGMM(dp + "/Coffee Tin", "Coffee Tin");
 
 	//Diet Coke
-	ObjectPCA::ObjectPCA(im + "/Diet Coke", "CDiet Coke");
-	ObjectPCA::ObjectPCA(dp + "/Diet Coke", "Diet Coke");
+	TrainGMM::TrainGMM(im + "/Diet Coke", "CDiet Coke");
+	TrainGMM::TrainGMM(dp + "/Diet Coke", "Diet Coke");
 
 	//Dinosaur
-	ObjectPCA::ObjectPCA(im + "/Dinosaur", "Dinosaur");
-	ObjectPCA::ObjectPCA(dp + "/Dinosaur", "Dinosaur");
+	TrainGMM::TrainGMM(im + "/Dinosaur", "Dinosaur");
+	TrainGMM::TrainGMM(dp + "/Dinosaur", "Dinosaur");
 
 	//Dog
-	ObjectPCA::ObjectPCA(im + "/Dog", "Dog");
-	ObjectPCA::ObjectPCA(dp + "/Dog", "Dog");
+	TrainGMM::TrainGMM(im + "/Dog", "Dog");
+	TrainGMM::TrainGMM(dp + "/Dog", "Dog");
 
 	//Dragon
-	ObjectPCA::ObjectPCA(im + "/Dragon", "Dragon");
-	ObjectPCA::ObjectPCA(dp + "/Dragon", "Dragon");
+	TrainGMM::TrainGMM(im + "/Dragon", "Dragon");
+	TrainGMM::TrainGMM(dp + "/Dragon", "Dragon");
 
 	//Duck
-	ObjectPCA::ObjectPCA(im + "/Duck", "Duck");
-	ObjectPCA::ObjectPCA(dp + "/Duck", "Duck");
+	TrainGMM::TrainGMM(im + "/Duck", "Duck");
+	TrainGMM::TrainGMM(dp + "/Duck", "Duck");
 
 	//Keyboard
-	ObjectPCA::ObjectPCA(im + "/Keyboard", "Keyboard");
-	ObjectPCA::ObjectPCA(dp + "/Keyboard", "Keyboard");
+	TrainGMM::TrainGMM(im + "/Keyboard", "Keyboard");
+	TrainGMM::TrainGMM(dp + "/Keyboard", "Keyboard");
 
 	//Koala
-	ObjectPCA::ObjectPCA(im + "/Koala", "Koala");
-	ObjectPCA::ObjectPCA(dp + "/Koala", "Koala");
+	TrainGMM::TrainGMM(im + "/Koala", "Koala");
+	TrainGMM::TrainGMM(dp + "/Koala", "Koala");
 
 	//Mug
-	ObjectPCA::ObjectPCA(im + "/Mug", "Mug");
-	ObjectPCA::ObjectPCA(dp + "/Mug", "Mug");
+	TrainGMM::TrainGMM(im + "/Mug", "Mug");
+	TrainGMM::TrainGMM(dp + "/Mug", "Mug");
+}
+private: System::Void btn_trn_Click(System::Object^  sender, System::EventArgs^  e) {
+	TrainDlg->SelectedPath = "";
+	TrainDlg->ShowDialog();
+	txt_trn->Text = TrainDlg->SelectedPath;
+}
+
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	TrainDlg->SelectedPath = "";
+	TrainDlg->ShowDialog();
+	txt_test->Text = TrainDlg->SelectedPath;
+}
+private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }

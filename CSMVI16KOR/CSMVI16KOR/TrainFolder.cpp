@@ -65,13 +65,17 @@ TrainFolder::TrainFolder(std::string path, std::string temp)
 		// Show the images in the windows
 		cv::imshow("RGB", currentRGB);
 		cv::imshow("Depth", currentDepth);
-		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".bmp";
-		cv::imwrite(iFile, currentRGB);
+		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".png";
+		cv::Mat Grey;
+		cv::cvtColor(currentRGB, Grey, cv::COLOR_BGR2GRAY);
+		cv::imwrite(iFile, Grey);
+		
+		
 
 		//depth
-		std::string dFile = temp + "/depth/" + std::to_string(Frame) + ".bmp";
+		std::string dFile = temp + "/depth/" + std::to_string(Frame) + ".png";
 		cv::imwrite(dFile, currentDepth);
-
+		
 		// Check for keyboard input
 		key = cv::waitKey(10);
 	}
