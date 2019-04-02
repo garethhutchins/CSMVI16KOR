@@ -14,19 +14,39 @@
 
 using namespace cv;
 using namespace std;
+static Mat createCoVar(cv::Mat data, cv::Mat mean) {
+	cv::Mat dt = data;
+	for (int r = 0; r < dt.rows; ++r) {
+		dt.row(r) = abs(dt.row(r) - mean);
+	}
+	Mat td = dt.t();
+	data.convertTo(dt, CV_32F);
+	td.convertTo(td, CV_32F);
+	//Now Calculate the Cov
+	Mat cov;
+	//cov = data * td;
+	cov = td * data;
+	cov = cov / (dt.rows - 1);
+	return cov;
+
+}
 static  Mat createDataMatrix(const vector<Mat> &images)
 {
 	cout << "Creating data matrix from images ...";
 
-	Mat data(static_cast<int>(images.size()), images[0].rows * images[0].cols, CV_32F);
+	//Mat data(static_cast<int>(images.size()), images[0].rows * images[0].cols, CV_32F);
+	//Mat data(cv::Size(images.size(), images[0].rows * images[0].cols), CV_32F);
+	Mat data;
+
 	// Turn an image into one row vector in the data matrix
 	for (unsigned int i = 0; i < images.size(); i++)
 	{
 		// Extract image as one long vector of size w x h 
 		Mat image = images[i].reshape(1, 1);
-
+		//image.convertTo(image, CV_32F);
 		// Copy the long vector into one row of the destm
-		image.copyTo(data.row(i));
+		//image.copyTo(data.row(i));
+		data.push_back(image);
 	}
 
 	cout << " DONE" << endl;
@@ -42,6 +62,7 @@ void readImages(string dirName, vector<Mat> & images) {
 	DIR *dir;
 	struct dirent *ent;
 	int count = 0;
+	int OneInTwenty = 0;
 
 	//image extensions
 	string imgExt = "png";
@@ -69,9 +90,15 @@ void readImages(string dirName, vector<Mat> & images) {
 				}
 				else
 				{
-					// Convert images to floating point type
-					//img.convertTo(img, CV_32F, 1 / 255.0);
-					images.push_back(img);
+					if (OneInTwenty == 19) {
+						OneInTwenty = 0;
+					}
+					if (OneInTwenty == 0) {
+						images.push_back(img);
+					}
+					OneInTwenty++;
+					
+					
 				}
 			}
 		}
@@ -81,7 +108,7 @@ void readImages(string dirName, vector<Mat> & images) {
 	// Exit program if no images are found
 	if (images.empty())exit(EXIT_FAILURE);
 
-	cout << "... " << images.size() / 2 << " files read" << endl;
+	cout << "... " << images.size() << " files read" << endl;
 }
 
 TrainGMM::TrainGMM(std::string path, std::string label)
@@ -91,11 +118,25 @@ TrainGMM::TrainGMM(std::string path, std::string label)
 	int numRows = images.size();
 	Size sz = images[0].size();
 	Mat data = createDataMatrix(images);
+	data.convertTo(data, CV_32F);
 	Mat cov, mean;
+	cov.convertTo(cov, CV_32F);
+	mean.convertTo(mean, CV_32F);
+	images.clear();
+	
+	//The data matrix is too large to calculate the Cov
+	//Perform SVD to reduce the number of columns
+	cv::SVD svd = SVD::SVD(data);
+	cv::Mat A = svd.u.colRange(1, 5) * svd.w.colRange(1, 5) * svd.vt.colRange(1, 5);
+	
 	//Calculate the mean and Covariance Matrix for the GMM
-	cv::calcCovarMatrix(images, cov, mean, COVAR_ROWS);
+	
+	reduce(A, mean, 0, REDUCE_AVG);
+	cov = createCoVar(A, mean);
+	
+	//Calc Covar
+	//cv::calcCovarMatrix(data, cov, mean, COVAR_ROWS | COVAR_SCRAMBLED, CV_32F);
 	//Divide by number of Rows
-	cov = cov / (numRows - 1);
 	//save the GMM
 	std::string fileName = path + "/" + label + ".dat";
 	FileStorage fs(fileName, FileStorage::WRITE);

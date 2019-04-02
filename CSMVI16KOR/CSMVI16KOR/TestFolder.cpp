@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cstdint>
 #include <filesystem>
+#include "Probability.h"
 #pragma comment(lib, "shell32")
 
 TestFolder::TestFolder(std::string path, std::string temp)
@@ -22,7 +23,9 @@ TestFolder::TestFolder(std::string path, std::string temp)
 	fs["mean"] >> Andoird_mu;
 	fs["cov"] >> Andoird_cov;
 	fs.release();
-
+	//Convert them to the saved format
+	Andoird_mu.convertTo(Andoird_mu, CV_32F);
+	Andoird_cov.convertTo(Andoird_cov, CV_32F);
 	int Frame = 0;
 	FreenectPlaybackWrapper wrap(path);
 
@@ -67,17 +70,20 @@ TestFolder::TestFolder(std::string path, std::string temp)
 
 		// Show the images in the windows
 		cv::imshow("RGB", currentRGB);
-		cv::imshow("Depth", currentDepth);
-		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".png";
 		cv::Mat Grey;
 		cv::cvtColor(currentRGB, Grey, cv::COLOR_BGR2GRAY);
-		cv::imwrite(iFile, Grey);
+		cv::imshow("Depth", currentDepth);
+		//Get the Probability for Depths
+		currentDepth.convertTo(currentDepth, CV_32F);
+
+		Probability::Probability(currentDepth, Andoird_mu, Andoird_cov);
+		
+		
+		
 
 
 
-		//depth
-		std::string dFile = temp + "/depth/" + std::to_string(Frame) + ".png";
-		cv::imwrite(dFile, currentDepth);
+		
 
 		// Check for keyboard input
 		key = cv::waitKey(10);

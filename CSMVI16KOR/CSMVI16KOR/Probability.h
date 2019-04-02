@@ -4,7 +4,7 @@ public class Probability
 {
 public:
 
-	Probability(std::string , cv::Mat, cv::Mat);
+	Probability(cv::Mat , cv::Mat, cv::Mat);
 };
 
 
