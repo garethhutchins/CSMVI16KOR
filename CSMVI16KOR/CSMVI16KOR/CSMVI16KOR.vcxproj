@@ -137,25 +137,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EDistance.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="freenect-playback-wrapper.cpp" />
     <ClCompile Include="LabelFolder.cpp" />
-    <ClCompile Include="Probability.cpp" />
+    <ClCompile Include="SVMTest.cpp" />
     <ClCompile Include="TestFolder.cpp" />
     <ClCompile Include="TrainFolder.cpp" />
     <ClCompile Include="TrainGMM.cpp" />
+    <ClCompile Include="TrainSVM.cpp" />
     <ClCompile Include="Unlabelled.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EDistance.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="freenect-playback-wrapper.h" />
     <ClInclude Include="LabelFolder.h" />
-    <ClInclude Include="Probability.h" />
+    <ClInclude Include="SVMTest.h" />
     <ClInclude Include="TestFolder.h" />
     <ClInclude Include="TrainFolder.h" />
     <ClInclude Include="TrainGMM.h" />
+    <ClInclude Include="TrainSVM.h" />
     <ClInclude Include="Unlabelled.h" />
   </ItemGroup>
   <ItemGroup>

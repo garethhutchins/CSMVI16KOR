@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include "TestFolder.h"
+#include "TrainSVM.h"
+#include "SVMTest.h"
 
 namespace CSMVI16KOR {
 
@@ -129,6 +131,11 @@ namespace CSMVI16KOR {
 private: System::Windows::Forms::TabControl^  tabControl2;
 private: System::Windows::Forms::TabPage^  tabPage3;
 private: System::Windows::Forms::TabPage^  tabPage4;
+private: System::Windows::Forms::Button^  btn_SVMTest;
+private: System::Windows::Forms::Label^  label26;
+private: System::Windows::Forms::TextBox^  nothing_s;
+private: System::Windows::Forms::TextBox^  nothing_e;
+
 
 	private:
 		/// <summary>
@@ -209,26 +216,31 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->txt_trainFldr = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->btn_Analyze = (gcnew System::Windows::Forms::Button());
+			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->btn_SVMTest = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->txt_test = (gcnew System::Windows::Forms::TextBox());
 			this->label25 = (gcnew System::Windows::Forms::Label());
-			this->btn_Analyze = (gcnew System::Windows::Forms::Button());
-			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btn_trn = (gcnew System::Windows::Forms::Button());
 			this->txt_trn = (gcnew System::Windows::Forms::TextBox());
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
-			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
-			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
-			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->label26 = (gcnew System::Windows::Forms::Label());
+			this->nothing_s = (gcnew System::Windows::Forms::TextBox());
+			this->nothing_e = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
 			this->tabPage2->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->tabControl2->SuspendLayout();
 			this->tabPage3->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
+			this->tabPage4->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -238,7 +250,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tabControl1->Location = System::Drawing::Point(12, 33);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(793, 512);
+			this->tabControl1->Size = System::Drawing::Size(793, 595);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -255,7 +267,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(785, 486);
+			this->tabPage1->Size = System::Drawing::Size(785, 569);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Training";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -276,16 +288,16 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->groupBox1->Controls->Add(this->label23);
 			this->groupBox1->Controls->Add(this->btn_label);
 			this->groupBox1->Controls->Add(this->tableLayoutPanel1);
-			this->groupBox1->Location = System::Drawing::Point(9, 148);
+			this->groupBox1->Location = System::Drawing::Point(9, 126);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(759, 292);
+			this->groupBox1->Size = System::Drawing::Size(759, 314);
 			this->groupBox1->TabIndex = 7;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Labels";
 			// 
 			// txt_EndFrame
 			// 
-			this->txt_EndFrame->Location = System::Drawing::Point(488, 261);
+			this->txt_EndFrame->Location = System::Drawing::Point(415, 272);
 			this->txt_EndFrame->Name = L"txt_EndFrame";
 			this->txt_EndFrame->Size = System::Drawing::Size(100, 20);
 			this->txt_EndFrame->TabIndex = 3;
@@ -295,7 +307,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label23->AutoSize = true;
 			this->label23->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label23->Location = System::Drawing::Point(395, 268);
+			this->label23->Location = System::Drawing::Point(338, 275);
 			this->label23->Name = L"label23";
 			this->label23->Size = System::Drawing::Size(71, 13);
 			this->label23->TabIndex = 2;
@@ -303,7 +315,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			// 
 			// btn_label
 			// 
-			this->btn_label->Location = System::Drawing::Point(271, 261);
+			this->btn_label->Location = System::Drawing::Point(85, 272);
 			this->btn_label->Name = L"btn_label";
 			this->btn_label->Size = System::Drawing::Size(101, 23);
 			this->btn_label->TabIndex = 1;
@@ -374,11 +386,14 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tableLayoutPanel1->Controls->Add(this->dragon_e, 5, 6);
 			this->tableLayoutPanel1->Controls->Add(this->android_s, 4, 7);
 			this->tableLayoutPanel1->Controls->Add(this->android_e, 5, 7);
+			this->tableLayoutPanel1->Controls->Add(this->label26, 3, 8);
+			this->tableLayoutPanel1->Controls->Add(this->nothing_s, 4, 8);
+			this->tableLayoutPanel1->Controls->Add(this->nothing_e, 5, 8);
 			this->tableLayoutPanel1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->tableLayoutPanel1->Location = System::Drawing::Point(6, 19);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(6, 13);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 8;
+			this->tableLayoutPanel1->RowCount = 9;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
@@ -387,7 +402,8 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(718, 232);
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(718, 249);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// label3
@@ -461,7 +477,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label9->AutoSize = true;
 			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label9->Location = System::Drawing::Point(3, 29);
+			this->label9->Location = System::Drawing::Point(3, 28);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(35, 13);
 			this->label9->TabIndex = 6;
@@ -472,7 +488,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label10->AutoSize = true;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label10->Location = System::Drawing::Point(3, 58);
+			this->label10->Location = System::Drawing::Point(3, 56);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(30, 13);
 			this->label10->TabIndex = 7;
@@ -483,7 +499,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label11->AutoSize = true;
 			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label11->Location = System::Drawing::Point(3, 87);
+			this->label11->Location = System::Drawing::Point(3, 84);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(57, 13);
 			this->label11->TabIndex = 8;
@@ -494,7 +510,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label12->AutoSize = true;
 			this->label12->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label12->Location = System::Drawing::Point(3, 116);
+			this->label12->Location = System::Drawing::Point(3, 112);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(66, 13);
 			this->label12->TabIndex = 9;
@@ -505,7 +521,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label13->AutoSize = true;
 			this->label13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label13->Location = System::Drawing::Point(3, 145);
+			this->label13->Location = System::Drawing::Point(3, 140);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(31, 13);
 			this->label13->TabIndex = 10;
@@ -516,7 +532,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label14->AutoSize = true;
 			this->label14->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label14->Location = System::Drawing::Point(3, 174);
+			this->label14->Location = System::Drawing::Point(3, 168);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(26, 13);
 			this->label14->TabIndex = 11;
@@ -527,7 +543,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label15->AutoSize = true;
 			this->label15->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label15->Location = System::Drawing::Point(3, 203);
+			this->label15->Location = System::Drawing::Point(3, 196);
 			this->label15->Name = L"label15";
 			this->label15->Size = System::Drawing::Size(49, 13);
 			this->label15->TabIndex = 12;
@@ -538,7 +554,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label16->AutoSize = true;
 			this->label16->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label16->Location = System::Drawing::Point(360, 29);
+			this->label16->Location = System::Drawing::Point(360, 28);
 			this->label16->Name = L"label16";
 			this->label16->Size = System::Drawing::Size(60, 13);
 			this->label16->TabIndex = 13;
@@ -549,7 +565,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label17->AutoSize = true;
 			this->label17->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label17->Location = System::Drawing::Point(360, 58);
+			this->label17->Location = System::Drawing::Point(360, 56);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(39, 13);
 			this->label17->TabIndex = 14;
@@ -560,7 +576,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label18->Location = System::Drawing::Point(360, 87);
+			this->label18->Location = System::Drawing::Point(360, 84);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(67, 13);
 			this->label18->TabIndex = 15;
@@ -571,7 +587,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label19->AutoSize = true;
 			this->label19->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label19->Location = System::Drawing::Point(360, 116);
+			this->label19->Location = System::Drawing::Point(360, 112);
 			this->label19->Name = L"label19";
 			this->label19->Size = System::Drawing::Size(100, 13);
 			this->label19->TabIndex = 16;
@@ -582,7 +598,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label20->Location = System::Drawing::Point(360, 145);
+			this->label20->Location = System::Drawing::Point(360, 140);
 			this->label20->Name = L"label20";
 			this->label20->Size = System::Drawing::Size(37, 13);
 			this->label20->TabIndex = 17;
@@ -593,7 +609,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label21->AutoSize = true;
 			this->label21->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label21->Location = System::Drawing::Point(360, 174);
+			this->label21->Location = System::Drawing::Point(360, 168);
 			this->label21->Name = L"label21";
 			this->label21->Size = System::Drawing::Size(48, 13);
 			this->label21->TabIndex = 18;
@@ -604,7 +620,7 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label22->AutoSize = true;
 			this->label22->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label22->Location = System::Drawing::Point(360, 203);
+			this->label22->Location = System::Drawing::Point(360, 196);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(50, 13);
 			this->label22->TabIndex = 19;
@@ -612,196 +628,196 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			// 
 			// baby_s
 			// 
-			this->baby_s->Location = System::Drawing::Point(122, 32);
+			this->baby_s->Location = System::Drawing::Point(122, 31);
 			this->baby_s->Name = L"baby_s";
 			this->baby_s->Size = System::Drawing::Size(100, 20);
 			this->baby_s->TabIndex = 20;
 			// 
 			// baby_e
 			// 
-			this->baby_e->Location = System::Drawing::Point(241, 32);
+			this->baby_e->Location = System::Drawing::Point(241, 31);
 			this->baby_e->Name = L"baby_e";
 			this->baby_e->Size = System::Drawing::Size(100, 20);
 			this->baby_e->TabIndex = 21;
 			// 
 			// dog_s
 			// 
-			this->dog_s->Location = System::Drawing::Point(122, 61);
+			this->dog_s->Location = System::Drawing::Point(122, 59);
 			this->dog_s->Name = L"dog_s";
 			this->dog_s->Size = System::Drawing::Size(100, 20);
 			this->dog_s->TabIndex = 22;
 			// 
 			// dog_e
 			// 
-			this->dog_e->Location = System::Drawing::Point(241, 61);
+			this->dog_e->Location = System::Drawing::Point(241, 59);
 			this->dog_e->Name = L"dog_e";
 			this->dog_e->Size = System::Drawing::Size(100, 20);
 			this->dog_e->TabIndex = 23;
 			// 
 			// dino_s
 			// 
-			this->dino_s->Location = System::Drawing::Point(122, 90);
+			this->dino_s->Location = System::Drawing::Point(122, 87);
 			this->dino_s->Name = L"dino_s";
 			this->dino_s->Size = System::Drawing::Size(100, 20);
 			this->dino_s->TabIndex = 24;
 			// 
 			// dino_e
 			// 
-			this->dino_e->Location = System::Drawing::Point(241, 90);
+			this->dino_e->Location = System::Drawing::Point(241, 87);
 			this->dino_e->Name = L"dino_e";
 			this->dino_e->Size = System::Drawing::Size(100, 20);
 			this->dino_e->TabIndex = 25;
 			// 
 			// coffee_s
 			// 
-			this->coffee_s->Location = System::Drawing::Point(122, 119);
+			this->coffee_s->Location = System::Drawing::Point(122, 115);
 			this->coffee_s->Name = L"coffee_s";
 			this->coffee_s->Size = System::Drawing::Size(100, 20);
 			this->coffee_s->TabIndex = 26;
 			// 
 			// coffee_e
 			// 
-			this->coffee_e->Location = System::Drawing::Point(241, 119);
+			this->coffee_e->Location = System::Drawing::Point(241, 115);
 			this->coffee_e->Name = L"coffee_e";
 			this->coffee_e->Size = System::Drawing::Size(100, 20);
 			this->coffee_e->TabIndex = 27;
 			// 
 			// mug_s
 			// 
-			this->mug_s->Location = System::Drawing::Point(122, 148);
+			this->mug_s->Location = System::Drawing::Point(122, 143);
 			this->mug_s->Name = L"mug_s";
 			this->mug_s->Size = System::Drawing::Size(100, 20);
 			this->mug_s->TabIndex = 28;
 			// 
 			// mug_e
 			// 
-			this->mug_e->Location = System::Drawing::Point(241, 148);
+			this->mug_e->Location = System::Drawing::Point(241, 143);
 			this->mug_e->Name = L"mug_e";
 			this->mug_e->Size = System::Drawing::Size(100, 20);
 			this->mug_e->TabIndex = 29;
 			// 
 			// car_s
 			// 
-			this->car_s->Location = System::Drawing::Point(122, 177);
+			this->car_s->Location = System::Drawing::Point(122, 171);
 			this->car_s->Name = L"car_s";
 			this->car_s->Size = System::Drawing::Size(100, 20);
 			this->car_s->TabIndex = 30;
 			// 
 			// car_e
 			// 
-			this->car_e->Location = System::Drawing::Point(241, 177);
+			this->car_e->Location = System::Drawing::Point(241, 171);
 			this->car_e->Name = L"car_e";
 			this->car_e->Size = System::Drawing::Size(100, 20);
 			this->car_e->TabIndex = 31;
 			// 
 			// cam_s
 			// 
-			this->cam_s->Location = System::Drawing::Point(122, 206);
+			this->cam_s->Location = System::Drawing::Point(122, 199);
 			this->cam_s->Name = L"cam_s";
 			this->cam_s->Size = System::Drawing::Size(100, 20);
 			this->cam_s->TabIndex = 32;
 			// 
 			// cam_e
 			// 
-			this->cam_e->Location = System::Drawing::Point(241, 206);
+			this->cam_e->Location = System::Drawing::Point(241, 199);
 			this->cam_e->Name = L"cam_e";
 			this->cam_e->Size = System::Drawing::Size(100, 20);
 			this->cam_e->TabIndex = 33;
 			// 
 			// key_s
 			// 
-			this->key_s->Location = System::Drawing::Point(479, 32);
+			this->key_s->Location = System::Drawing::Point(479, 31);
 			this->key_s->Name = L"key_s";
 			this->key_s->Size = System::Drawing::Size(100, 20);
 			this->key_s->TabIndex = 34;
 			// 
 			// key_e
 			// 
-			this->key_e->Location = System::Drawing::Point(598, 32);
+			this->key_e->Location = System::Drawing::Point(598, 31);
 			this->key_e->Name = L"key_e";
 			this->key_e->Size = System::Drawing::Size(100, 20);
 			this->key_e->TabIndex = 35;
 			// 
 			// koala_s
 			// 
-			this->koala_s->Location = System::Drawing::Point(479, 61);
+			this->koala_s->Location = System::Drawing::Point(479, 59);
 			this->koala_s->Name = L"koala_s";
 			this->koala_s->Size = System::Drawing::Size(100, 20);
 			this->koala_s->TabIndex = 36;
 			// 
 			// koala_e
 			// 
-			this->koala_e->Location = System::Drawing::Point(598, 61);
+			this->koala_e->Location = System::Drawing::Point(598, 59);
 			this->koala_e->Name = L"koala_e";
 			this->koala_e->Size = System::Drawing::Size(100, 20);
 			this->koala_e->TabIndex = 37;
 			// 
 			// blackberry_s
 			// 
-			this->blackberry_s->Location = System::Drawing::Point(479, 90);
+			this->blackberry_s->Location = System::Drawing::Point(479, 87);
 			this->blackberry_s->Name = L"blackberry_s";
 			this->blackberry_s->Size = System::Drawing::Size(100, 20);
 			this->blackberry_s->TabIndex = 38;
 			// 
 			// blackberry_e
 			// 
-			this->blackberry_e->Location = System::Drawing::Point(598, 90);
+			this->blackberry_e->Location = System::Drawing::Point(598, 87);
 			this->blackberry_e->Name = L"blackberry_e";
 			this->blackberry_e->Size = System::Drawing::Size(100, 20);
 			this->blackberry_e->TabIndex = 39;
 			// 
 			// diet_s
 			// 
-			this->diet_s->Location = System::Drawing::Point(479, 119);
+			this->diet_s->Location = System::Drawing::Point(479, 115);
 			this->diet_s->Name = L"diet_s";
 			this->diet_s->Size = System::Drawing::Size(100, 20);
 			this->diet_s->TabIndex = 40;
 			// 
 			// diet_e
 			// 
-			this->diet_e->Location = System::Drawing::Point(598, 119);
+			this->diet_e->Location = System::Drawing::Point(598, 115);
 			this->diet_e->Name = L"diet_e";
 			this->diet_e->Size = System::Drawing::Size(100, 20);
 			this->diet_e->TabIndex = 41;
 			// 
 			// duck_s
 			// 
-			this->duck_s->Location = System::Drawing::Point(479, 148);
+			this->duck_s->Location = System::Drawing::Point(479, 143);
 			this->duck_s->Name = L"duck_s";
 			this->duck_s->Size = System::Drawing::Size(100, 20);
 			this->duck_s->TabIndex = 42;
 			// 
 			// duck_e
 			// 
-			this->duck_e->Location = System::Drawing::Point(598, 148);
+			this->duck_e->Location = System::Drawing::Point(598, 143);
 			this->duck_e->Name = L"duck_e";
 			this->duck_e->Size = System::Drawing::Size(100, 20);
 			this->duck_e->TabIndex = 43;
 			// 
 			// dragon_s
 			// 
-			this->dragon_s->Location = System::Drawing::Point(479, 177);
+			this->dragon_s->Location = System::Drawing::Point(479, 171);
 			this->dragon_s->Name = L"dragon_s";
 			this->dragon_s->Size = System::Drawing::Size(100, 20);
 			this->dragon_s->TabIndex = 44;
 			// 
 			// dragon_e
 			// 
-			this->dragon_e->Location = System::Drawing::Point(598, 177);
+			this->dragon_e->Location = System::Drawing::Point(598, 171);
 			this->dragon_e->Name = L"dragon_e";
 			this->dragon_e->Size = System::Drawing::Size(100, 20);
 			this->dragon_e->TabIndex = 45;
 			// 
 			// android_s
 			// 
-			this->android_s->Location = System::Drawing::Point(479, 206);
+			this->android_s->Location = System::Drawing::Point(479, 199);
 			this->android_s->Name = L"android_s";
 			this->android_s->Size = System::Drawing::Size(100, 20);
 			this->android_s->TabIndex = 46;
 			// 
 			// android_e
 			// 
-			this->android_e->Location = System::Drawing::Point(598, 206);
+			this->android_e->Location = System::Drawing::Point(598, 199);
 			this->android_e->Name = L"android_e";
 			this->android_e->Size = System::Drawing::Size(100, 20);
 			this->android_e->TabIndex = 47;
@@ -874,17 +890,82 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tabPage2->Controls->Add(this->button2);
 			this->tabPage2->Controls->Add(this->txt_test);
 			this->tabPage2->Controls->Add(this->label25);
-			this->tabPage2->Controls->Add(this->btn_Analyze);
 			this->tabPage2->Controls->Add(this->btn_trn);
 			this->tabPage2->Controls->Add(this->txt_trn);
 			this->tabPage2->Controls->Add(this->label24);
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(785, 486);
+			this->tabPage2->Size = System::Drawing::Size(785, 569);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Testing";
 			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// tabControl2
+			// 
+			this->tabControl2->Controls->Add(this->tabPage3);
+			this->tabControl2->Controls->Add(this->tabPage4);
+			this->tabControl2->Location = System::Drawing::Point(18, 107);
+			this->tabControl2->Name = L"tabControl2";
+			this->tabControl2->SelectedIndex = 0;
+			this->tabControl2->Size = System::Drawing::Size(761, 443);
+			this->tabControl2->TabIndex = 15;
+			// 
+			// tabPage3
+			// 
+			this->tabPage3->Controls->Add(this->chart1);
+			this->tabPage3->Controls->Add(this->btn_Analyze);
+			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Name = L"tabPage3";
+			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage3->Size = System::Drawing::Size(753, 417);
+			this->tabPage3->TabIndex = 0;
+			this->tabPage3->Text = L"Depth E Distance";
+			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			this->chart1->Location = System::Drawing::Point(6, 6);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(716, 329);
+			this->chart1->TabIndex = 10;
+			this->chart1->Text = L"Classification";
+			// 
+			// btn_Analyze
+			// 
+			this->btn_Analyze->Location = System::Drawing::Point(312, 341);
+			this->btn_Analyze->Name = L"btn_Analyze";
+			this->btn_Analyze->Size = System::Drawing::Size(75, 23);
+			this->btn_Analyze->TabIndex = 11;
+			this->btn_Analyze->Text = L"Analyze";
+			this->btn_Analyze->UseVisualStyleBackColor = true;
+			this->btn_Analyze->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
+			// 
+			// tabPage4
+			// 
+			this->tabPage4->Controls->Add(this->btn_SVMTest);
+			this->tabPage4->Location = System::Drawing::Point(4, 22);
+			this->tabPage4->Name = L"tabPage4";
+			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage4->Size = System::Drawing::Size(753, 417);
+			this->tabPage4->TabIndex = 1;
+			this->tabPage4->Text = L"RGB GMM";
+			this->tabPage4->UseVisualStyleBackColor = true;
+			// 
+			// btn_SVMTest
+			// 
+			this->btn_SVMTest->Location = System::Drawing::Point(302, 388);
+			this->btn_SVMTest->Name = L"btn_SVMTest";
+			this->btn_SVMTest->Size = System::Drawing::Size(75, 23);
+			this->btn_SVMTest->TabIndex = 0;
+			this->btn_SVMTest->Text = L"SVM Test";
+			this->btn_SVMTest->UseVisualStyleBackColor = true;
+			this->btn_SVMTest->Click += gcnew System::EventHandler(this, &FormMain::button1_Click_1);
 			// 
 			// button2
 			// 
@@ -913,29 +994,6 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label25->TabIndex = 12;
 			this->label25->Text = L"Testing Images";
 			// 
-			// btn_Analyze
-			// 
-			this->btn_Analyze->Location = System::Drawing::Point(335, 76);
-			this->btn_Analyze->Name = L"btn_Analyze";
-			this->btn_Analyze->Size = System::Drawing::Size(75, 23);
-			this->btn_Analyze->TabIndex = 11;
-			this->btn_Analyze->Text = L"Analyze";
-			this->btn_Analyze->UseVisualStyleBackColor = true;
-			this->btn_Analyze->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
-			// 
-			// chart1
-			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
-			this->chart1->Location = System::Drawing::Point(6, 6);
-			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->Name = L"Series1";
-			this->chart1->Series->Add(series1);
-			this->chart1->Size = System::Drawing::Size(716, 329);
-			this->chart1->TabIndex = 10;
-			this->chart1->Text = L"Classification";
-			// 
 			// btn_trn
 			// 
 			this->btn_trn->Location = System::Drawing::Point(680, 16);
@@ -962,36 +1020,30 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->label24->TabIndex = 7;
 			this->label24->Text = L"Training Directory";
 			// 
-			// tabControl2
+			// label26
 			// 
-			this->tabControl2->Controls->Add(this->tabPage3);
-			this->tabControl2->Controls->Add(this->tabPage4);
-			this->tabControl2->Location = System::Drawing::Point(18, 107);
-			this->tabControl2->Name = L"tabControl2";
-			this->tabControl2->SelectedIndex = 0;
-			this->tabControl2->Size = System::Drawing::Size(761, 383);
-			this->tabControl2->TabIndex = 15;
+			this->label26->AutoSize = true;
+			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label26->Location = System::Drawing::Point(360, 224);
+			this->label26->Name = L"label26";
+			this->label26->Size = System::Drawing::Size(51, 13);
+			this->label26->TabIndex = 48;
+			this->label26->Text = L"Nothing";
 			// 
-			// tabPage3
+			// nothing_s
 			// 
-			this->tabPage3->Controls->Add(this->chart1);
-			this->tabPage3->Location = System::Drawing::Point(4, 22);
-			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage3->Size = System::Drawing::Size(753, 357);
-			this->tabPage3->TabIndex = 0;
-			this->tabPage3->Text = L"Depth GMM";
-			this->tabPage3->UseVisualStyleBackColor = true;
+			this->nothing_s->Location = System::Drawing::Point(479, 227);
+			this->nothing_s->Name = L"nothing_s";
+			this->nothing_s->Size = System::Drawing::Size(100, 20);
+			this->nothing_s->TabIndex = 49;
 			// 
-			// tabPage4
+			// nothing_e
 			// 
-			this->tabPage4->Location = System::Drawing::Point(4, 22);
-			this->tabPage4->Name = L"tabPage4";
-			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage4->Size = System::Drawing::Size(753, 357);
-			this->tabPage4->TabIndex = 1;
-			this->tabPage4->Text = L"RGB GMM";
-			this->tabPage4->UseVisualStyleBackColor = true;
+			this->nothing_e->Location = System::Drawing::Point(598, 227);
+			this->nothing_e->Name = L"nothing_e";
+			this->nothing_e->Size = System::Drawing::Size(100, 20);
+			this->nothing_e->TabIndex = 50;
 			// 
 			// FormMain
 			// 
@@ -1010,9 +1062,10 @@ private: System::Windows::Forms::TabPage^  tabPage4;
 			this->tableLayoutPanel1->PerformLayout();
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->tabControl2->ResumeLayout(false);
 			this->tabPage3->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
+			this->tabPage4->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -1130,6 +1183,12 @@ private: System::Void btn_label_Click(System::Object^  sender, System::EventArgs
 	LabelFolder::LabelFolder(im, "Android", androids, androide);
 	LabelFolder::LabelFolder(dp, "Android", androids, androide);
 
+	//Nothing
+	int nothings = std::stoi(context.marshal_as<std::string>(nothing_s->Text));
+	int nothinge = std::stoi(context.marshal_as<std::string>(nothing_e->Text));
+	LabelFolder::LabelFolder(im, "Nothing", nothings, nothinge);
+	LabelFolder::LabelFolder(dp, "Nothing", nothings, nothinge);
+
 	//Now move everything that isn't labelled to an unlabelled directory
 	int eFrame = std::stoi(context.marshal_as<std::string>(txt_EndFrame->Text));
 	Unlabelled::Unlabelled(im,eFrame);
@@ -1142,7 +1201,12 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	//Set the Directories
 	std::string im = tDir + "/images";
 	std::string dp = tDir + "/depth";
-	//GMM
+
+	//Train the SVM
+	TrainSVM::TrainSVM(im);
+	TrainSVM::TrainSVM(dp);
+
+	//Means
 	//Android
 	TrainGMM::TrainGMM(im + "/Android", "Android");
 	TrainGMM::TrainGMM(dp + "/Android", "Android");
@@ -1197,6 +1261,12 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	//Mug
 	TrainGMM::TrainGMM(im + "/Mug", "Mug");
 	TrainGMM::TrainGMM(dp + "/Mug", "Mug");
+
+	//Unlabelled
+	TrainGMM::TrainGMM(im + "/Nothing", "Nothing");
+	TrainGMM::TrainGMM(dp + "/Nothing", "Nothing");
+
+	
 }
 private: System::Void btn_trn_Click(System::Object^  sender, System::EventArgs^  e) {
 	TrainDlg->SelectedPath = "";
@@ -1218,10 +1288,13 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
 	ft = ft + "/depth";
 	//Load all of the Training for Depth
-	TestFolder::TestFolder(tf, ft);
-	
-
-	
+	TestFolder::TestFolder(tf, ft);	
+}
+private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	msclr::interop::marshal_context context;
+	std::string tf = context.marshal_as<std::string>(txt_test->Text);
+	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
+	SVMTest:SVMTest(ft, tf);
 }
 };
 }

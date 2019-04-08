@@ -34,8 +34,6 @@ static  Mat createDataMatrix(const vector<Mat> &images)
 {
 	cout << "Creating data matrix from images ...";
 
-	//Mat data(static_cast<int>(images.size()), images[0].rows * images[0].cols, CV_32F);
-	//Mat data(cv::Size(images.size(), images[0].rows * images[0].cols), CV_32F);
 	Mat data;
 
 	// Turn an image into one row vector in the data matrix
@@ -43,9 +41,8 @@ static  Mat createDataMatrix(const vector<Mat> &images)
 	{
 		// Extract image as one long vector of size w x h 
 		Mat image = images[i].reshape(1, 1);
-		//image.convertTo(image, CV_32F);
+		
 		// Copy the long vector into one row of the destm
-		//image.copyTo(data.row(i));
 		data.push_back(image);
 	}
 
@@ -62,7 +59,6 @@ void readImages(string dirName, vector<Mat> & images) {
 	DIR *dir;
 	struct dirent *ent;
 	int count = 0;
-	int OneInTwenty = 0;
 
 	//image extensions
 	string imgExt = "png";
@@ -89,17 +85,8 @@ void readImages(string dirName, vector<Mat> & images) {
 					cout << "image " << path << " not read properly" << endl;
 				}
 				else
-				{
-					if (OneInTwenty == 19) {
-						OneInTwenty = 0;
-					}
-					if (OneInTwenty == 0) {
-						images.push_back(img);
-					}
-					OneInTwenty++;
-					
-					
-				}
+					images.push_back(img);
+				
 			}
 		}
 		closedir(dir);
@@ -119,30 +106,32 @@ TrainGMM::TrainGMM(std::string path, std::string label)
 	Size sz = images[0].size();
 	Mat data = createDataMatrix(images);
 	data.convertTo(data, CV_32F);
-	Mat cov, mean;
-	cov.convertTo(cov, CV_32F);
+	Mat mean;
+	reduce(data, mean, 0, REDUCE_AVG);
 	mean.convertTo(mean, CV_32F);
 	images.clear();
+	//Save the File
+
+	std::string fileName = path + "/" + label + ".dat";
+	FileStorage fs(fileName, FileStorage::WRITE);
+	fs << "mean" << mean;
+	fs.release();
 	
 	//The data matrix is too large to calculate the Cov
 	//Perform SVD to reduce the number of columns
-	cv::SVD svd = SVD::SVD(data);
-	cv::Mat A = svd.u.colRange(1, 5) * svd.w.colRange(1, 5) * svd.vt.colRange(1, 5);
+	//cv::SVD svd = SVD::SVD(data);
+	//cv::Mat A = svd.u.colRange(1, 5) * svd.w.colRange(1, 5) * svd.vt.colRange(1, 5);
 	
 	//Calculate the mean and Covariance Matrix for the GMM
 	
-	reduce(A, mean, 0, REDUCE_AVG);
-	cov = createCoVar(A, mean);
+	//reduce(A, mean, 0, REDUCE_AVG);
+	//cov = createCoVar(A, mean);
 	
 	//Calc Covar
 	//cv::calcCovarMatrix(data, cov, mean, COVAR_ROWS | COVAR_SCRAMBLED, CV_32F);
 	//Divide by number of Rows
 	//save the GMM
-	std::string fileName = path + "/" + label + ".dat";
-	FileStorage fs(fileName, FileStorage::WRITE);
-	fs << "mean" << mean;
-	fs << "cov" << cov;
-	fs.release();
+	
 
 }
 

@@ -33,10 +33,16 @@
     <ClCompile Include="TrainGMM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Probability.cpp">
+    <ClCompile Include="TestFolder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestFolder.cpp">
+    <ClCompile Include="EDistance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainSVM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SVMTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,10 +65,16 @@
     <ClInclude Include="TrainGMM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Probability.h">
+    <ClInclude Include="TestFolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestFolder.h">
+    <ClInclude Include="EDistance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainSVM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SVMTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
