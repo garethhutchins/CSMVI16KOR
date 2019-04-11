@@ -12,6 +12,11 @@
 using namespace cv;
 using namespace std;
 
+double S;
+float Thresh;
+int CT;
+
+
 
 
 void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int CurrentLabel) {
@@ -51,17 +56,46 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 					//cout << "image " << path << " not read properly" << endl;
 				}
 				else {
-					HOGDescriptor hog;
-					vector<float> descriptors_train;
-					hog.compute(img, descriptors_train,Size(64, 48), Size(0, 0));
-					Mat HogMat;
+					//Apply Edge Detection
+					Mat src, src_gray;
+					Mat dst, detected_edges;
+
+					int edgeThresh = 1;
+					int const max_lowThreshold = 100;
+					int ratio = 3;
+					int kernel_size = 3;
+					char* window_name = "Edge Map";
+					//Threshold
+					img = img * Thresh;
+
+					//Resize
+					double Ss = S / 100;
+					cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+
+					cv::blur(img, detected_edges, cv::Size(3, 3));
+
+					/// Canny detector
+					cv::Canny(detected_edges, detected_edges, CT, CT*ratio, kernel_size);
+
+					/// Using Canny's output as a mask, we display our result
+					dst = cv::Scalar::all(0);
+
+					img.copyTo(dst, detected_edges);
+
+					//HOGDescriptor hog;
+					//vector<float> descriptors_train;
+					//cv::imwrite(dirName +"/t.png", dst);
+					//Mat imgR = imread(dirName + "/t.png", cv::IMREAD_GRAYSCALE);
+					//imgR.convertTo(imgR, CV_32F);
+					//hog.compute(imgR, descriptors_train,Size(8, 8), Size(0, 0));
+					//Mat HogMat;
 					
-					for (int i = 0; i < descriptors_train.size(); i++) {
-						Mat TMat = Mat(1,1, CV_32F, descriptors_train.at(i));
-						HogMat.push_back(TMat);
-					}
+					//for (int i = 0; i < descriptors_train.size(); i++) {
+						//Mat TMat = Mat(1,1, CV_32F, descriptors_train.at(i));
+						//HogMat.push_back(TMat);
+					//}
 						
-					images.push_back(HogMat);
+					images.push_back(dst);
 				}
 					
 				
@@ -117,6 +151,14 @@ static Mat createLabelMatrix(const vector<Mat> & labels) {
 TrainSVM::TrainSVM(std::string path) {
 	vector<Mat> images;
 	vector<Mat> labels;
+	//Load the Image Processing Settings
+	std::string fileName = path + "/ImageProc.dat";
+	cv::FileStorage fs(fileName, cv::FileStorage::READ);
+	
+	fs["brightness"] >> Thresh;
+	fs["resolution"] >> S;
+	fs["canny"] >> CT;
+	fs.release();
 	//Add all of the Images
 	readImages(path + "/Android", images, labels, 1);
 	readImages(path + "/Baby", images, labels, 2);
@@ -137,11 +179,11 @@ TrainSVM::TrainSVM(std::string path) {
 	Size sz = images[0].size();
 	Mat data = createDataMatrix(images);
 	Mat Dlabels = createLabelMatrix(labels);
-	//data.copyTo(data, CV_32F);
+	
 
 
 	//Now Setup the SVM Parameters
-	cout << "Creating SVM" << endl;
+	
 
 	Ptr<ml::SVM> svm = ml::SVM::create();
 	// edit: the params struct got removed,
@@ -150,10 +192,23 @@ TrainSVM::TrainSVM(std::string path) {
 	svm->setKernel(ml::SVM::LINEAR);
 	svm->setGamma(3);
 	svm->setDegree(3);
-	
+
+	//Now perform PCA on the HOG Matrix
+	// do the PCA, and retain only 50 eigenvecs:
+	cout << "Perform PCA" << endl;
+	PCA pca(data, Mat(), PCA::DATA_AS_ROW, 50);
+	fs.open(path + "pca.dat", FileStorage::WRITE);
+	fs << "mean" << pca.mean;
+	fs << "e_vectors" << pca.eigenvectors;
+	fs << "e_values" << pca.eigenvalues;
+	fs.release();
+
+	Mat reduced = pca.project(data);
+	reduced.convertTo(reduced, CV_32F);
 
 	Dlabels.convertTo(Dlabels, CV_32SC1);
-	svm->train(data, ml::ROW_SAMPLE, Dlabels);
+	cout << "Creating SVM" << endl;
+	svm->train(reduced, ml::ROW_SAMPLE, Dlabels);
 	//Save the SVM
 	cout << "Saving SVM" << endl;
 	svm->save(path + "svm.xml");

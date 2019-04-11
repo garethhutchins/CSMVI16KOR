@@ -12,6 +12,16 @@
 #include "TestFolder.h"
 #include "TrainSVM.h"
 #include "SVMTest.h"
+#include "TrainSVM.h"
+#include "freenect-playback-wrapper.h"
+#include <Unknwn.h>    
+#include <windows.h>
+#include <objidl.h>
+#include <shellapi.h>
+#include <cstdint>
+#include <sstream>
+#include <dirent.h>
+#include "Canny.h"
 
 namespace CSMVI16KOR {
 
@@ -135,6 +145,39 @@ private: System::Windows::Forms::Button^  btn_SVMTest;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::TextBox^  nothing_s;
 private: System::Windows::Forms::TextBox^  nothing_e;
+private: System::Windows::Forms::TabPage^  tabPage5;
+private: System::Windows::Forms::Button^  btn_Image_Select;
+private: System::Windows::Forms::TextBox^  txt_Test_Image;
+private: System::Windows::Forms::Label^  label27;
+private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+
+
+
+
+
+
+
+
+
+private: System::Windows::Forms::GroupBox^  groupBox2;
+private: System::Windows::Forms::Button^  btn_IS;
+private: System::Windows::Forms::TextBox^  txt_ResP;
+private: System::Windows::Forms::Label^  label29;
+private: System::Windows::Forms::TextBox^  txt_Threshold;
+private: System::Windows::Forms::Label^  label28;
+private: System::Windows::Forms::TextBox^  txt_CT;
+
+private: System::Windows::Forms::Label^  label30;
+private: System::Windows::Forms::Button^  button1;
+private: System::Windows::Forms::TabPage^  tabPage6;
+private: System::Windows::Forms::Button^  btn_ClassTestFolder;
+private: System::Windows::Forms::TextBox^  txt_ClassTrain;
+private: System::Windows::Forms::Label^  label31;
+private: System::Windows::Forms::Button^  btn_ClassTest;
+private: System::Windows::Forms::TabControl^  tabControl3;
+private: System::Windows::Forms::TabPage^  tabPage7;
+private: System::Windows::Forms::RichTextBox^  txt_ImageResults;
+private: System::Windows::Forms::TabPage^  tabPage8;
 
 
 	private:
@@ -154,7 +197,6 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
-			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->txt_EndFrame = (gcnew System::Windows::Forms::TextBox());
 			this->label23 = (gcnew System::Windows::Forms::Label());
@@ -208,6 +250,9 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->dragon_e = (gcnew System::Windows::Forms::TextBox());
 			this->android_s = (gcnew System::Windows::Forms::TextBox());
 			this->android_e = (gcnew System::Windows::Forms::TextBox());
+			this->label26 = (gcnew System::Windows::Forms::Label());
+			this->nothing_s = (gcnew System::Windows::Forms::TextBox());
+			this->nothing_e = (gcnew System::Windows::Forms::TextBox());
 			this->btn_temp = (gcnew System::Windows::Forms::Button());
 			this->btn_run = (gcnew System::Windows::Forms::Button());
 			this->txt_tmp = (gcnew System::Windows::Forms::TextBox());
@@ -215,6 +260,29 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->btn_trn_folder = (gcnew System::Windows::Forms::Button());
 			this->txt_trainFldr = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btn_class = (gcnew System::Windows::Forms::Button());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->txt_CT = (gcnew System::Windows::Forms::TextBox());
+			this->label30 = (gcnew System::Windows::Forms::Label());
+			this->btn_IS = (gcnew System::Windows::Forms::Button());
+			this->txt_ResP = (gcnew System::Windows::Forms::TextBox());
+			this->label29 = (gcnew System::Windows::Forms::Label());
+			this->txt_Threshold = (gcnew System::Windows::Forms::TextBox());
+			this->label28 = (gcnew System::Windows::Forms::Label());
+			this->btn_Image_Select = (gcnew System::Windows::Forms::Button());
+			this->txt_Test_Image = (gcnew System::Windows::Forms::TextBox());
+			this->label27 = (gcnew System::Windows::Forms::Label());
+			this->tabPage6 = (gcnew System::Windows::Forms::TabPage());
+			this->btn_ClassTestFolder = (gcnew System::Windows::Forms::Button());
+			this->txt_ClassTrain = (gcnew System::Windows::Forms::TextBox());
+			this->label31 = (gcnew System::Windows::Forms::Label());
+			this->btn_ClassTest = (gcnew System::Windows::Forms::Button());
+			this->tabControl3 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage7 = (gcnew System::Windows::Forms::TabPage());
+			this->txt_ImageResults = (gcnew System::Windows::Forms::RichTextBox());
+			this->tabPage8 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
@@ -229,13 +297,16 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->txt_trn = (gcnew System::Windows::Forms::TextBox());
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
-			this->label26 = (gcnew System::Windows::Forms::Label());
-			this->nothing_s = (gcnew System::Windows::Forms::TextBox());
-			this->nothing_e = (gcnew System::Windows::Forms::TextBox());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
+			this->tabPage5->SuspendLayout();
+			this->groupBox2->SuspendLayout();
+			this->tabPage6->SuspendLayout();
+			this->tabControl3->SuspendLayout();
+			this->tabPage7->SuspendLayout();
 			this->tabPage2->SuspendLayout();
 			this->tabControl2->SuspendLayout();
 			this->tabPage3->SuspendLayout();
@@ -246,6 +317,8 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
+			this->tabControl1->Controls->Add(this->tabPage5);
+			this->tabControl1->Controls->Add(this->tabPage6);
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Location = System::Drawing::Point(12, 33);
 			this->tabControl1->Name = L"tabControl1";
@@ -255,7 +328,6 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			// 
 			// tabPage1
 			// 
-			this->tabPage1->Controls->Add(this->btn_class);
 			this->tabPage1->Controls->Add(this->groupBox1);
 			this->tabPage1->Controls->Add(this->btn_temp);
 			this->tabPage1->Controls->Add(this->btn_run);
@@ -269,18 +341,8 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage1->Size = System::Drawing::Size(785, 569);
 			this->tabPage1->TabIndex = 0;
-			this->tabPage1->Text = L"Training";
+			this->tabPage1->Text = L"Frame Splitting";
 			this->tabPage1->UseVisualStyleBackColor = true;
-			// 
-			// btn_class
-			// 
-			this->btn_class->Location = System::Drawing::Point(318, 446);
-			this->btn_class->Name = L"btn_class";
-			this->btn_class->Size = System::Drawing::Size(137, 23);
-			this->btn_class->TabIndex = 1;
-			this->btn_class->Text = L"Create Classifications";
-			this->btn_class->UseVisualStyleBackColor = true;
-			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
 			// 
 			// groupBox1
 			// 
@@ -822,6 +884,31 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->android_e->Size = System::Drawing::Size(100, 20);
 			this->android_e->TabIndex = 47;
 			// 
+			// label26
+			// 
+			this->label26->AutoSize = true;
+			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label26->Location = System::Drawing::Point(360, 224);
+			this->label26->Name = L"label26";
+			this->label26->Size = System::Drawing::Size(51, 13);
+			this->label26->TabIndex = 48;
+			this->label26->Text = L"Nothing";
+			// 
+			// nothing_s
+			// 
+			this->nothing_s->Location = System::Drawing::Point(479, 227);
+			this->nothing_s->Name = L"nothing_s";
+			this->nothing_s->Size = System::Drawing::Size(100, 20);
+			this->nothing_s->TabIndex = 49;
+			// 
+			// nothing_e
+			// 
+			this->nothing_e->Location = System::Drawing::Point(598, 227);
+			this->nothing_e->Name = L"nothing_e";
+			this->nothing_e->Size = System::Drawing::Size(100, 20);
+			this->nothing_e->TabIndex = 50;
+			// 
 			// btn_temp
 			// 
 			this->btn_temp->Location = System::Drawing::Point(668, 57);
@@ -884,6 +971,233 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Training Set:";
 			// 
+			// tabPage5
+			// 
+			this->tabPage5->Controls->Add(this->button1);
+			this->tabPage5->Controls->Add(this->btn_class);
+			this->tabPage5->Controls->Add(this->groupBox2);
+			this->tabPage5->Controls->Add(this->btn_Image_Select);
+			this->tabPage5->Controls->Add(this->txt_Test_Image);
+			this->tabPage5->Controls->Add(this->label27);
+			this->tabPage5->Location = System::Drawing::Point(4, 22);
+			this->tabPage5->Name = L"tabPage5";
+			this->tabPage5->Size = System::Drawing::Size(785, 569);
+			this->tabPage5->TabIndex = 2;
+			this->tabPage5->Text = L"Image Settings";
+			this->tabPage5->UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(298, 223);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(104, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Save Settings";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &FormMain::button1_Click_2);
+			// 
+			// btn_class
+			// 
+			this->btn_class->Location = System::Drawing::Point(288, 373);
+			this->btn_class->Name = L"btn_class";
+			this->btn_class->Size = System::Drawing::Size(137, 23);
+			this->btn_class->TabIndex = 1;
+			this->btn_class->Text = L"Create Classifications";
+			this->btn_class->UseVisualStyleBackColor = true;
+			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->Controls->Add(this->txt_CT);
+			this->groupBox2->Controls->Add(this->label30);
+			this->groupBox2->Controls->Add(this->btn_IS);
+			this->groupBox2->Controls->Add(this->txt_ResP);
+			this->groupBox2->Controls->Add(this->label29);
+			this->groupBox2->Controls->Add(this->txt_Threshold);
+			this->groupBox2->Controls->Add(this->label28);
+			this->groupBox2->Location = System::Drawing::Point(87, 74);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(547, 123);
+			this->groupBox2->TabIndex = 3;
+			this->groupBox2->TabStop = false;
+			this->groupBox2->Text = L"Image Settings";
+			// 
+			// txt_CT
+			// 
+			this->txt_CT->Location = System::Drawing::Point(110, 81);
+			this->txt_CT->Name = L"txt_CT";
+			this->txt_CT->Size = System::Drawing::Size(100, 20);
+			this->txt_CT->TabIndex = 6;
+			this->txt_CT->Text = L"0";
+			// 
+			// label30
+			// 
+			this->label30->AutoSize = true;
+			this->label30->Location = System::Drawing::Point(17, 83);
+			this->label30->Name = L"label30";
+			this->label30->Size = System::Drawing::Size(87, 13);
+			this->label30->TabIndex = 5;
+			this->label30->Text = L"Canny Threshold";
+			// 
+			// btn_IS
+			// 
+			this->btn_IS->Location = System::Drawing::Point(240, 79);
+			this->btn_IS->Name = L"btn_IS";
+			this->btn_IS->Size = System::Drawing::Size(75, 23);
+			this->btn_IS->TabIndex = 4;
+			this->btn_IS->Text = L"Show Image";
+			this->btn_IS->UseVisualStyleBackColor = true;
+			this->btn_IS->Click += gcnew System::EventHandler(this, &FormMain::btn_IS_Click);
+			// 
+			// txt_ResP
+			// 
+			this->txt_ResP->Location = System::Drawing::Point(326, 24);
+			this->txt_ResP->Name = L"txt_ResP";
+			this->txt_ResP->Size = System::Drawing::Size(100, 20);
+			this->txt_ResP->TabIndex = 3;
+			this->txt_ResP->Text = L"100";
+			// 
+			// label29
+			// 
+			this->label29->AutoSize = true;
+			this->label29->Location = System::Drawing::Point(237, 31);
+			this->label29->Name = L"label29";
+			this->label29->Size = System::Drawing::Size(68, 13);
+			this->label29->TabIndex = 2;
+			this->label29->Text = L"Resolution %";
+			// 
+			// txt_Threshold
+			// 
+			this->txt_Threshold->Location = System::Drawing::Point(77, 28);
+			this->txt_Threshold->Name = L"txt_Threshold";
+			this->txt_Threshold->Size = System::Drawing::Size(100, 20);
+			this->txt_Threshold->TabIndex = 1;
+			this->txt_Threshold->Text = L"1";
+			// 
+			// label28
+			// 
+			this->label28->AutoSize = true;
+			this->label28->Location = System::Drawing::Point(17, 31);
+			this->label28->Name = L"label28";
+			this->label28->Size = System::Drawing::Size(56, 13);
+			this->label28->TabIndex = 0;
+			this->label28->Text = L"Brightness";
+			// 
+			// btn_Image_Select
+			// 
+			this->btn_Image_Select->Location = System::Drawing::Point(652, 22);
+			this->btn_Image_Select->Name = L"btn_Image_Select";
+			this->btn_Image_Select->Size = System::Drawing::Size(75, 23);
+			this->btn_Image_Select->TabIndex = 2;
+			this->btn_Image_Select->Text = L"Select Image";
+			this->btn_Image_Select->UseVisualStyleBackColor = true;
+			this->btn_Image_Select->Click += gcnew System::EventHandler(this, &FormMain::btn_Image_Select_Click);
+			// 
+			// txt_Test_Image
+			// 
+			this->txt_Test_Image->Location = System::Drawing::Point(87, 22);
+			this->txt_Test_Image->Name = L"txt_Test_Image";
+			this->txt_Test_Image->Size = System::Drawing::Size(547, 20);
+			this->txt_Test_Image->TabIndex = 1;
+			// 
+			// label27
+			// 
+			this->label27->AutoSize = true;
+			this->label27->Location = System::Drawing::Point(20, 22);
+			this->label27->Name = L"label27";
+			this->label27->Size = System::Drawing::Size(60, 13);
+			this->label27->TabIndex = 0;
+			this->label27->Text = L"Test Image";
+			// 
+			// tabPage6
+			// 
+			this->tabPage6->Controls->Add(this->btn_ClassTestFolder);
+			this->tabPage6->Controls->Add(this->txt_ClassTrain);
+			this->tabPage6->Controls->Add(this->label31);
+			this->tabPage6->Controls->Add(this->btn_ClassTest);
+			this->tabPage6->Controls->Add(this->tabControl3);
+			this->tabPage6->Location = System::Drawing::Point(4, 22);
+			this->tabPage6->Name = L"tabPage6";
+			this->tabPage6->Size = System::Drawing::Size(785, 569);
+			this->tabPage6->TabIndex = 3;
+			this->tabPage6->Text = L"Test Classification";
+			this->tabPage6->UseVisualStyleBackColor = true;
+			// 
+			// btn_ClassTestFolder
+			// 
+			this->btn_ClassTestFolder->Location = System::Drawing::Point(692, 17);
+			this->btn_ClassTestFolder->Name = L"btn_ClassTestFolder";
+			this->btn_ClassTestFolder->Size = System::Drawing::Size(75, 23);
+			this->btn_ClassTestFolder->TabIndex = 4;
+			this->btn_ClassTestFolder->Text = L"Browse";
+			this->btn_ClassTestFolder->UseVisualStyleBackColor = true;
+			this->btn_ClassTestFolder->Click += gcnew System::EventHandler(this, &FormMain::btn_ClassTestFolder_Click);
+			// 
+			// txt_ClassTrain
+			// 
+			this->txt_ClassTrain->Location = System::Drawing::Point(113, 21);
+			this->txt_ClassTrain->Name = L"txt_ClassTrain";
+			this->txt_ClassTrain->Size = System::Drawing::Size(560, 20);
+			this->txt_ClassTrain->TabIndex = 3;
+			// 
+			// label31
+			// 
+			this->label31->AutoSize = true;
+			this->label31->Location = System::Drawing::Point(29, 21);
+			this->label31->Name = L"label31";
+			this->label31->Size = System::Drawing::Size(77, 13);
+			this->label31->TabIndex = 2;
+			this->label31->Text = L"Training Folder";
+			// 
+			// btn_ClassTest
+			// 
+			this->btn_ClassTest->Location = System::Drawing::Point(363, 519);
+			this->btn_ClassTest->Name = L"btn_ClassTest";
+			this->btn_ClassTest->Size = System::Drawing::Size(75, 23);
+			this->btn_ClassTest->TabIndex = 1;
+			this->btn_ClassTest->Text = L"Test";
+			this->btn_ClassTest->UseVisualStyleBackColor = true;
+			this->btn_ClassTest->Click += gcnew System::EventHandler(this, &FormMain::btn_ClassTest_Click);
+			// 
+			// tabControl3
+			// 
+			this->tabControl3->Controls->Add(this->tabPage7);
+			this->tabControl3->Controls->Add(this->tabPage8);
+			this->tabControl3->Location = System::Drawing::Point(29, 63);
+			this->tabControl3->Name = L"tabControl3";
+			this->tabControl3->SelectedIndex = 0;
+			this->tabControl3->Size = System::Drawing::Size(718, 441);
+			this->tabControl3->TabIndex = 0;
+			// 
+			// tabPage7
+			// 
+			this->tabPage7->Controls->Add(this->txt_ImageResults);
+			this->tabPage7->Location = System::Drawing::Point(4, 22);
+			this->tabPage7->Name = L"tabPage7";
+			this->tabPage7->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage7->Size = System::Drawing::Size(710, 415);
+			this->tabPage7->TabIndex = 0;
+			this->tabPage7->Text = L"Images";
+			this->tabPage7->UseVisualStyleBackColor = true;
+			// 
+			// txt_ImageResults
+			// 
+			this->txt_ImageResults->Location = System::Drawing::Point(7, 20);
+			this->txt_ImageResults->Name = L"txt_ImageResults";
+			this->txt_ImageResults->Size = System::Drawing::Size(697, 368);
+			this->txt_ImageResults->TabIndex = 0;
+			this->txt_ImageResults->Text = L"";
+			// 
+			// tabPage8
+			// 
+			this->tabPage8->Location = System::Drawing::Point(4, 22);
+			this->tabPage8->Name = L"tabPage8";
+			this->tabPage8->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage8->Size = System::Drawing::Size(710, 415);
+			this->tabPage8->TabIndex = 1;
+			this->tabPage8->Text = L"Depth";
+			this->tabPage8->UseVisualStyleBackColor = true;
+			// 
 			// tabPage2
 			// 
 			this->tabPage2->Controls->Add(this->tabControl2);
@@ -898,7 +1212,7 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage2->Size = System::Drawing::Size(785, 569);
 			this->tabPage2->TabIndex = 1;
-			this->tabPage2->Text = L"Testing";
+			this->tabPage2->Text = L"Run Predictions";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
 			// tabControl2
@@ -1020,30 +1334,9 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->label24->TabIndex = 7;
 			this->label24->Text = L"Training Directory";
 			// 
-			// label26
+			// openFileDialog1
 			// 
-			this->label26->AutoSize = true;
-			this->label26->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label26->Location = System::Drawing::Point(360, 224);
-			this->label26->Name = L"label26";
-			this->label26->Size = System::Drawing::Size(51, 13);
-			this->label26->TabIndex = 48;
-			this->label26->Text = L"Nothing";
-			// 
-			// nothing_s
-			// 
-			this->nothing_s->Location = System::Drawing::Point(479, 227);
-			this->nothing_s->Name = L"nothing_s";
-			this->nothing_s->Size = System::Drawing::Size(100, 20);
-			this->nothing_s->TabIndex = 49;
-			// 
-			// nothing_e
-			// 
-			this->nothing_e->Location = System::Drawing::Point(598, 227);
-			this->nothing_e->Name = L"nothing_e";
-			this->nothing_e->Size = System::Drawing::Size(100, 20);
-			this->nothing_e->TabIndex = 50;
+			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
 			// FormMain
 			// 
@@ -1060,6 +1353,14 @@ private: System::Windows::Forms::TextBox^  nothing_e;
 			this->groupBox1->PerformLayout();
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
+			this->tabPage5->ResumeLayout(false);
+			this->tabPage5->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
+			this->tabPage6->ResumeLayout(false);
+			this->tabPage6->PerformLayout();
+			this->tabControl3->ResumeLayout(false);
+			this->tabPage7->ResumeLayout(false);
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
 			this->tabControl2->ResumeLayout(false);
@@ -1295,6 +1596,91 @@ private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs
 	std::string tf = context.marshal_as<std::string>(txt_test->Text);
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
 	SVMTest:SVMTest(ft, tf);
+}
+private: System::Void btn_Image_Select_Click(System::Object^  sender, System::EventArgs^  e) {
+	openFileDialog1->ShowDialog();
+	txt_Test_Image->Text = openFileDialog1->FileName;
+	msclr::interop::marshal_context context;
+	std::string ti = context.marshal_as<std::string>(txt_Test_Image->Text);
+	cv::namedWindow("Image", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+	cv::Mat img = imread(ti, cv::IMREAD_GRAYSCALE);
+	cv::imshow("Image", img);
+	int CT = std::stof(context.marshal_as<std::string>(txt_CT->Text));
+	Canny C;
+	C.CannyImage(img, CT);
+}
+private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  e) {
+	msclr::interop::marshal_context context;
+	std::string ti = context.marshal_as<std::string>(txt_Test_Image->Text);
+	cv::namedWindow("ImageP", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+	cv::Mat img = imread(ti, cv::IMREAD_GRAYSCALE);
+	//Apply Threshold
+	//Convert to float
+	
+	float Thresh = std::stof(context.marshal_as<std::string>(txt_Threshold->Text));
+	
+	img = img * Thresh;
+
+	//Change Resolution
+	double S = std::stod(context.marshal_as<std::string>(txt_ResP->Text));
+	S = S / 100;
+	cv::resize(img, img, cv::Size(), S, S, cv::INTER_LINEAR);
+
+	
+	int CT = std::stof(context.marshal_as<std::string>(txt_CT->Text));
+
+	cv::Mat src, src_gray;
+	cv:: Mat dst, detected_edges;
+
+	int edgeThresh = 1;
+	int lowThreshold = CT;
+	int const max_lowThreshold = 100;
+	int ratio = 3;
+	int kernel_size = 3;
+	char* window_name = "Edge Map";
+	src = img;
+
+	cv::blur(src, detected_edges, cv::Size(3, 3));
+
+	/// Canny detector
+	cv::Canny(detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size);
+
+	/// Using Canny's output as a mask, we display our result
+	dst = cv::Scalar::all(0);
+
+	src.copyTo(dst, detected_edges);
+
+	cv::imshow("ImageP", dst);
+
+}
+private: System::Void btn_SH_Click(System::Object^  sender, System::EventArgs^  e) {
+
+}
+private: System::Void button1_Click_2(System::Object^  sender, System::EventArgs^  e) {
+	msclr::interop::marshal_context context;
+	std::string path = context.marshal_as<std::string>(txt_tmp->Text);
+	float Thresh = std::stof(context.marshal_as<std::string>(txt_Threshold->Text));
+	double S = std::stod(context.marshal_as<std::string>(txt_ResP->Text));
+	int CT = std::stof(context.marshal_as<std::string>(txt_CT->Text));
+	cv::FileStorage fs1(path + "/images/ImageProc.dat", cv::FileStorage::WRITE);
+	fs1 << "brightness" << Thresh;
+	fs1 << "resolution" << S;
+	fs1 << "canny" << CT;
+	fs1.release();
+
+	cv::FileStorage fs2(path + "/depth/ImageProc.dat", cv::FileStorage::WRITE);
+	fs2 << "brightness" << Thresh;
+	fs2 << "resolution" << S;
+	fs2 << "canny" << CT;
+	fs2.release();
+}
+private: System::Void btn_ClassTestFolder_Click(System::Object^  sender, System::EventArgs^  e) {
+	TrainDlg->SelectedPath = "";
+	TrainDlg->ShowDialog();
+	txt_ClassTrain->Text = TrainDlg->SelectedPath;
+}
+private: System::Void btn_ClassTest_Click(System::Object^  sender, System::EventArgs^  e) {
+
 }
 };
 }

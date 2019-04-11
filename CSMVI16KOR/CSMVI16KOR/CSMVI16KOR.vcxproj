@@ -137,6 +137,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Canny.cpp" />
     <ClCompile Include="EDistance.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="freenect-playback-wrapper.cpp" />
@@ -149,6 +150,8 @@
     <ClCompile Include="Unlabelled.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Canny.h" />
+    <ClInclude Include="ClassTest.h" />
     <ClInclude Include="EDistance.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
