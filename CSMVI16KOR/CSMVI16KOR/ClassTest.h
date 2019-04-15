@@ -7,6 +7,6 @@ class ClassTest
 {
 public:
 	ClassTest();
-	int * CheckFolder(std::string, cv::PCA, cv::ml::SVM);
+	int * CheckFolder(std::string, cv::PCA);
 };
 

@@ -11,22 +11,91 @@
 #include <sstream>
 #include <dirent.h>
 
+void GetLabel(float Code, System::Windows::Forms::Label^ L) {
+	std::string Lab = "Nothing";
+	int c = static_cast<int>(Code);
+	switch (c) {
+	case 1: {
+		L->Text = "Android";
+		break;
+	}
+	case 2: {
+		L->Text = "Baby";
+		break;
+	}
+	case 3: {
+		L->Text = "Blackberry";
+		break;
+	}
+	case 4: {
+		L->Text = "Camera";
+		break;
+	}
+	case 5: {
+		L->Text = "Car";
+		break;
+	}
+	case 6: {
+		L->Text = "Coffee Tin";
+		break;
+	}
+	case 7: {
+		L->Text = "Diet Coke";
+		break;
+	}
+	case 8: {
+		L->Text = "Dinosaur";
+		break;
+	}
+	case 9: {
+		L->Text = "Dog";
+		break;
+	}
+	case 10: {
+		L->Text = "Dragon";
+		break;
+	}
+	case 11: {
+		L->Text = "Duck";
+		break;
+	}
+	case 12: {
+		L->Text = "Keyboard";
+		break;
+	}
+	case 13: {
+		L->Text = "Koala";
+		break;
+	}
+	case 14: {
+		L->Text = "Mug";
+		break;
+	}
+	case 15: {
+		L->Text = "Nothing";
+		break;
+	}
+	}
+}
 
-SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath) {
+SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Windows::Forms::Label^ DL, System::Windows::Forms::Label^ IL) {
 	using namespace cv;
+	
 	double S;
 	float Thresh;
 	int CT;
+	int Rx1, Rx2, Ry1, Ry2;
 	std::string fileName = TrainingPath + "/images/ImageProc.dat";
 	cv::FileStorage Ifs(fileName, cv::FileStorage::READ);
 
 	Ifs["brightness"] >> Thresh;
 	Ifs["resolution"] >> S;
 	Ifs["canny"] >> CT;
+	Ifs["x1"] >> Rx1;
+	Ifs["x2"] >> Rx2;
+	Ifs["y1"] >> Ry1;
+	Ifs["y2"] >> Ry2;
 	Ifs.release();
-
-	
-
 
 	//Load the PCA
 	std::cout << "Loading Depth PCA" << std::endl;
@@ -169,14 +238,15 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath) {
 
 			currentDepth.copyTo(dst, detected_edges);
 			cv::imshow("DepthC", dst);
-			Mat RS = dst.reshape(1, 1);
+			cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+			ROI.convertTo(ROI, CV_32F);
+			Mat RS = ROI.reshape(1, 1);
 			RS.convertTo(RS, CV_32F);
 			//Now reduce the HogMat with the PCA Projetions
 			Mat DRed = DepthPCA.project(RS);
 			DRed.convertTo(DRed, CV_32F);
 			Mat Dres;
 			float Dresponse = svmD->predict(DRed, Dres, 0);
-			std::cout << std::to_string(Dresponse);
 			std::cout << "SVM Depth Output = " << Dres.at<float>(0) << std::endl;
 
 			Mat Image;
@@ -208,15 +278,18 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath) {
 			dst = cv::Scalar::all(0);
 
 			Grey.copyTo(dst, detected_edges);
-			cv::imshow("RGBC", dst);
+			cv::Mat ROD(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+			ROD.convertTo(ROD, CV_32F);
+			Mat RSD = ROD.reshape(1, 1);
 			//Now reduce the HogMat with the PCA Projetions
-			RS = dst.reshape(1, 1);
+			RS = RSD.reshape(1, 1);
 			RS.convertTo(RS, CV_32F);
 			Mat IRed = ImagePCA.project(RS);
 			IRed.convertTo(IRed, CV_32F);
 			float Iresponse = svmI->predict(IRed, Ires, 0);
-			std::cout << std::to_string(Iresponse);
 			std::cout << "SVM Image Output = " << Ires.at<float>(0) << std::endl;
+			GetLabel(Dres.at<float>(0), DL);
+			GetLabel(Ires.at<float>(0),IL);
 
 		}
 		
@@ -225,11 +298,7 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath) {
 
 		// Check for keyboard input
 		key = cv::waitKey(10);
-
-		
-		
-		
-
 		
 	}
+	
 }

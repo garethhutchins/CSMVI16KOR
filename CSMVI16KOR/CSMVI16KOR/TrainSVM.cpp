@@ -11,11 +11,12 @@
 #include <dirent.h>
 using namespace cv;
 using namespace std;
+using namespace System::Windows::Forms;
 
 double S;
 float Thresh;
 int CT;
-
+int Rx1, Rx2, Ry1, Ry2;
 
 
 
@@ -81,6 +82,8 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 					dst = cv::Scalar::all(0);
 
 					img.copyTo(dst, detected_edges);
+					cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+					//dst = ROI;
 
 					//HOGDescriptor hog;
 					//vector<float> descriptors_train;
@@ -94,8 +97,9 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 						//Mat TMat = Mat(1,1, CV_32F, descriptors_train.at(i));
 						//HogMat.push_back(TMat);
 					//}
+					ROI.convertTo(ROI, CV_32F);
 						
-					images.push_back(dst);
+					images.push_back(ROI);
 				}
 					
 				
@@ -158,6 +162,10 @@ TrainSVM::TrainSVM(std::string path) {
 	fs["brightness"] >> Thresh;
 	fs["resolution"] >> S;
 	fs["canny"] >> CT;
+	fs["x1"] >> Rx1;
+	fs["x2"] >> Rx2;
+	fs["y1"] >> Ry1;
+	fs["y2"] >> Ry2;
 	fs.release();
 	//Add all of the Images
 	readImages(path + "/Android", images, labels, 1);

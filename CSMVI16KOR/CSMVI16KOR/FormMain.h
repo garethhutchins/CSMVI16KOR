@@ -22,6 +22,7 @@
 #include <sstream>
 #include <dirent.h>
 #include "Canny.h"
+#include "ClassTest.h"
 
 namespace CSMVI16KOR {
 
@@ -178,6 +179,18 @@ private: System::Windows::Forms::TabControl^  tabControl3;
 private: System::Windows::Forms::TabPage^  tabPage7;
 private: System::Windows::Forms::RichTextBox^  txt_ImageResults;
 private: System::Windows::Forms::TabPage^  tabPage8;
+private: System::Windows::Forms::TextBox^  txt_yh;
+private: System::Windows::Forms::Label^  label35;
+private: System::Windows::Forms::TextBox^  txt_ys;
+private: System::Windows::Forms::Label^  label34;
+private: System::Windows::Forms::TextBox^  txt_xw;
+private: System::Windows::Forms::Label^  label33;
+private: System::Windows::Forms::TextBox^  txt_xs;
+private: System::Windows::Forms::Label^  label32;
+private: System::Windows::Forms::Label^  lbl_SVM_IP;
+private: System::Windows::Forms::Label^  lbl_SVM_DP;
+private: System::Windows::Forms::Label^  label37;
+private: System::Windows::Forms::Label^  label36;
 
 
 	private:
@@ -264,6 +277,14 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->txt_yh = (gcnew System::Windows::Forms::TextBox());
+			this->label35 = (gcnew System::Windows::Forms::Label());
+			this->txt_ys = (gcnew System::Windows::Forms::TextBox());
+			this->label34 = (gcnew System::Windows::Forms::Label());
+			this->txt_xw = (gcnew System::Windows::Forms::TextBox());
+			this->label33 = (gcnew System::Windows::Forms::Label());
+			this->txt_xs = (gcnew System::Windows::Forms::TextBox());
+			this->label32 = (gcnew System::Windows::Forms::Label());
 			this->txt_CT = (gcnew System::Windows::Forms::TextBox());
 			this->label30 = (gcnew System::Windows::Forms::Label());
 			this->btn_IS = (gcnew System::Windows::Forms::Button());
@@ -298,6 +319,10 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->label36 = (gcnew System::Windows::Forms::Label());
+			this->label37 = (gcnew System::Windows::Forms::Label());
+			this->lbl_SVM_DP = (gcnew System::Windows::Forms::Label());
+			this->lbl_SVM_IP = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -988,7 +1013,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(298, 223);
+			this->button1->Location = System::Drawing::Point(298, 390);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(104, 23);
 			this->button1->TabIndex = 4;
@@ -998,7 +1023,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// btn_class
 			// 
-			this->btn_class->Location = System::Drawing::Point(288, 373);
+			this->btn_class->Location = System::Drawing::Point(286, 443);
 			this->btn_class->Name = L"btn_class";
 			this->btn_class->Size = System::Drawing::Size(137, 23);
 			this->btn_class->TabIndex = 1;
@@ -1008,6 +1033,14 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->txt_yh);
+			this->groupBox2->Controls->Add(this->label35);
+			this->groupBox2->Controls->Add(this->txt_ys);
+			this->groupBox2->Controls->Add(this->label34);
+			this->groupBox2->Controls->Add(this->txt_xw);
+			this->groupBox2->Controls->Add(this->label33);
+			this->groupBox2->Controls->Add(this->txt_xs);
+			this->groupBox2->Controls->Add(this->label32);
 			this->groupBox2->Controls->Add(this->txt_CT);
 			this->groupBox2->Controls->Add(this->label30);
 			this->groupBox2->Controls->Add(this->btn_IS);
@@ -1017,10 +1050,74 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			this->groupBox2->Controls->Add(this->label28);
 			this->groupBox2->Location = System::Drawing::Point(87, 74);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(547, 123);
+			this->groupBox2->Size = System::Drawing::Size(547, 298);
 			this->groupBox2->TabIndex = 3;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Image Settings";
+			// 
+			// txt_yh
+			// 
+			this->txt_yh->Location = System::Drawing::Point(326, 183);
+			this->txt_yh->Name = L"txt_yh";
+			this->txt_yh->Size = System::Drawing::Size(100, 20);
+			this->txt_yh->TabIndex = 14;
+			// 
+			// label35
+			// 
+			this->label35->AutoSize = true;
+			this->label35->Location = System::Drawing::Point(256, 190);
+			this->label35->Name = L"label35";
+			this->label35->Size = System::Drawing::Size(48, 13);
+			this->label35->TabIndex = 13;
+			this->label35->Text = L"Y Height";
+			// 
+			// txt_ys
+			// 
+			this->txt_ys->Location = System::Drawing::Point(326, 141);
+			this->txt_ys->Name = L"txt_ys";
+			this->txt_ys->Size = System::Drawing::Size(100, 20);
+			this->txt_ys->TabIndex = 12;
+			// 
+			// label34
+			// 
+			this->label34->AutoSize = true;
+			this->label34->Location = System::Drawing::Point(256, 144);
+			this->label34->Name = L"label34";
+			this->label34->Size = System::Drawing::Size(39, 13);
+			this->label34->TabIndex = 11;
+			this->label34->Text = L"Y Start";
+			// 
+			// txt_xw
+			// 
+			this->txt_xw->Location = System::Drawing::Point(110, 183);
+			this->txt_xw->Name = L"txt_xw";
+			this->txt_xw->Size = System::Drawing::Size(100, 20);
+			this->txt_xw->TabIndex = 10;
+			// 
+			// label33
+			// 
+			this->label33->AutoSize = true;
+			this->label33->Location = System::Drawing::Point(20, 190);
+			this->label33->Name = L"label33";
+			this->label33->Size = System::Drawing::Size(45, 13);
+			this->label33->TabIndex = 9;
+			this->label33->Text = L"X Width";
+			// 
+			// txt_xs
+			// 
+			this->txt_xs->Location = System::Drawing::Point(110, 138);
+			this->txt_xs->Name = L"txt_xs";
+			this->txt_xs->Size = System::Drawing::Size(100, 20);
+			this->txt_xs->TabIndex = 8;
+			// 
+			// label32
+			// 
+			this->label32->AutoSize = true;
+			this->label32->Location = System::Drawing::Point(20, 138);
+			this->label32->Name = L"label32";
+			this->label32->Size = System::Drawing::Size(39, 13);
+			this->label32->TabIndex = 7;
+			this->label32->Text = L"X Start";
 			// 
 			// txt_CT
 			// 
@@ -1041,7 +1138,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// btn_IS
 			// 
-			this->btn_IS->Location = System::Drawing::Point(240, 79);
+			this->btn_IS->Location = System::Drawing::Point(240, 248);
 			this->btn_IS->Name = L"btn_IS";
 			this->btn_IS->Size = System::Drawing::Size(75, 23);
 			this->btn_IS->TabIndex = 4;
@@ -1068,7 +1165,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// txt_Threshold
 			// 
-			this->txt_Threshold->Location = System::Drawing::Point(77, 28);
+			this->txt_Threshold->Location = System::Drawing::Point(110, 28);
 			this->txt_Threshold->Name = L"txt_Threshold";
 			this->txt_Threshold->Size = System::Drawing::Size(100, 20);
 			this->txt_Threshold->TabIndex = 1;
@@ -1139,6 +1236,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			this->txt_ClassTrain->Name = L"txt_ClassTrain";
 			this->txt_ClassTrain->Size = System::Drawing::Size(560, 20);
 			this->txt_ClassTrain->TabIndex = 3;
+			this->txt_ClassTrain->TextChanged += gcnew System::EventHandler(this, &FormMain::txt_ClassTrain_TextChanged);
 			// 
 			// label31
 			// 
@@ -1262,13 +1360,17 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->lbl_SVM_IP);
+			this->tabPage4->Controls->Add(this->lbl_SVM_DP);
+			this->tabPage4->Controls->Add(this->label37);
+			this->tabPage4->Controls->Add(this->label36);
 			this->tabPage4->Controls->Add(this->btn_SVMTest);
 			this->tabPage4->Location = System::Drawing::Point(4, 22);
 			this->tabPage4->Name = L"tabPage4";
 			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage4->Size = System::Drawing::Size(753, 417);
 			this->tabPage4->TabIndex = 1;
-			this->tabPage4->Text = L"RGB GMM";
+			this->tabPage4->Text = L"SVM Test";
 			this->tabPage4->UseVisualStyleBackColor = true;
 			// 
 			// btn_SVMTest
@@ -1338,6 +1440,52 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
+			// label36
+			// 
+			this->label36->AutoSize = true;
+			this->label36->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label36->Location = System::Drawing::Point(63, 34);
+			this->label36->Name = L"label36";
+			this->label36->Size = System::Drawing::Size(187, 25);
+			this->label36->TabIndex = 1;
+			this->label36->Text = L"Depth Predcition";
+			// 
+			// label37
+			// 
+			this->label37->AutoSize = true;
+			this->label37->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label37->Location = System::Drawing::Point(497, 34);
+			this->label37->Name = L"label37";
+			this->label37->Size = System::Drawing::Size(188, 25);
+			this->label37->TabIndex = 2;
+			this->label37->Text = L"Image Prediction";
+			// 
+			// lbl_SVM_DP
+			// 
+			this->lbl_SVM_DP->AutoSize = true;
+			this->lbl_SVM_DP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_SVM_DP->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_SVM_DP->Location = System::Drawing::Point(68, 141);
+			this->lbl_SVM_DP->Name = L"lbl_SVM_DP";
+			this->lbl_SVM_DP->Size = System::Drawing::Size(122, 33);
+			this->lbl_SVM_DP->TabIndex = 3;
+			this->lbl_SVM_DP->Text = L"Nothing";
+			// 
+			// lbl_SVM_IP
+			// 
+			this->lbl_SVM_IP->AutoSize = true;
+			this->lbl_SVM_IP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_SVM_IP->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_SVM_IP->Location = System::Drawing::Point(512, 141);
+			this->lbl_SVM_IP->Name = L"lbl_SVM_IP";
+			this->lbl_SVM_IP->Size = System::Drawing::Size(122, 33);
+			this->lbl_SVM_IP->TabIndex = 4;
+			this->lbl_SVM_IP->Text = L"Nothing";
+			// 
 			// FormMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1367,6 +1515,7 @@ private: System::Windows::Forms::TabPage^  tabPage8;
 			this->tabPage3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->tabPage4->ResumeLayout(false);
+			this->tabPage4->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -1595,7 +1744,7 @@ private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs
 	msclr::interop::marshal_context context;
 	std::string tf = context.marshal_as<std::string>(txt_test->Text);
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
-	SVMTest:SVMTest(ft, tf);
+	SVMTest:SVMTest(ft, tf,lbl_SVM_DP, lbl_SVM_IP);
 }
 private: System::Void btn_Image_Select_Click(System::Object^  sender, System::EventArgs^  e) {
 	openFileDialog1->ShowDialog();
@@ -1621,6 +1770,14 @@ private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  
 	
 	img = img * Thresh;
 
+	//Crop
+	int x1, x2, y1, y2;
+	x1 = std::stoi(context.marshal_as<std::string>(txt_xs->Text));
+	x2 = std::stoi(context.marshal_as<std::string>(txt_xw->Text));
+	y1 = std::stoi(context.marshal_as<std::string>(txt_ys->Text));
+	y2 = std::stoi(context.marshal_as<std::string>(txt_yh->Text));
+	
+	
 	//Change Resolution
 	double S = std::stod(context.marshal_as<std::string>(txt_ResP->Text));
 	S = S / 100;
@@ -1649,6 +1806,8 @@ private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  
 	dst = cv::Scalar::all(0);
 
 	src.copyTo(dst, detected_edges);
+	cv::Mat ROI(dst, cv::Rect(x1, y1, x2, y2));
+	dst = ROI;
 
 	cv::imshow("ImageP", dst);
 
@@ -1662,16 +1821,31 @@ private: System::Void button1_Click_2(System::Object^  sender, System::EventArgs
 	float Thresh = std::stof(context.marshal_as<std::string>(txt_Threshold->Text));
 	double S = std::stod(context.marshal_as<std::string>(txt_ResP->Text));
 	int CT = std::stof(context.marshal_as<std::string>(txt_CT->Text));
+
+	int x1, x2, y1, y2;
+	x1 = std::stoi(context.marshal_as<std::string>(txt_xs->Text));
+	x2 = std::stoi(context.marshal_as<std::string>(txt_xw->Text));
+	y1 = std::stoi(context.marshal_as<std::string>(txt_ys->Text));
+	y2 = std::stoi(context.marshal_as<std::string>(txt_yh->Text));
+
 	cv::FileStorage fs1(path + "/images/ImageProc.dat", cv::FileStorage::WRITE);
 	fs1 << "brightness" << Thresh;
 	fs1 << "resolution" << S;
 	fs1 << "canny" << CT;
+	fs1 << "x1" << x1;
+	fs1 << "x2" << x2;
+	fs1 << "y1" << y1;
+	fs1 << "y2" << y2;
 	fs1.release();
 
 	cv::FileStorage fs2(path + "/depth/ImageProc.dat", cv::FileStorage::WRITE);
 	fs2 << "brightness" << Thresh;
 	fs2 << "resolution" << S;
 	fs2 << "canny" << CT;
+	fs2 << "x1" << x1;
+	fs2 << "x2" << x2;
+	fs2 << "y1" << y1;
+	fs2 << "y2" << y2;
 	fs2.release();
 }
 private: System::Void btn_ClassTestFolder_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1680,7 +1854,12 @@ private: System::Void btn_ClassTestFolder_Click(System::Object^  sender, System:
 	txt_ClassTrain->Text = TrainDlg->SelectedPath;
 }
 private: System::Void btn_ClassTest_Click(System::Object^  sender, System::EventArgs^  e) {
-
+	//ClassTest CT;
+	msclr::interop::marshal_context context;
+	std::string path = context.marshal_as<std::string>(txt_ClassTrain->Text);
+	//int out[] = CT.CheckFolder(path,"Android");
+}
+private: System::Void txt_ClassTrain_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
