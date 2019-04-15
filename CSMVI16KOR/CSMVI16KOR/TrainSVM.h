@@ -3,6 +3,6 @@
 class TrainSVM
 {
 public:
-	TrainSVM(std::string);
+	TrainSVM(std::string, System::Windows::Forms::Label^);
 };
 

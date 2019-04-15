@@ -152,10 +152,12 @@ static Mat createLabelMatrix(const vector<Mat> & labels) {
 
 }
 
-TrainSVM::TrainSVM(std::string path) {
+TrainSVM::TrainSVM(std::string path, System::Windows::Forms::Label^ LS) {
 	vector<Mat> images;
 	vector<Mat> labels;
 	//Load the Image Processing Settings
+	LS->Text = "Loading Image Processing Settings";
+	LS->Refresh();
 	std::string fileName = path + "/ImageProc.dat";
 	cv::FileStorage fs(fileName, cv::FileStorage::READ);
 	
@@ -168,23 +170,55 @@ TrainSVM::TrainSVM(std::string path) {
 	fs["y2"] >> Ry2;
 	fs.release();
 	//Add all of the Images
+	LS->Text = "Reading Android Images";
+	LS->Refresh();
 	readImages(path + "/Android", images, labels, 1);
+	LS->Text = "Reading Baby Images";
+	LS->Refresh();
 	readImages(path + "/Baby", images, labels, 2);
+	LS->Text = "Reading Blackberry Images";
+	LS->Refresh();
 	readImages(path + "/Blackberry", images, labels, 3);
+	LS->Text = "Reading Camera Images";
+	LS->Refresh();
 	readImages(path + "/Camera", images, labels, 4);
+	LS->Text = "Reading Car Images";
+	LS->Refresh();
 	readImages(path + "/Car", images, labels, 5);
+	LS->Text = "Reading Coffee Tin Images";
+	LS->Refresh();
 	readImages(path + "/Coffee Tin", images, labels, 6);
+	LS->Text = "Reading Diet Coke Images";
+	LS->Refresh();
 	readImages(path + "/Diet Coke", images, labels, 7);
+	LS->Text = "Reading Dinosaur Images";
+	LS->Refresh();
 	readImages(path + "/Dinosaur", images, labels, 8);
+	LS->Text = "Reading Dog Images";
+	LS->Refresh();
 	readImages(path + "/Dog", images, labels, 9);
+	LS->Text = "Reading Gragon Images";
+	LS->Refresh();
 	readImages(path + "/Dragon", images, labels, 10);
+	LS->Text = "Reading Duck Images";
+	LS->Refresh();
 	readImages(path + "/Duck", images, labels, 11);
+	LS->Text = "Reading Keyboard Images";
+	LS->Refresh();
 	readImages(path + "/Keyboard", images, labels, 12);
+	LS->Text = "Reading Koala Images";
+	LS->Refresh();
 	readImages(path + "/Koala", images, labels, 13);
+	LS->Text = "Reading Mug Images";
+	LS->Refresh();
 	readImages(path + "/Mug", images, labels, 14);
+	LS->Text = "Reading Nothing Images";
+	LS->Refresh();
 	readImages(path + "/Nothing", images, labels, 15);
 	int numRows = images.size();
 	Size sz = images[0].size();
+	LS->Text = "Creating Data Matrix";
+	LS->Refresh();
 	Mat data = createDataMatrix(images);
 	Mat Dlabels = createLabelMatrix(labels);
 	
@@ -203,6 +237,8 @@ TrainSVM::TrainSVM(std::string path) {
 
 	//Now perform PCA on the HOG Matrix
 	// do the PCA, and retain only 50 eigenvecs:
+	LS->Text = "Performing PCA";
+	LS->Refresh();
 	cout << "Perform PCA" << endl;
 	PCA pca(data, Mat(), PCA::DATA_AS_ROW, 50);
 	fs.open(path + "pca.dat", FileStorage::WRITE);
@@ -215,11 +251,13 @@ TrainSVM::TrainSVM(std::string path) {
 	reduced.convertTo(reduced, CV_32F);
 
 	Dlabels.convertTo(Dlabels, CV_32SC1);
+	LS->Text = "Creating SVM";
+	LS->Refresh();
 	cout << "Creating SVM" << endl;
 	svm->train(reduced, ml::ROW_SAMPLE, Dlabels);
 	//Save the SVM
 	cout << "Saving SVM" << endl;
 	svm->save(path + "svm.xml");
-	
+	LS->Refresh();
 }
 	

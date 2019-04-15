@@ -11,7 +11,7 @@
 #include <sstream>
 #include <dirent.h>
 
-void GetLabel(float Code, System::Windows::Forms::Label^ L) {
+void GetLabel(float Code, System::Windows::Forms::Label^ L ) {
 	std::string Lab = "Nothing";
 	int c = static_cast<int>(Code);
 	switch (c) {
@@ -78,9 +78,10 @@ void GetLabel(float Code, System::Windows::Forms::Label^ L) {
 	}
 }
 
-SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Windows::Forms::Label^ DL, System::Windows::Forms::Label^ IL) {
+SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Windows::Forms::Label^ DL, System::Windows::Forms::Label^ IL, System::Windows::Forms::Label^ LS) {
 	using namespace cv;
-	
+	LS->Text = "Loading Image Processing Settings";
+	LS->Refresh();
 	double S;
 	float Thresh;
 	int CT;
@@ -98,6 +99,8 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 	Ifs.release();
 
 	//Load the PCA
+	LS->Text = "Loading Depth PCA";
+	LS->Refresh();
 	std::cout << "Loading Depth PCA" << std::endl;
 	cv::PCA DepthPCA;
 	cv::PCA ImagePCA;
@@ -108,6 +111,8 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 	fsD.release();
 
 	std::cout << "Loading Image PCA" << std::endl;
+	LS->Refresh();
+	LS->Text = "Loading Image PCA";
 
 	FileStorage fsI(TrainingPath + "/imagespca.dat", FileStorage::READ);
 	fsI["mean"] >> ImagePCA.mean;
@@ -117,9 +122,13 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 
 	
 	//Load the SVM
+	LS->Text = "Loading Depth SVM";
+	LS->Refresh();
 	std::cout << "Loading Depth SVM" << std::endl;
 	std::string svmFile = TrainingPath + "/depthsvm.xml";
 	Ptr<ml::SVM> svmD = Algorithm::load<ml::SVM>(svmFile);
+	LS->Text = "Loading Image SVM";
+	LS->Refresh();
 	std::cout << "Loading Image SVM" << std::endl;
 	svmFile = TrainingPath + "/imagessvm.xml";
 	Ptr<ml::SVM> svmI = Algorithm::load<ml::SVM>(svmFile);
@@ -139,9 +148,11 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 
 	// Create the RGB and Depth Windows
 	cv::namedWindow("RGB", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+	cv::moveWindow("RGB", 1000, 0);
 	cv::namedWindow("Depth", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
-	cv::namedWindow("RGBC", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
-	cv::namedWindow("DepthC", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
+	cv::moveWindow("Depth", 1000, 500);
+	//This is for seeing the Canny Results
+	//cv::namedWindow("DepthC", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 
 	// The key value represents a key pressed on the keyboard,
 	// where 27 is the ESCAPE key
@@ -159,6 +170,8 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 
 	while (key != 27 && status != 0)
 	{
+		LS->Text = "Analyzing Images";
+		LS->Refresh();
 		// Loads in the next frame of Kinect data into the
 		// wrapper. Also pauses between the frames depending
 		// on the time between frames.

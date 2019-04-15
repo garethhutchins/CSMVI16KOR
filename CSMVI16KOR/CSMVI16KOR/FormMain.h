@@ -6,7 +6,7 @@
 #include "TrainFolder.h"
 #include "LabelFolder.h"
 #include "Unlabelled.h"
-#include "TrainGMM.h"
+#include "TrainEDist.h"
 #include <iostream>
 #include <fstream>
 #include "TestFolder.h"
@@ -146,7 +146,7 @@ private: System::Windows::Forms::Button^  btn_SVMTest;
 private: System::Windows::Forms::Label^  label26;
 private: System::Windows::Forms::TextBox^  nothing_s;
 private: System::Windows::Forms::TextBox^  nothing_e;
-private: System::Windows::Forms::TabPage^  tabPage5;
+
 private: System::Windows::Forms::Button^  btn_Image_Select;
 private: System::Windows::Forms::TextBox^  txt_Test_Image;
 private: System::Windows::Forms::Label^  label27;
@@ -191,6 +191,17 @@ private: System::Windows::Forms::Label^  lbl_SVM_IP;
 private: System::Windows::Forms::Label^  lbl_SVM_DP;
 private: System::Windows::Forms::Label^  label37;
 private: System::Windows::Forms::Label^  label36;
+private: System::Windows::Forms::TabControl^  tabControl4;
+private: System::Windows::Forms::TabPage^  tabPage9;
+private: System::Windows::Forms::TabPage^  tabPage10;
+private: System::Windows::Forms::Label^  lbl_DE;
+private: System::Windows::Forms::TabPage^  tabPage5;
+private: System::Windows::Forms::Label^  lbl_IE;
+
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart2;
+private: System::Windows::Forms::Button^  button3;
+private: System::Windows::Forms::Label^  label38;
+private: System::Windows::Forms::Label^  lbl_Status;
 
 
 	private:
@@ -208,8 +219,12 @@ private: System::Windows::Forms::Label^  label36;
 		{
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->tabControl4 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage9 = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->txt_EndFrame = (gcnew System::Windows::Forms::TextBox());
 			this->label23 = (gcnew System::Windows::Forms::Label());
@@ -266,16 +281,15 @@ private: System::Windows::Forms::Label^  label36;
 			this->label26 = (gcnew System::Windows::Forms::Label());
 			this->nothing_s = (gcnew System::Windows::Forms::TextBox());
 			this->nothing_e = (gcnew System::Windows::Forms::TextBox());
-			this->btn_temp = (gcnew System::Windows::Forms::Button());
-			this->btn_run = (gcnew System::Windows::Forms::Button());
-			this->txt_tmp = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->btn_trn_folder = (gcnew System::Windows::Forms::Button());
-			this->txt_trainFldr = (gcnew System::Windows::Forms::TextBox());
+			this->btn_temp = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+			this->btn_run = (gcnew System::Windows::Forms::Button());
+			this->txt_trainFldr = (gcnew System::Windows::Forms::TextBox());
+			this->txt_tmp = (gcnew System::Windows::Forms::TextBox());
+			this->btn_trn_folder = (gcnew System::Windows::Forms::Button());
+			this->tabPage10 = (gcnew System::Windows::Forms::TabPage());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->txt_yh = (gcnew System::Windows::Forms::TextBox());
 			this->label35 = (gcnew System::Windows::Forms::Label());
@@ -292,9 +306,10 @@ private: System::Windows::Forms::Label^  label36;
 			this->label29 = (gcnew System::Windows::Forms::Label());
 			this->txt_Threshold = (gcnew System::Windows::Forms::TextBox());
 			this->label28 = (gcnew System::Windows::Forms::Label());
-			this->btn_Image_Select = (gcnew System::Windows::Forms::Button());
-			this->txt_Test_Image = (gcnew System::Windows::Forms::TextBox());
 			this->label27 = (gcnew System::Windows::Forms::Label());
+			this->txt_Test_Image = (gcnew System::Windows::Forms::TextBox());
+			this->btn_Image_Select = (gcnew System::Windows::Forms::Button());
+			this->btn_class = (gcnew System::Windows::Forms::Button());
 			this->tabPage6 = (gcnew System::Windows::Forms::TabPage());
 			this->btn_ClassTestFolder = (gcnew System::Windows::Forms::Button());
 			this->txt_ClassTrain = (gcnew System::Windows::Forms::TextBox());
@@ -306,11 +321,20 @@ private: System::Windows::Forms::Label^  label36;
 			this->tabPage8 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
+			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->lbl_SVM_IP = (gcnew System::Windows::Forms::Label());
+			this->lbl_SVM_DP = (gcnew System::Windows::Forms::Label());
+			this->label37 = (gcnew System::Windows::Forms::Label());
+			this->label36 = (gcnew System::Windows::Forms::Label());
+			this->btn_SVMTest = (gcnew System::Windows::Forms::Button());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->lbl_DE = (gcnew System::Windows::Forms::Label());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btn_Analyze = (gcnew System::Windows::Forms::Button());
-			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
-			this->btn_SVMTest = (gcnew System::Windows::Forms::Button());
+			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+			this->lbl_IE = (gcnew System::Windows::Forms::Label());
+			this->chart2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->txt_test = (gcnew System::Windows::Forms::TextBox());
 			this->label25 = (gcnew System::Windows::Forms::Label());
@@ -319,33 +343,34 @@ private: System::Windows::Forms::Label^  label36;
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->TrainDlg = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->label36 = (gcnew System::Windows::Forms::Label());
-			this->label37 = (gcnew System::Windows::Forms::Label());
-			this->lbl_SVM_DP = (gcnew System::Windows::Forms::Label());
-			this->lbl_SVM_IP = (gcnew System::Windows::Forms::Label());
+			this->label38 = (gcnew System::Windows::Forms::Label());
+			this->lbl_Status = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
+			this->tabControl4->SuspendLayout();
+			this->tabPage9->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
-			this->tabPage5->SuspendLayout();
+			this->tabPage10->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->tabPage6->SuspendLayout();
 			this->tabControl3->SuspendLayout();
 			this->tabPage7->SuspendLayout();
 			this->tabPage2->SuspendLayout();
 			this->tabControl2->SuspendLayout();
+			this->tabPage4->SuspendLayout();
 			this->tabPage3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
-			this->tabPage4->SuspendLayout();
+			this->tabPage5->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
-			this->tabControl1->Controls->Add(this->tabPage5);
 			this->tabControl1->Controls->Add(this->tabPage6);
 			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(12, 33);
+			this->tabControl1->Location = System::Drawing::Point(12, 12);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(793, 595);
@@ -353,21 +378,43 @@ private: System::Windows::Forms::Label^  label36;
 			// 
 			// tabPage1
 			// 
-			this->tabPage1->Controls->Add(this->groupBox1);
-			this->tabPage1->Controls->Add(this->btn_temp);
-			this->tabPage1->Controls->Add(this->btn_run);
-			this->tabPage1->Controls->Add(this->txt_tmp);
-			this->tabPage1->Controls->Add(this->label2);
-			this->tabPage1->Controls->Add(this->btn_trn_folder);
-			this->tabPage1->Controls->Add(this->txt_trainFldr);
-			this->tabPage1->Controls->Add(this->label1);
+			this->tabPage1->Controls->Add(this->tabControl4);
+			this->tabPage1->Controls->Add(this->btn_class);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage1->Size = System::Drawing::Size(785, 569);
 			this->tabPage1->TabIndex = 0;
-			this->tabPage1->Text = L"Frame Splitting";
+			this->tabPage1->Text = L"Classification Settings";
 			this->tabPage1->UseVisualStyleBackColor = true;
+			// 
+			// tabControl4
+			// 
+			this->tabControl4->Controls->Add(this->tabPage9);
+			this->tabControl4->Controls->Add(this->tabPage10);
+			this->tabControl4->Location = System::Drawing::Point(6, 6);
+			this->tabControl4->Name = L"tabControl4";
+			this->tabControl4->SelectedIndex = 0;
+			this->tabControl4->Size = System::Drawing::Size(750, 475);
+			this->tabControl4->TabIndex = 1;
+			// 
+			// tabPage9
+			// 
+			this->tabPage9->Controls->Add(this->groupBox1);
+			this->tabPage9->Controls->Add(this->label2);
+			this->tabPage9->Controls->Add(this->btn_temp);
+			this->tabPage9->Controls->Add(this->label1);
+			this->tabPage9->Controls->Add(this->btn_run);
+			this->tabPage9->Controls->Add(this->txt_trainFldr);
+			this->tabPage9->Controls->Add(this->txt_tmp);
+			this->tabPage9->Controls->Add(this->btn_trn_folder);
+			this->tabPage9->Location = System::Drawing::Point(4, 22);
+			this->tabPage9->Name = L"tabPage9";
+			this->tabPage9->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage9->Size = System::Drawing::Size(742, 449);
+			this->tabPage9->TabIndex = 0;
+			this->tabPage9->Text = L"Frame Splitting";
+			this->tabPage9->UseVisualStyleBackColor = true;
 			// 
 			// groupBox1
 			// 
@@ -375,7 +422,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->groupBox1->Controls->Add(this->label23);
 			this->groupBox1->Controls->Add(this->btn_label);
 			this->groupBox1->Controls->Add(this->tableLayoutPanel1);
-			this->groupBox1->Location = System::Drawing::Point(9, 126);
+			this->groupBox1->Location = System::Drawing::Point(24, 117);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(759, 314);
 			this->groupBox1->TabIndex = 7;
@@ -934,9 +981,18 @@ private: System::Windows::Forms::Label^  label36;
 			this->nothing_e->Size = System::Drawing::Size(100, 20);
 			this->nothing_e->TabIndex = 50;
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(6, 48);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(76, 13);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"Train Directory";
+			// 
 			// btn_temp
 			// 
-			this->btn_temp->Location = System::Drawing::Point(668, 57);
+			this->btn_temp->Location = System::Drawing::Point(668, 48);
 			this->btn_temp->Name = L"btn_temp";
 			this->btn_temp->Size = System::Drawing::Size(75, 23);
 			this->btn_temp->TabIndex = 6;
@@ -944,9 +1000,18 @@ private: System::Windows::Forms::Label^  label36;
 			this->btn_temp->UseVisualStyleBackColor = true;
 			this->btn_temp->Click += gcnew System::EventHandler(this, &FormMain::btn_temp_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(21, 14);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(67, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Training Set:";
+			// 
 			// btn_run
 			// 
-			this->btn_run->Location = System::Drawing::Point(346, 97);
+			this->btn_run->Location = System::Drawing::Point(346, 88);
 			this->btn_run->Name = L"btn_run";
 			this->btn_run->Size = System::Drawing::Size(75, 23);
 			this->btn_run->TabIndex = 5;
@@ -954,25 +1019,23 @@ private: System::Windows::Forms::Label^  label36;
 			this->btn_run->UseVisualStyleBackColor = true;
 			this->btn_run->Click += gcnew System::EventHandler(this, &FormMain::btn_run_Click);
 			// 
+			// txt_trainFldr
+			// 
+			this->txt_trainFldr->Location = System::Drawing::Point(94, 11);
+			this->txt_trainFldr->Name = L"txt_trainFldr";
+			this->txt_trainFldr->Size = System::Drawing::Size(559, 20);
+			this->txt_trainFldr->TabIndex = 1;
+			// 
 			// txt_tmp
 			// 
-			this->txt_tmp->Location = System::Drawing::Point(94, 57);
+			this->txt_tmp->Location = System::Drawing::Point(94, 48);
 			this->txt_tmp->Name = L"txt_tmp";
 			this->txt_tmp->Size = System::Drawing::Size(559, 20);
 			this->txt_tmp->TabIndex = 4;
 			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(6, 57);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(76, 13);
-			this->label2->TabIndex = 3;
-			this->label2->Text = L"Train Directory";
-			// 
 			// btn_trn_folder
 			// 
-			this->btn_trn_folder->Location = System::Drawing::Point(668, 18);
+			this->btn_trn_folder->Location = System::Drawing::Point(668, 9);
 			this->btn_trn_folder->Name = L"btn_trn_folder";
 			this->btn_trn_folder->Size = System::Drawing::Size(75, 23);
 			this->btn_trn_folder->TabIndex = 2;
@@ -980,56 +1043,30 @@ private: System::Windows::Forms::Label^  label36;
 			this->btn_trn_folder->UseVisualStyleBackColor = true;
 			this->btn_trn_folder->Click += gcnew System::EventHandler(this, &FormMain::btn_trn_folder_Click);
 			// 
-			// txt_trainFldr
+			// tabPage10
 			// 
-			this->txt_trainFldr->Location = System::Drawing::Point(94, 20);
-			this->txt_trainFldr->Name = L"txt_trainFldr";
-			this->txt_trainFldr->Size = System::Drawing::Size(559, 20);
-			this->txt_trainFldr->TabIndex = 1;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(21, 23);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(67, 13);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Training Set:";
-			// 
-			// tabPage5
-			// 
-			this->tabPage5->Controls->Add(this->button1);
-			this->tabPage5->Controls->Add(this->btn_class);
-			this->tabPage5->Controls->Add(this->groupBox2);
-			this->tabPage5->Controls->Add(this->btn_Image_Select);
-			this->tabPage5->Controls->Add(this->txt_Test_Image);
-			this->tabPage5->Controls->Add(this->label27);
-			this->tabPage5->Location = System::Drawing::Point(4, 22);
-			this->tabPage5->Name = L"tabPage5";
-			this->tabPage5->Size = System::Drawing::Size(785, 569);
-			this->tabPage5->TabIndex = 2;
-			this->tabPage5->Text = L"Image Settings";
-			this->tabPage5->UseVisualStyleBackColor = true;
+			this->tabPage10->Controls->Add(this->button1);
+			this->tabPage10->Controls->Add(this->groupBox2);
+			this->tabPage10->Controls->Add(this->label27);
+			this->tabPage10->Controls->Add(this->txt_Test_Image);
+			this->tabPage10->Controls->Add(this->btn_Image_Select);
+			this->tabPage10->Location = System::Drawing::Point(4, 22);
+			this->tabPage10->Name = L"tabPage10";
+			this->tabPage10->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage10->Size = System::Drawing::Size(742, 449);
+			this->tabPage10->TabIndex = 1;
+			this->tabPage10->Text = L"Image Settings";
+			this->tabPage10->UseVisualStyleBackColor = true;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(298, 390);
+			this->button1->Location = System::Drawing::Point(290, 375);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(104, 23);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Save Settings";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &FormMain::button1_Click_2);
-			// 
-			// btn_class
-			// 
-			this->btn_class->Location = System::Drawing::Point(286, 443);
-			this->btn_class->Name = L"btn_class";
-			this->btn_class->Size = System::Drawing::Size(137, 23);
-			this->btn_class->TabIndex = 1;
-			this->btn_class->Text = L"Create Classifications";
-			this->btn_class->UseVisualStyleBackColor = true;
-			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
 			// 
 			// groupBox2
 			// 
@@ -1048,7 +1085,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->groupBox2->Controls->Add(this->label29);
 			this->groupBox2->Controls->Add(this->txt_Threshold);
 			this->groupBox2->Controls->Add(this->label28);
-			this->groupBox2->Location = System::Drawing::Point(87, 74);
+			this->groupBox2->Location = System::Drawing::Point(79, 59);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(547, 298);
 			this->groupBox2->TabIndex = 3;
@@ -1061,6 +1098,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_yh->Name = L"txt_yh";
 			this->txt_yh->Size = System::Drawing::Size(100, 20);
 			this->txt_yh->TabIndex = 14;
+			this->txt_yh->Text = L"80";
 			// 
 			// label35
 			// 
@@ -1077,6 +1115,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_ys->Name = L"txt_ys";
 			this->txt_ys->Size = System::Drawing::Size(100, 20);
 			this->txt_ys->TabIndex = 12;
+			this->txt_ys->Text = L"20";
 			// 
 			// label34
 			// 
@@ -1093,6 +1132,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_xw->Name = L"txt_xw";
 			this->txt_xw->Size = System::Drawing::Size(100, 20);
 			this->txt_xw->TabIndex = 10;
+			this->txt_xw->Text = L"100";
 			// 
 			// label33
 			// 
@@ -1109,6 +1149,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_xs->Name = L"txt_xs";
 			this->txt_xs->Size = System::Drawing::Size(100, 20);
 			this->txt_xs->TabIndex = 8;
+			this->txt_xs->Text = L"60";
 			// 
 			// label32
 			// 
@@ -1125,7 +1166,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_CT->Name = L"txt_CT";
 			this->txt_CT->Size = System::Drawing::Size(100, 20);
 			this->txt_CT->TabIndex = 6;
-			this->txt_CT->Text = L"0";
+			this->txt_CT->Text = L"80";
 			// 
 			// label30
 			// 
@@ -1152,7 +1193,7 @@ private: System::Windows::Forms::Label^  label36;
 			this->txt_ResP->Name = L"txt_ResP";
 			this->txt_ResP->Size = System::Drawing::Size(100, 20);
 			this->txt_ResP->TabIndex = 3;
-			this->txt_ResP->Text = L"100";
+			this->txt_ResP->Text = L"25";
 			// 
 			// label29
 			// 
@@ -1180,9 +1221,25 @@ private: System::Windows::Forms::Label^  label36;
 			this->label28->TabIndex = 0;
 			this->label28->Text = L"Brightness";
 			// 
+			// label27
+			// 
+			this->label27->AutoSize = true;
+			this->label27->Location = System::Drawing::Point(12, 7);
+			this->label27->Name = L"label27";
+			this->label27->Size = System::Drawing::Size(60, 13);
+			this->label27->TabIndex = 0;
+			this->label27->Text = L"Test Image";
+			// 
+			// txt_Test_Image
+			// 
+			this->txt_Test_Image->Location = System::Drawing::Point(79, 7);
+			this->txt_Test_Image->Name = L"txt_Test_Image";
+			this->txt_Test_Image->Size = System::Drawing::Size(547, 20);
+			this->txt_Test_Image->TabIndex = 1;
+			// 
 			// btn_Image_Select
 			// 
-			this->btn_Image_Select->Location = System::Drawing::Point(652, 22);
+			this->btn_Image_Select->Location = System::Drawing::Point(644, 7);
 			this->btn_Image_Select->Name = L"btn_Image_Select";
 			this->btn_Image_Select->Size = System::Drawing::Size(75, 23);
 			this->btn_Image_Select->TabIndex = 2;
@@ -1190,21 +1247,15 @@ private: System::Windows::Forms::Label^  label36;
 			this->btn_Image_Select->UseVisualStyleBackColor = true;
 			this->btn_Image_Select->Click += gcnew System::EventHandler(this, &FormMain::btn_Image_Select_Click);
 			// 
-			// txt_Test_Image
+			// btn_class
 			// 
-			this->txt_Test_Image->Location = System::Drawing::Point(87, 22);
-			this->txt_Test_Image->Name = L"txt_Test_Image";
-			this->txt_Test_Image->Size = System::Drawing::Size(547, 20);
-			this->txt_Test_Image->TabIndex = 1;
-			// 
-			// label27
-			// 
-			this->label27->AutoSize = true;
-			this->label27->Location = System::Drawing::Point(20, 22);
-			this->label27->Name = L"label27";
-			this->label27->Size = System::Drawing::Size(60, 13);
-			this->label27->TabIndex = 0;
-			this->label27->Text = L"Test Image";
+			this->btn_class->Location = System::Drawing::Point(294, 499);
+			this->btn_class->Name = L"btn_class";
+			this->btn_class->Size = System::Drawing::Size(137, 23);
+			this->btn_class->TabIndex = 1;
+			this->btn_class->Text = L"Create Classifications";
+			this->btn_class->UseVisualStyleBackColor = true;
+			this->btn_class->Click += gcnew System::EventHandler(this, &FormMain::btn_class_Click);
 			// 
 			// tabPage6
 			// 
@@ -1315,48 +1366,14 @@ private: System::Windows::Forms::Label^  label36;
 			// 
 			// tabControl2
 			// 
-			this->tabControl2->Controls->Add(this->tabPage3);
 			this->tabControl2->Controls->Add(this->tabPage4);
-			this->tabControl2->Location = System::Drawing::Point(18, 107);
+			this->tabControl2->Controls->Add(this->tabPage3);
+			this->tabControl2->Controls->Add(this->tabPage5);
+			this->tabControl2->Location = System::Drawing::Point(9, 98);
 			this->tabControl2->Name = L"tabControl2";
 			this->tabControl2->SelectedIndex = 0;
 			this->tabControl2->Size = System::Drawing::Size(761, 443);
 			this->tabControl2->TabIndex = 15;
-			// 
-			// tabPage3
-			// 
-			this->tabPage3->Controls->Add(this->chart1);
-			this->tabPage3->Controls->Add(this->btn_Analyze);
-			this->tabPage3->Location = System::Drawing::Point(4, 22);
-			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage3->Size = System::Drawing::Size(753, 417);
-			this->tabPage3->TabIndex = 0;
-			this->tabPage3->Text = L"Depth E Distance";
-			this->tabPage3->UseVisualStyleBackColor = true;
-			// 
-			// chart1
-			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
-			this->chart1->Location = System::Drawing::Point(6, 6);
-			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->Name = L"Series1";
-			this->chart1->Series->Add(series1);
-			this->chart1->Size = System::Drawing::Size(716, 329);
-			this->chart1->TabIndex = 10;
-			this->chart1->Text = L"Classification";
-			// 
-			// btn_Analyze
-			// 
-			this->btn_Analyze->Location = System::Drawing::Point(312, 341);
-			this->btn_Analyze->Name = L"btn_Analyze";
-			this->btn_Analyze->Size = System::Drawing::Size(75, 23);
-			this->btn_Analyze->TabIndex = 11;
-			this->btn_Analyze->Text = L"Analyze";
-			this->btn_Analyze->UseVisualStyleBackColor = true;
-			this->btn_Analyze->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
 			// 
 			// tabPage4
 			// 
@@ -1370,8 +1387,54 @@ private: System::Windows::Forms::Label^  label36;
 			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
 			this->tabPage4->Size = System::Drawing::Size(753, 417);
 			this->tabPage4->TabIndex = 1;
-			this->tabPage4->Text = L"SVM Test";
+			this->tabPage4->Text = L"SVM";
 			this->tabPage4->UseVisualStyleBackColor = true;
+			// 
+			// lbl_SVM_IP
+			// 
+			this->lbl_SVM_IP->AutoSize = true;
+			this->lbl_SVM_IP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_SVM_IP->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_SVM_IP->Location = System::Drawing::Point(512, 141);
+			this->lbl_SVM_IP->Name = L"lbl_SVM_IP";
+			this->lbl_SVM_IP->Size = System::Drawing::Size(122, 33);
+			this->lbl_SVM_IP->TabIndex = 4;
+			this->lbl_SVM_IP->Text = L"Nothing";
+			// 
+			// lbl_SVM_DP
+			// 
+			this->lbl_SVM_DP->AutoSize = true;
+			this->lbl_SVM_DP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_SVM_DP->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_SVM_DP->Location = System::Drawing::Point(68, 141);
+			this->lbl_SVM_DP->Name = L"lbl_SVM_DP";
+			this->lbl_SVM_DP->Size = System::Drawing::Size(122, 33);
+			this->lbl_SVM_DP->TabIndex = 3;
+			this->lbl_SVM_DP->Text = L"Nothing";
+			// 
+			// label37
+			// 
+			this->label37->AutoSize = true;
+			this->label37->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label37->Location = System::Drawing::Point(497, 34);
+			this->label37->Name = L"label37";
+			this->label37->Size = System::Drawing::Size(188, 25);
+			this->label37->TabIndex = 2;
+			this->label37->Text = L"Image Prediction";
+			// 
+			// label36
+			// 
+			this->label36->AutoSize = true;
+			this->label36->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label36->Location = System::Drawing::Point(63, 34);
+			this->label36->Name = L"label36";
+			this->label36->Size = System::Drawing::Size(187, 25);
+			this->label36->TabIndex = 1;
+			this->label36->Text = L"Depth Predcition";
 			// 
 			// btn_SVMTest
 			// 
@@ -1382,6 +1445,101 @@ private: System::Windows::Forms::Label^  label36;
 			this->btn_SVMTest->Text = L"SVM Test";
 			this->btn_SVMTest->UseVisualStyleBackColor = true;
 			this->btn_SVMTest->Click += gcnew System::EventHandler(this, &FormMain::button1_Click_1);
+			// 
+			// tabPage3
+			// 
+			this->tabPage3->Controls->Add(this->lbl_DE);
+			this->tabPage3->Controls->Add(this->chart1);
+			this->tabPage3->Controls->Add(this->btn_Analyze);
+			this->tabPage3->Location = System::Drawing::Point(4, 22);
+			this->tabPage3->Name = L"tabPage3";
+			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage3->Size = System::Drawing::Size(753, 417);
+			this->tabPage3->TabIndex = 0;
+			this->tabPage3->Text = L"Depth E Distance";
+			this->tabPage3->UseVisualStyleBackColor = true;
+			// 
+			// lbl_DE
+			// 
+			this->lbl_DE->AutoSize = true;
+			this->lbl_DE->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_DE->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_DE->Location = System::Drawing::Point(286, 329);
+			this->lbl_DE->Name = L"lbl_DE";
+			this->lbl_DE->Size = System::Drawing::Size(122, 33);
+			this->lbl_DE->TabIndex = 12;
+			this->lbl_DE->Text = L"Nothing";
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			this->chart1->Location = System::Drawing::Point(6, 6);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->Name = L"Depth";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(716, 329);
+			this->chart1->TabIndex = 10;
+			this->chart1->Text = L"Classification";
+			// 
+			// btn_Analyze
+			// 
+			this->btn_Analyze->Location = System::Drawing::Point(312, 388);
+			this->btn_Analyze->Name = L"btn_Analyze";
+			this->btn_Analyze->Size = System::Drawing::Size(75, 23);
+			this->btn_Analyze->TabIndex = 11;
+			this->btn_Analyze->Text = L"Analyze";
+			this->btn_Analyze->UseVisualStyleBackColor = true;
+			this->btn_Analyze->Click += gcnew System::EventHandler(this, &FormMain::button1_Click);
+			// 
+			// tabPage5
+			// 
+			this->tabPage5->Controls->Add(this->lbl_IE);
+			this->tabPage5->Controls->Add(this->chart2);
+			this->tabPage5->Controls->Add(this->button3);
+			this->tabPage5->Location = System::Drawing::Point(4, 22);
+			this->tabPage5->Name = L"tabPage5";
+			this->tabPage5->Size = System::Drawing::Size(753, 417);
+			this->tabPage5->TabIndex = 2;
+			this->tabPage5->Text = L"Image E Distance";
+			this->tabPage5->UseVisualStyleBackColor = true;
+			// 
+			// lbl_IE
+			// 
+			this->lbl_IE->AutoSize = true;
+			this->lbl_IE->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbl_IE->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_IE->Location = System::Drawing::Point(298, 329);
+			this->lbl_IE->Name = L"lbl_IE";
+			this->lbl_IE->Size = System::Drawing::Size(122, 33);
+			this->lbl_IE->TabIndex = 15;
+			this->lbl_IE->Text = L"Nothing";
+			// 
+			// chart2
+			// 
+			chartArea2->Name = L"ChartArea1";
+			this->chart2->ChartAreas->Add(chartArea2);
+			this->chart2->Location = System::Drawing::Point(18, 6);
+			this->chart2->Name = L"chart2";
+			series2->ChartArea = L"ChartArea1";
+			series2->Name = L"Depth";
+			this->chart2->Series->Add(series2);
+			this->chart2->Size = System::Drawing::Size(716, 329);
+			this->chart2->TabIndex = 13;
+			this->chart2->Text = L"Classification";
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(324, 388);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 14;
+			this->button3->Text = L"Analyze";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &FormMain::button3_Click);
 			// 
 			// button2
 			// 
@@ -1440,69 +1598,50 @@ private: System::Windows::Forms::Label^  label36;
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
-			// label36
+			// label38
 			// 
-			this->label36->AutoSize = true;
-			this->label36->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label38->AutoSize = true;
+			this->label38->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label36->Location = System::Drawing::Point(63, 34);
-			this->label36->Name = L"label36";
-			this->label36->Size = System::Drawing::Size(187, 25);
-			this->label36->TabIndex = 1;
-			this->label36->Text = L"Depth Predcition";
+			this->label38->Location = System::Drawing::Point(201, 626);
+			this->label38->Name = L"label38";
+			this->label38->Size = System::Drawing::Size(124, 37);
+			this->label38->TabIndex = 1;
+			this->label38->Text = L"Status:";
 			// 
-			// label37
+			// lbl_Status
 			// 
-			this->label37->AutoSize = true;
-			this->label37->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->lbl_Status->AutoSize = true;
+			this->lbl_Status->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label37->Location = System::Drawing::Point(497, 34);
-			this->label37->Name = L"label37";
-			this->label37->Size = System::Drawing::Size(188, 25);
-			this->label37->TabIndex = 2;
-			this->label37->Text = L"Image Prediction";
-			// 
-			// lbl_SVM_DP
-			// 
-			this->lbl_SVM_DP->AutoSize = true;
-			this->lbl_SVM_DP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbl_SVM_DP->ForeColor = System::Drawing::SystemColors::Highlight;
-			this->lbl_SVM_DP->Location = System::Drawing::Point(68, 141);
-			this->lbl_SVM_DP->Name = L"lbl_SVM_DP";
-			this->lbl_SVM_DP->Size = System::Drawing::Size(122, 33);
-			this->lbl_SVM_DP->TabIndex = 3;
-			this->lbl_SVM_DP->Text = L"Nothing";
-			// 
-			// lbl_SVM_IP
-			// 
-			this->lbl_SVM_IP->AutoSize = true;
-			this->lbl_SVM_IP->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbl_SVM_IP->ForeColor = System::Drawing::SystemColors::Highlight;
-			this->lbl_SVM_IP->Location = System::Drawing::Point(512, 141);
-			this->lbl_SVM_IP->Name = L"lbl_SVM_IP";
-			this->lbl_SVM_IP->Size = System::Drawing::Size(122, 33);
-			this->lbl_SVM_IP->TabIndex = 4;
-			this->lbl_SVM_IP->Text = L"Nothing";
+			this->lbl_Status->ForeColor = System::Drawing::SystemColors::Highlight;
+			this->lbl_Status->Location = System::Drawing::Point(365, 626);
+			this->lbl_Status->Name = L"lbl_Status";
+			this->lbl_Status->Size = System::Drawing::Size(71, 37);
+			this->lbl_Status->TabIndex = 2;
+			this->lbl_Status->Text = L"Idle";
 			// 
 			// FormMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(871, 640);
+			this->ClientSize = System::Drawing::Size(832, 697);
+			this->Controls->Add(this->lbl_Status);
+			this->Controls->Add(this->label38);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"FormMain";
 			this->Text = L"FormMain";
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
-			this->tabPage1->PerformLayout();
+			this->tabControl4->ResumeLayout(false);
+			this->tabPage9->ResumeLayout(false);
+			this->tabPage9->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
-			this->tabPage5->ResumeLayout(false);
-			this->tabPage5->PerformLayout();
+			this->tabPage10->ResumeLayout(false);
+			this->tabPage10->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->tabPage6->ResumeLayout(false);
@@ -1512,11 +1651,16 @@ private: System::Windows::Forms::Label^  label36;
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
 			this->tabControl2->ResumeLayout(false);
-			this->tabPage3->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->tabPage4->ResumeLayout(false);
 			this->tabPage4->PerformLayout();
+			this->tabPage3->ResumeLayout(false);
+			this->tabPage3->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
+			this->tabPage5->ResumeLayout(false);
+			this->tabPage5->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -1653,70 +1797,102 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	std::string dp = tDir + "/depth";
 
 	//Train the SVM
-	TrainSVM::TrainSVM(im);
-	TrainSVM::TrainSVM(dp);
+	TrainSVM::TrainSVM(im, lbl_Status);
+	
+	TrainSVM::TrainSVM(dp, lbl_Status);
 
 	//Means
 	//Android
-	TrainGMM::TrainGMM(im + "/Android", "Android");
-	TrainGMM::TrainGMM(dp + "/Android", "Android");
+	lbl_Status->Text = "Calculating Android EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Android", "Android", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Android", "Android", tDir + "/depth");
 	//Baby
-	TrainGMM::TrainGMM(im + "/Baby", "Baby");
-	TrainGMM::TrainGMM(dp + "/Baby", "Baby");
+	lbl_Status->Text = "Calculating Baby EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Baby", "Baby", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Baby", "Baby", tDir + "/depth");
 
 	//Blackberry
-	TrainGMM::TrainGMM(im + "/Blackberry", "Blackberry");
-	TrainGMM::TrainGMM(dp + "/Blackberry", "Blackberry");
+	lbl_Status->Text = "Calculating Blackberry EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Blackberry", "Blackberry", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Blackberry", "Blackberry", tDir + "/depth");
 
 	//Camera
-	TrainGMM::TrainGMM(im + "/Camera", "Camera");
-	TrainGMM::TrainGMM(dp + "/Camera", "Camera");
+	lbl_Status->Text = "Calculating Camera EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Camera", "Camera", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Camera", "Camera", tDir + "/depth");
 
 	//Car
-	TrainGMM::TrainGMM(im + "/Car", "Car");
-	TrainGMM::TrainGMM(dp + "/Car", "Car");
+	lbl_Status->Text = "Calculating Car EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Car", "Car", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Car", "Car", tDir + "/depth");
 
 	//Coffee Tin
-	TrainGMM::TrainGMM(im + "/Coffee Tin", "Coffee Tin");
-	TrainGMM::TrainGMM(dp + "/Coffee Tin", "Coffee Tin");
+	lbl_Status->Text = "Calculating Coffee Tin EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Coffee Tin", "Coffee Tin", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Coffee Tin", "Coffee Tin", tDir + "/depth");
 
 	//Diet Coke
-	TrainGMM::TrainGMM(im + "/Diet Coke", "CDiet Coke");
-	TrainGMM::TrainGMM(dp + "/Diet Coke", "Diet Coke");
+	lbl_Status->Text = "Calculating Diet Coke EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Diet Coke", "Diet Coke", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Diet Coke", "Diet Coke", tDir + "/depth");
 
 	//Dinosaur
-	TrainGMM::TrainGMM(im + "/Dinosaur", "Dinosaur");
-	TrainGMM::TrainGMM(dp + "/Dinosaur", "Dinosaur");
+	lbl_Status->Text = "Calculating Dinosaur EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Dinosaur", "Dinosaur", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Dinosaur", "Dinosaur", tDir + "/depth");
 
 	//Dog
-	TrainGMM::TrainGMM(im + "/Dog", "Dog");
-	TrainGMM::TrainGMM(dp + "/Dog", "Dog");
+	lbl_Status->Text = "Calculating Dog EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Dog", "Dog", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Dog", "Dog", tDir + "/depth");
 
 	//Dragon
-	TrainGMM::TrainGMM(im + "/Dragon", "Dragon");
-	TrainGMM::TrainGMM(dp + "/Dragon", "Dragon");
+	lbl_Status->Text = "Calculating Dragon EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Dragon", "Dragon", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Dragon", "Dragon", tDir + "/depth");
 
 	//Duck
-	TrainGMM::TrainGMM(im + "/Duck", "Duck");
-	TrainGMM::TrainGMM(dp + "/Duck", "Duck");
+	lbl_Status->Text = "Calculating Duck EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Duck", "Duck", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Duck", "Duck", tDir + "/depth");
 
 	//Keyboard
-	TrainGMM::TrainGMM(im + "/Keyboard", "Keyboard");
-	TrainGMM::TrainGMM(dp + "/Keyboard", "Keyboard");
+	lbl_Status->Text = "Calculating Keyboard EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Keyboard", "Keyboard", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Keyboard", "Keyboard", tDir + "/depth");
 
 	//Koala
-	TrainGMM::TrainGMM(im + "/Koala", "Koala");
-	TrainGMM::TrainGMM(dp + "/Koala", "Koala");
+	lbl_Status->Text = "Calculating Koala EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Koala", "Koala", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Koala", "Koala", tDir + "/depth");
 
 	//Mug
-	TrainGMM::TrainGMM(im + "/Mug", "Mug");
-	TrainGMM::TrainGMM(dp + "/Mug", "Mug");
+	lbl_Status->Text = "Calculating Mug EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/Mug", "Mug", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Mug", "Mug", tDir + "/depth");
 
-	//Unlabelled
-	TrainGMM::TrainGMM(im + "/Nothing", "Nothing");
-	TrainGMM::TrainGMM(dp + "/Nothing", "Nothing");
+	//Nothing
+	lbl_Status->Text = "Calculating Unlabelled EDistance";
+	lbl_Status->Refresh();
+	TrainEDist::TrainEDist(im + "/unlabelled", "unlabelled", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/unlabelled", "unlabelled", tDir + "/depth");
 
-	
+	lbl_Status->Text = "Idle";
+	lbl_Status->Refresh();
 }
 private: System::Void btn_trn_Click(System::Object^  sender, System::EventArgs^  e) {
 	TrainDlg->SelectedPath = "";
@@ -1738,13 +1914,20 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
 	ft = ft + "/depth";
 	//Load all of the Training for Depth
-	TestFolder::TestFolder(tf, ft);	
+	chart1->ChartAreas[0]->AxisX->Interval = 1;
+	lbl_Status->Text = "Alayzing Images";
+	lbl_Status->Refresh();
+	TestFolder::TestFolder(tf, ft,"depth",chart1, lbl_DE);	
+	lbl_Status->Text = "Idle";
+	lbl_Status->Refresh();
 }
 private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
 	msclr::interop::marshal_context context;
 	std::string tf = context.marshal_as<std::string>(txt_test->Text);
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
-	SVMTest:SVMTest(ft, tf,lbl_SVM_DP, lbl_SVM_IP);
+	SVMTest:SVMTest(ft, tf,lbl_SVM_DP, lbl_SVM_IP, lbl_Status);
+	lbl_Status->Text = "Idle";
+	lbl_Status->Refresh();
 }
 private: System::Void btn_Image_Select_Click(System::Object^  sender, System::EventArgs^  e) {
 	openFileDialog1->ShowDialog();
@@ -1860,6 +2043,20 @@ private: System::Void btn_ClassTest_Click(System::Object^  sender, System::Event
 	//int out[] = CT.CheckFolder(path,"Android");
 }
 private: System::Void txt_ClassTrain_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Now Analyze the Testing Images
+	msclr::interop::marshal_context context;
+	std::string tf = context.marshal_as<std::string>(txt_test->Text);
+	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
+	ft = ft + "/images";
+	chart2->ChartAreas[0]->AxisX->Interval = 1;
+	//Load all of the Training for Depth
+	lbl_Status->Text = "Alayzing Images";
+	lbl_Status->Refresh();
+	TestFolder::TestFolder(tf, ft, "images", chart2, lbl_IE);
+	lbl_Status->Text = "Idle";
+	lbl_Status->Refresh();
 }
 };
 }

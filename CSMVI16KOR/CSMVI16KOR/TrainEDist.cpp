@@ -10,26 +10,16 @@
 #include <cstdint>
 #include <sstream>
 #include <dirent.h>
-#include "TrainGMM.h"
+#include "TrainEDist.h"
 
 using namespace cv;
 using namespace std;
-static Mat createCoVar(cv::Mat data, cv::Mat mean) {
-	cv::Mat dt = data;
-	for (int r = 0; r < dt.rows; ++r) {
-		dt.row(r) = abs(dt.row(r) - mean);
-	}
-	Mat td = dt.t();
-	data.convertTo(dt, CV_32F);
-	td.convertTo(td, CV_32F);
-	//Now Calculate the Cov
-	Mat cov;
-	//cov = data * td;
-	cov = td * data;
-	cov = cov / (dt.rows - 1);
-	return cov;
 
-}
+double ES;
+float EThresh;
+int ECT;
+int Ex1, Ex2, Ey1, Ey2;
+
 static  Mat createDataMatrix(const vector<Mat> &images)
 {
 	cout << "Creating data matrix from images ...";
@@ -85,7 +75,35 @@ void readImages(string dirName, vector<Mat> & images) {
 					cout << "image " << path << " not read properly" << endl;
 				}
 				else
-					images.push_back(img);
+					//Apply Edge Detection
+					Mat src, src_gray;
+				Mat dst, detected_edges;
+
+				int edgeThresh = 1;
+				int const max_lowThreshold = 100;
+				int ratio = 3;
+				int kernel_size = 3;
+				char* window_name = "Edge Map";
+				//Threshold
+				img = img * EThresh;
+
+				//Resize
+				double Ss = ES / 100;
+				cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+
+				cv::blur(img, detected_edges, cv::Size(3, 3));
+
+				/// Canny detector
+				cv::Canny(detected_edges, detected_edges, ECT, ECT*ratio, kernel_size);
+
+				/// Using Canny's output as a mask, we display our result
+				dst = cv::Scalar::all(0);
+
+				img.copyTo(dst, detected_edges);
+				cv::Mat ROI(dst, cv::Rect(Ex1, Ey1, Ex2, Ey2));
+				ROI.convertTo(ROI, CV_32F);
+
+				images.push_back(ROI);
 				
 			}
 		}
@@ -98,12 +116,23 @@ void readImages(string dirName, vector<Mat> & images) {
 	cout << "... " << images.size() << " files read" << endl;
 }
 
-TrainGMM::TrainGMM(std::string path, std::string label)
+TrainEDist::TrainEDist(std::string path, std::string label, std::string Trainpath)
 {
+	//Load Image Processing Settings
+	std::string fileName = Trainpath + "/ImageProc.dat";
+	cv::FileStorage fs(fileName, cv::FileStorage::READ);
+
+	fs["brightness"] >> EThresh;
+	fs["resolution"] >> ES;
+	fs["canny"] >> ECT;
+	fs["x1"] >> Ex1;
+	fs["x2"] >> Ex2;
+	fs["y1"] >> Ey1;
+	fs["y2"] >> Ey2;
+	fs.release();
 	vector<Mat> images;
 	readImages(path, images);
 	int numRows = images.size();
-	Size sz = images[0].size();
 	Mat data = createDataMatrix(images);
 	data.convertTo(data, CV_32F);
 	Mat mean;
@@ -112,26 +141,9 @@ TrainGMM::TrainGMM(std::string path, std::string label)
 	images.clear();
 	//Save the File
 
-	std::string fileName = path + "/" + label + ".dat";
-	FileStorage fs(fileName, FileStorage::WRITE);
+	fileName = path + "/" + label + ".dat";
+	fs.open(fileName, FileStorage::WRITE);
 	fs << "mean" << mean;
 	fs.release();
-	
-	//The data matrix is too large to calculate the Cov
-	//Perform SVD to reduce the number of columns
-	//cv::SVD svd = SVD::SVD(data);
-	//cv::Mat A = svd.u.colRange(1, 5) * svd.w.colRange(1, 5) * svd.vt.colRange(1, 5);
-	
-	//Calculate the mean and Covariance Matrix for the GMM
-	
-	//reduce(A, mean, 0, REDUCE_AVG);
-	//cov = createCoVar(A, mean);
-	
-	//Calc Covar
-	//cv::calcCovarMatrix(data, cov, mean, COVAR_ROWS | COVAR_SCRAMBLED, CV_32F);
-	//Divide by number of Rows
-	//save the GMM
-	
-
 }
 
