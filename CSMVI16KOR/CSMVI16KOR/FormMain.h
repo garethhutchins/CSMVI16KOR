@@ -202,6 +202,34 @@ private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart2;
 private: System::Windows::Forms::Button^  button3;
 private: System::Windows::Forms::Label^  label38;
 private: System::Windows::Forms::Label^  lbl_Status;
+private: System::Windows::Forms::TabPage^  tabPage11;
+private: System::Windows::Forms::TabPage^  tabPage12;
+private: System::Windows::Forms::TabPage^  tabPage13;
+private: System::Windows::Forms::TabPage^  tabPage14;
+private: System::Windows::Forms::TabPage^  tabPage15;
+private: System::Windows::Forms::TabPage^  tabPage16;
+private: System::Windows::Forms::TabPage^  tabPage17;
+private: System::Windows::Forms::TabPage^  tabPage18;
+private: System::Windows::Forms::TabPage^  tabPage19;
+private: System::Windows::Forms::TabPage^  tabPage20;
+private: System::Windows::Forms::TabPage^  tabPage21;
+private: System::Windows::Forms::TabPage^  tabPage22;
+private: System::Windows::Forms::TabPage^  tabPage23;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart3;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart4;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart5;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart6;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart7;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart8;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart9;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart10;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart11;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart12;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart13;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart14;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart15;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart16;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart17;
 
 
 	private:
@@ -221,6 +249,36 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea3 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea4 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea5 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series5 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea6 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series6 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea7 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series7 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea8 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea9 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series9 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea10 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series10 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea11 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series11 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea12 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series12 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea13 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series13 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea14 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series14 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea15 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series15 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea16 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series16 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea17 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series17 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl4 = (gcnew System::Windows::Forms::TabControl());
@@ -317,8 +375,36 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->btn_ClassTest = (gcnew System::Windows::Forms::Button());
 			this->tabControl3 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage7 = (gcnew System::Windows::Forms::TabPage());
+			this->chart3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->txt_ImageResults = (gcnew System::Windows::Forms::RichTextBox());
 			this->tabPage8 = (gcnew System::Windows::Forms::TabPage());
+			this->chart4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage11 = (gcnew System::Windows::Forms::TabPage());
+			this->chart5 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage12 = (gcnew System::Windows::Forms::TabPage());
+			this->chart6 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage13 = (gcnew System::Windows::Forms::TabPage());
+			this->chart7 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage14 = (gcnew System::Windows::Forms::TabPage());
+			this->chart8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage15 = (gcnew System::Windows::Forms::TabPage());
+			this->chart9 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage16 = (gcnew System::Windows::Forms::TabPage());
+			this->chart10 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage17 = (gcnew System::Windows::Forms::TabPage());
+			this->chart11 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage18 = (gcnew System::Windows::Forms::TabPage());
+			this->chart12 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage19 = (gcnew System::Windows::Forms::TabPage());
+			this->chart13 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage20 = (gcnew System::Windows::Forms::TabPage());
+			this->chart14 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage21 = (gcnew System::Windows::Forms::TabPage());
+			this->chart15 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage22 = (gcnew System::Windows::Forms::TabPage());
+			this->chart16 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->tabPage23 = (gcnew System::Windows::Forms::TabPage());
+			this->chart17 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
@@ -356,6 +442,35 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabPage6->SuspendLayout();
 			this->tabControl3->SuspendLayout();
 			this->tabPage7->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart3))->BeginInit();
+			this->tabPage8->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart4))->BeginInit();
+			this->tabPage11->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart5))->BeginInit();
+			this->tabPage12->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart6))->BeginInit();
+			this->tabPage13->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart7))->BeginInit();
+			this->tabPage14->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart8))->BeginInit();
+			this->tabPage15->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart9))->BeginInit();
+			this->tabPage16->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart10))->BeginInit();
+			this->tabPage17->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart11))->BeginInit();
+			this->tabPage18->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart12))->BeginInit();
+			this->tabPage19->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart13))->BeginInit();
+			this->tabPage20->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart14))->BeginInit();
+			this->tabPage21->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart15))->BeginInit();
+			this->tabPage22->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart16))->BeginInit();
+			this->tabPage23->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart17))->BeginInit();
 			this->tabPage2->SuspendLayout();
 			this->tabControl2->SuspendLayout();
 			this->tabPage4->SuspendLayout();
@@ -395,7 +510,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabControl4->Location = System::Drawing::Point(6, 6);
 			this->tabControl4->Name = L"tabControl4";
 			this->tabControl4->SelectedIndex = 0;
-			this->tabControl4->Size = System::Drawing::Size(750, 475);
+			this->tabControl4->Size = System::Drawing::Size(773, 475);
 			this->tabControl4->TabIndex = 1;
 			// 
 			// tabPage9
@@ -411,7 +526,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabPage9->Location = System::Drawing::Point(4, 22);
 			this->tabPage9->Name = L"tabPage9";
 			this->tabPage9->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage9->Size = System::Drawing::Size(742, 449);
+			this->tabPage9->Size = System::Drawing::Size(765, 449);
 			this->tabPage9->TabIndex = 0;
 			this->tabPage9->Text = L"Frame Splitting";
 			this->tabPage9->UseVisualStyleBackColor = true;
@@ -1053,7 +1168,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabPage10->Location = System::Drawing::Point(4, 22);
 			this->tabPage10->Name = L"tabPage10";
 			this->tabPage10->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage10->Size = System::Drawing::Size(742, 449);
+			this->tabPage10->Size = System::Drawing::Size(765, 449);
 			this->tabPage10->TabIndex = 1;
 			this->tabPage10->Text = L"Image Settings";
 			this->tabPage10->UseVisualStyleBackColor = true;
@@ -1268,7 +1383,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabPage6->Name = L"tabPage6";
 			this->tabPage6->Size = System::Drawing::Size(785, 569);
 			this->tabPage6->TabIndex = 3;
-			this->tabPage6->Text = L"Test Classification";
+			this->tabPage6->Text = L"SVM Confusion";
 			this->tabPage6->UseVisualStyleBackColor = true;
 			// 
 			// btn_ClassTestFolder
@@ -1312,40 +1427,380 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			// 
 			this->tabControl3->Controls->Add(this->tabPage7);
 			this->tabControl3->Controls->Add(this->tabPage8);
-			this->tabControl3->Location = System::Drawing::Point(29, 63);
+			this->tabControl3->Controls->Add(this->tabPage11);
+			this->tabControl3->Controls->Add(this->tabPage12);
+			this->tabControl3->Controls->Add(this->tabPage13);
+			this->tabControl3->Controls->Add(this->tabPage14);
+			this->tabControl3->Controls->Add(this->tabPage15);
+			this->tabControl3->Controls->Add(this->tabPage16);
+			this->tabControl3->Controls->Add(this->tabPage17);
+			this->tabControl3->Controls->Add(this->tabPage18);
+			this->tabControl3->Controls->Add(this->tabPage19);
+			this->tabControl3->Controls->Add(this->tabPage20);
+			this->tabControl3->Controls->Add(this->tabPage21);
+			this->tabControl3->Controls->Add(this->tabPage22);
+			this->tabControl3->Controls->Add(this->tabPage23);
+			this->tabControl3->Location = System::Drawing::Point(11, 63);
 			this->tabControl3->Name = L"tabControl3";
 			this->tabControl3->SelectedIndex = 0;
-			this->tabControl3->Size = System::Drawing::Size(718, 441);
+			this->tabControl3->Size = System::Drawing::Size(771, 441);
 			this->tabControl3->TabIndex = 0;
 			// 
 			// tabPage7
 			// 
+			this->tabPage7->Controls->Add(this->chart3);
 			this->tabPage7->Controls->Add(this->txt_ImageResults);
 			this->tabPage7->Location = System::Drawing::Point(4, 22);
 			this->tabPage7->Name = L"tabPage7";
 			this->tabPage7->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage7->Size = System::Drawing::Size(710, 415);
+			this->tabPage7->Size = System::Drawing::Size(763, 415);
 			this->tabPage7->TabIndex = 0;
-			this->tabPage7->Text = L"Images";
+			this->tabPage7->Text = L"Android";
 			this->tabPage7->UseVisualStyleBackColor = true;
+			// 
+			// chart3
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart3->ChartAreas->Add(chartArea1);
+			this->chart3->Location = System::Drawing::Point(17, 35);
+			this->chart3->Name = L"chart3";
+			series1->ChartArea = L"ChartArea1";
+			series1->Name = L"Depth";
+			this->chart3->Series->Add(series1);
+			this->chart3->Size = System::Drawing::Size(735, 342);
+			this->chart3->TabIndex = 11;
+			this->chart3->Text = L"Classification";
 			// 
 			// txt_ImageResults
 			// 
 			this->txt_ImageResults->Location = System::Drawing::Point(7, 20);
 			this->txt_ImageResults->Name = L"txt_ImageResults";
-			this->txt_ImageResults->Size = System::Drawing::Size(697, 368);
+			this->txt_ImageResults->Size = System::Drawing::Size(750, 368);
 			this->txt_ImageResults->TabIndex = 0;
 			this->txt_ImageResults->Text = L"";
 			// 
 			// tabPage8
 			// 
+			this->tabPage8->Controls->Add(this->chart4);
 			this->tabPage8->Location = System::Drawing::Point(4, 22);
 			this->tabPage8->Name = L"tabPage8";
 			this->tabPage8->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage8->Size = System::Drawing::Size(710, 415);
+			this->tabPage8->Size = System::Drawing::Size(763, 415);
 			this->tabPage8->TabIndex = 1;
-			this->tabPage8->Text = L"Depth";
+			this->tabPage8->Text = L"Baby";
 			this->tabPage8->UseVisualStyleBackColor = true;
+			// 
+			// chart4
+			// 
+			chartArea2->Name = L"ChartArea1";
+			this->chart4->ChartAreas->Add(chartArea2);
+			this->chart4->Location = System::Drawing::Point(14, 36);
+			this->chart4->Name = L"chart4";
+			series2->ChartArea = L"ChartArea1";
+			series2->Name = L"Depth";
+			this->chart4->Series->Add(series2);
+			this->chart4->Size = System::Drawing::Size(735, 342);
+			this->chart4->TabIndex = 12;
+			this->chart4->Text = L"Classification";
+			// 
+			// tabPage11
+			// 
+			this->tabPage11->Controls->Add(this->chart5);
+			this->tabPage11->Location = System::Drawing::Point(4, 22);
+			this->tabPage11->Name = L"tabPage11";
+			this->tabPage11->Size = System::Drawing::Size(763, 415);
+			this->tabPage11->TabIndex = 2;
+			this->tabPage11->Text = L"Blackberry";
+			this->tabPage11->UseVisualStyleBackColor = true;
+			// 
+			// chart5
+			// 
+			chartArea3->Name = L"ChartArea1";
+			this->chart5->ChartAreas->Add(chartArea3);
+			this->chart5->Location = System::Drawing::Point(14, 36);
+			this->chart5->Name = L"chart5";
+			series3->ChartArea = L"ChartArea1";
+			series3->Name = L"Depth";
+			this->chart5->Series->Add(series3);
+			this->chart5->Size = System::Drawing::Size(735, 342);
+			this->chart5->TabIndex = 12;
+			this->chart5->Text = L"Classification";
+			// 
+			// tabPage12
+			// 
+			this->tabPage12->Controls->Add(this->chart6);
+			this->tabPage12->Location = System::Drawing::Point(4, 22);
+			this->tabPage12->Name = L"tabPage12";
+			this->tabPage12->Size = System::Drawing::Size(763, 415);
+			this->tabPage12->TabIndex = 3;
+			this->tabPage12->Text = L"Camera";
+			this->tabPage12->UseVisualStyleBackColor = true;
+			// 
+			// chart6
+			// 
+			chartArea4->Name = L"ChartArea1";
+			this->chart6->ChartAreas->Add(chartArea4);
+			this->chart6->Location = System::Drawing::Point(14, 36);
+			this->chart6->Name = L"chart6";
+			series4->ChartArea = L"ChartArea1";
+			series4->Name = L"Depth";
+			this->chart6->Series->Add(series4);
+			this->chart6->Size = System::Drawing::Size(735, 342);
+			this->chart6->TabIndex = 12;
+			this->chart6->Text = L"Classification";
+			// 
+			// tabPage13
+			// 
+			this->tabPage13->Controls->Add(this->chart7);
+			this->tabPage13->Location = System::Drawing::Point(4, 22);
+			this->tabPage13->Name = L"tabPage13";
+			this->tabPage13->Size = System::Drawing::Size(763, 415);
+			this->tabPage13->TabIndex = 4;
+			this->tabPage13->Text = L"Car";
+			this->tabPage13->UseVisualStyleBackColor = true;
+			// 
+			// chart7
+			// 
+			chartArea5->Name = L"ChartArea1";
+			this->chart7->ChartAreas->Add(chartArea5);
+			this->chart7->Location = System::Drawing::Point(14, 36);
+			this->chart7->Name = L"chart7";
+			series5->ChartArea = L"ChartArea1";
+			series5->Name = L"Depth";
+			this->chart7->Series->Add(series5);
+			this->chart7->Size = System::Drawing::Size(735, 342);
+			this->chart7->TabIndex = 12;
+			this->chart7->Text = L"Classification";
+			// 
+			// tabPage14
+			// 
+			this->tabPage14->Controls->Add(this->chart8);
+			this->tabPage14->Location = System::Drawing::Point(4, 22);
+			this->tabPage14->Name = L"tabPage14";
+			this->tabPage14->Size = System::Drawing::Size(763, 415);
+			this->tabPage14->TabIndex = 5;
+			this->tabPage14->Text = L"Coffee Tin";
+			this->tabPage14->UseVisualStyleBackColor = true;
+			// 
+			// chart8
+			// 
+			chartArea6->Name = L"ChartArea1";
+			this->chart8->ChartAreas->Add(chartArea6);
+			this->chart8->Location = System::Drawing::Point(14, 36);
+			this->chart8->Name = L"chart8";
+			series6->ChartArea = L"ChartArea1";
+			series6->Name = L"Depth";
+			this->chart8->Series->Add(series6);
+			this->chart8->Size = System::Drawing::Size(735, 342);
+			this->chart8->TabIndex = 12;
+			this->chart8->Text = L"Classification";
+			// 
+			// tabPage15
+			// 
+			this->tabPage15->Controls->Add(this->chart9);
+			this->tabPage15->Location = System::Drawing::Point(4, 22);
+			this->tabPage15->Name = L"tabPage15";
+			this->tabPage15->Size = System::Drawing::Size(763, 415);
+			this->tabPage15->TabIndex = 6;
+			this->tabPage15->Text = L"Diet Coke";
+			this->tabPage15->UseVisualStyleBackColor = true;
+			// 
+			// chart9
+			// 
+			chartArea7->Name = L"ChartArea1";
+			this->chart9->ChartAreas->Add(chartArea7);
+			this->chart9->Location = System::Drawing::Point(14, 36);
+			this->chart9->Name = L"chart9";
+			series7->ChartArea = L"ChartArea1";
+			series7->Name = L"Depth";
+			this->chart9->Series->Add(series7);
+			this->chart9->Size = System::Drawing::Size(735, 342);
+			this->chart9->TabIndex = 12;
+			this->chart9->Text = L"Classification";
+			// 
+			// tabPage16
+			// 
+			this->tabPage16->Controls->Add(this->chart10);
+			this->tabPage16->Location = System::Drawing::Point(4, 22);
+			this->tabPage16->Name = L"tabPage16";
+			this->tabPage16->Size = System::Drawing::Size(763, 415);
+			this->tabPage16->TabIndex = 7;
+			this->tabPage16->Text = L"Dinosaur";
+			this->tabPage16->UseVisualStyleBackColor = true;
+			// 
+			// chart10
+			// 
+			chartArea8->Name = L"ChartArea1";
+			this->chart10->ChartAreas->Add(chartArea8);
+			this->chart10->Location = System::Drawing::Point(14, 36);
+			this->chart10->Name = L"chart10";
+			series8->ChartArea = L"ChartArea1";
+			series8->Name = L"Depth";
+			this->chart10->Series->Add(series8);
+			this->chart10->Size = System::Drawing::Size(735, 342);
+			this->chart10->TabIndex = 12;
+			this->chart10->Text = L"Classification";
+			// 
+			// tabPage17
+			// 
+			this->tabPage17->Controls->Add(this->chart11);
+			this->tabPage17->Location = System::Drawing::Point(4, 22);
+			this->tabPage17->Name = L"tabPage17";
+			this->tabPage17->Size = System::Drawing::Size(763, 415);
+			this->tabPage17->TabIndex = 8;
+			this->tabPage17->Text = L"Dog";
+			this->tabPage17->UseVisualStyleBackColor = true;
+			// 
+			// chart11
+			// 
+			chartArea9->Name = L"ChartArea1";
+			this->chart11->ChartAreas->Add(chartArea9);
+			this->chart11->Location = System::Drawing::Point(14, 36);
+			this->chart11->Name = L"chart11";
+			series9->ChartArea = L"ChartArea1";
+			series9->Name = L"Depth";
+			this->chart11->Series->Add(series9);
+			this->chart11->Size = System::Drawing::Size(735, 342);
+			this->chart11->TabIndex = 12;
+			this->chart11->Text = L"Classification";
+			// 
+			// tabPage18
+			// 
+			this->tabPage18->Controls->Add(this->chart12);
+			this->tabPage18->Location = System::Drawing::Point(4, 22);
+			this->tabPage18->Name = L"tabPage18";
+			this->tabPage18->Size = System::Drawing::Size(763, 415);
+			this->tabPage18->TabIndex = 9;
+			this->tabPage18->Text = L"Dragon";
+			this->tabPage18->UseVisualStyleBackColor = true;
+			// 
+			// chart12
+			// 
+			chartArea10->Name = L"ChartArea1";
+			this->chart12->ChartAreas->Add(chartArea10);
+			this->chart12->Location = System::Drawing::Point(14, 36);
+			this->chart12->Name = L"chart12";
+			series10->ChartArea = L"ChartArea1";
+			series10->Name = L"Depth";
+			this->chart12->Series->Add(series10);
+			this->chart12->Size = System::Drawing::Size(735, 342);
+			this->chart12->TabIndex = 12;
+			this->chart12->Text = L"Classification";
+			// 
+			// tabPage19
+			// 
+			this->tabPage19->Controls->Add(this->chart13);
+			this->tabPage19->Location = System::Drawing::Point(4, 22);
+			this->tabPage19->Name = L"tabPage19";
+			this->tabPage19->Size = System::Drawing::Size(763, 415);
+			this->tabPage19->TabIndex = 10;
+			this->tabPage19->Text = L"Duck";
+			this->tabPage19->UseVisualStyleBackColor = true;
+			// 
+			// chart13
+			// 
+			chartArea11->Name = L"ChartArea1";
+			this->chart13->ChartAreas->Add(chartArea11);
+			this->chart13->Location = System::Drawing::Point(14, 36);
+			this->chart13->Name = L"chart13";
+			series11->ChartArea = L"ChartArea1";
+			series11->Name = L"Depth";
+			this->chart13->Series->Add(series11);
+			this->chart13->Size = System::Drawing::Size(735, 342);
+			this->chart13->TabIndex = 12;
+			this->chart13->Text = L"Classification";
+			// 
+			// tabPage20
+			// 
+			this->tabPage20->Controls->Add(this->chart14);
+			this->tabPage20->Location = System::Drawing::Point(4, 22);
+			this->tabPage20->Name = L"tabPage20";
+			this->tabPage20->Size = System::Drawing::Size(763, 415);
+			this->tabPage20->TabIndex = 11;
+			this->tabPage20->Text = L"Keyboard";
+			this->tabPage20->UseVisualStyleBackColor = true;
+			// 
+			// chart14
+			// 
+			chartArea12->Name = L"ChartArea1";
+			this->chart14->ChartAreas->Add(chartArea12);
+			this->chart14->Location = System::Drawing::Point(14, 36);
+			this->chart14->Name = L"chart14";
+			series12->ChartArea = L"ChartArea1";
+			series12->Name = L"Depth";
+			this->chart14->Series->Add(series12);
+			this->chart14->Size = System::Drawing::Size(735, 342);
+			this->chart14->TabIndex = 12;
+			this->chart14->Text = L"Classification";
+			// 
+			// tabPage21
+			// 
+			this->tabPage21->Controls->Add(this->chart15);
+			this->tabPage21->Location = System::Drawing::Point(4, 22);
+			this->tabPage21->Name = L"tabPage21";
+			this->tabPage21->Size = System::Drawing::Size(763, 415);
+			this->tabPage21->TabIndex = 12;
+			this->tabPage21->Text = L"Koala";
+			this->tabPage21->UseVisualStyleBackColor = true;
+			// 
+			// chart15
+			// 
+			chartArea13->Name = L"ChartArea1";
+			this->chart15->ChartAreas->Add(chartArea13);
+			this->chart15->Location = System::Drawing::Point(14, 36);
+			this->chart15->Name = L"chart15";
+			series13->ChartArea = L"ChartArea1";
+			series13->Name = L"Depth";
+			this->chart15->Series->Add(series13);
+			this->chart15->Size = System::Drawing::Size(735, 342);
+			this->chart15->TabIndex = 12;
+			this->chart15->Text = L"Classification";
+			// 
+			// tabPage22
+			// 
+			this->tabPage22->Controls->Add(this->chart16);
+			this->tabPage22->Location = System::Drawing::Point(4, 22);
+			this->tabPage22->Name = L"tabPage22";
+			this->tabPage22->Size = System::Drawing::Size(763, 415);
+			this->tabPage22->TabIndex = 13;
+			this->tabPage22->Text = L"Mug";
+			this->tabPage22->UseVisualStyleBackColor = true;
+			// 
+			// chart16
+			// 
+			chartArea14->Name = L"ChartArea1";
+			this->chart16->ChartAreas->Add(chartArea14);
+			this->chart16->Location = System::Drawing::Point(14, 36);
+			this->chart16->Name = L"chart16";
+			series14->ChartArea = L"ChartArea1";
+			series14->Name = L"Depth";
+			this->chart16->Series->Add(series14);
+			this->chart16->Size = System::Drawing::Size(735, 342);
+			this->chart16->TabIndex = 12;
+			this->chart16->Text = L"Classification";
+			// 
+			// tabPage23
+			// 
+			this->tabPage23->Controls->Add(this->chart17);
+			this->tabPage23->Location = System::Drawing::Point(4, 22);
+			this->tabPage23->Name = L"tabPage23";
+			this->tabPage23->Size = System::Drawing::Size(763, 415);
+			this->tabPage23->TabIndex = 14;
+			this->tabPage23->Text = L"Nothing";
+			this->tabPage23->UseVisualStyleBackColor = true;
+			// 
+			// chart17
+			// 
+			chartArea15->Name = L"ChartArea1";
+			this->chart17->ChartAreas->Add(chartArea15);
+			this->chart17->Location = System::Drawing::Point(14, 36);
+			this->chart17->Name = L"chart17";
+			series15->ChartArea = L"ChartArea1";
+			series15->Name = L"Depth";
+			this->chart17->Series->Add(series15);
+			this->chart17->Size = System::Drawing::Size(735, 342);
+			this->chart17->TabIndex = 12;
+			this->chart17->Text = L"Classification";
 			// 
 			// tabPage2
 			// 
@@ -1473,13 +1928,13 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			// 
 			// chart1
 			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
+			chartArea16->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea16);
 			this->chart1->Location = System::Drawing::Point(6, 6);
 			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->Name = L"Depth";
-			this->chart1->Series->Add(series1);
+			series16->ChartArea = L"ChartArea1";
+			series16->Name = L"Depth";
+			this->chart1->Series->Add(series16);
 			this->chart1->Size = System::Drawing::Size(716, 329);
 			this->chart1->TabIndex = 10;
 			this->chart1->Text = L"Classification";
@@ -1520,13 +1975,13 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			// 
 			// chart2
 			// 
-			chartArea2->Name = L"ChartArea1";
-			this->chart2->ChartAreas->Add(chartArea2);
+			chartArea17->Name = L"ChartArea1";
+			this->chart2->ChartAreas->Add(chartArea17);
 			this->chart2->Location = System::Drawing::Point(18, 6);
 			this->chart2->Name = L"chart2";
-			series2->ChartArea = L"ChartArea1";
-			series2->Name = L"Depth";
-			this->chart2->Series->Add(series2);
+			series17->ChartArea = L"ChartArea1";
+			series17->Name = L"Depth";
+			this->chart2->Series->Add(series17);
 			this->chart2->Size = System::Drawing::Size(716, 329);
 			this->chart2->TabIndex = 13;
 			this->chart2->Text = L"Classification";
@@ -1603,7 +2058,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->label38->AutoSize = true;
 			this->label38->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label38->Location = System::Drawing::Point(201, 626);
+			this->label38->Location = System::Drawing::Point(91, 626);
 			this->label38->Name = L"label38";
 			this->label38->Size = System::Drawing::Size(124, 37);
 			this->label38->TabIndex = 1;
@@ -1615,7 +2070,7 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->lbl_Status->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lbl_Status->ForeColor = System::Drawing::SystemColors::Highlight;
-			this->lbl_Status->Location = System::Drawing::Point(365, 626);
+			this->lbl_Status->Location = System::Drawing::Point(255, 626);
 			this->lbl_Status->Name = L"lbl_Status";
 			this->lbl_Status->Size = System::Drawing::Size(71, 37);
 			this->lbl_Status->TabIndex = 2;
@@ -1648,6 +2103,35 @@ private: System::Windows::Forms::Label^  lbl_Status;
 			this->tabPage6->PerformLayout();
 			this->tabControl3->ResumeLayout(false);
 			this->tabPage7->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart3))->EndInit();
+			this->tabPage8->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart4))->EndInit();
+			this->tabPage11->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart5))->EndInit();
+			this->tabPage12->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart6))->EndInit();
+			this->tabPage13->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart7))->EndInit();
+			this->tabPage14->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart8))->EndInit();
+			this->tabPage15->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart9))->EndInit();
+			this->tabPage16->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart10))->EndInit();
+			this->tabPage17->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart11))->EndInit();
+			this->tabPage18->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart12))->EndInit();
+			this->tabPage19->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart13))->EndInit();
+			this->tabPage20->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart14))->EndInit();
+			this->tabPage21->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart15))->EndInit();
+			this->tabPage22->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart16))->EndInit();
+			this->tabPage23->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart17))->EndInit();
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
 			this->tabControl2->ResumeLayout(false);
@@ -1886,10 +2370,10 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	TrainEDist::TrainEDist(dp + "/Mug", "Mug", tDir + "/depth");
 
 	//Nothing
-	lbl_Status->Text = "Calculating Unlabelled EDistance";
+	lbl_Status->Text = "Calculating Nothing EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/unlabelled", "unlabelled", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/unlabelled", "unlabelled", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Nothing", "Nothing", tDir + "/images");
+	TrainEDist::TrainEDist(dp + "/Nothing", "Nothing", tDir + "/depth");
 
 	lbl_Status->Text = "Idle";
 	lbl_Status->Refresh();
@@ -2037,10 +2521,72 @@ private: System::Void btn_ClassTestFolder_Click(System::Object^  sender, System:
 	txt_ClassTrain->Text = TrainDlg->SelectedPath;
 }
 private: System::Void btn_ClassTest_Click(System::Object^  sender, System::EventArgs^  e) {
-	//ClassTest CT;
+	
 	msclr::interop::marshal_context context;
 	std::string path = context.marshal_as<std::string>(txt_ClassTrain->Text);
-	//int out[] = CT.CheckFolder(path,"Android");
+	//Now run the classification Confusion on the split images
+	lbl_Status->Text = "Testing Android";
+	lbl_Status->Refresh();
+	chart3->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Android", chart3);
+	lbl_Status->Text = "Testing Baby";
+	lbl_Status->Refresh();
+	chart4->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Baby", chart4);
+	lbl_Status->Text = "Testing Blackberry";
+	lbl_Status->Refresh();
+	chart5->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Blackberry",chart5);
+	lbl_Status->Text = "Testing Camera";
+	lbl_Status->Refresh();
+	chart6->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Camera",chart6);
+	lbl_Status->Text = "Testing Car";
+	lbl_Status->Refresh();
+	chart7->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Car",chart7);
+	lbl_Status->Text = "Testing Coffee Tin";
+	lbl_Status->Refresh();
+	chart8->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Coffee Tin", chart8);
+	lbl_Status->Text = "Testing Diet Coke";
+	lbl_Status->Refresh();
+	chart9->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Diet Coke", chart9);
+	lbl_Status->Text = "Testing Dinosaur";
+	lbl_Status->Refresh();
+	chart10->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Dinosaur", chart10);
+	lbl_Status->Text = "Testing Dog";
+	lbl_Status->Refresh();
+	chart11->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Dog", chart11);
+	lbl_Status->Text = "Testing Dragon";
+	lbl_Status->Refresh();
+	chart12->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Dragon", chart12);
+	lbl_Status->Text = "Testing Duck";
+	lbl_Status->Refresh();
+	chart13->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Duck", chart13);
+	lbl_Status->Text = "Testing Keyboard";
+	lbl_Status->Refresh();
+	chart14->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Keyboard", chart14);
+	lbl_Status->Text = "Testing Koala";
+	lbl_Status->Refresh();
+	chart15->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Koala", chart15);
+	lbl_Status->Text = "Testing Mug";
+	lbl_Status->Refresh();
+	chart16->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Mug", chart16);
+	lbl_Status->Text = "Testing Nothing";
+	lbl_Status->Refresh();
+	chart17->ChartAreas[0]->AxisX->Interval = 1;
+	ClassTest::ClassTest(path, "Nothing", chart17);
+	lbl_Status->Text = "Idle";
+	lbl_Status->Refresh();
 }
 private: System::Void txt_ClassTrain_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 }

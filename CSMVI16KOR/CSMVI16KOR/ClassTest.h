@@ -6,7 +6,6 @@
 class ClassTest
 {
 public:
-	ClassTest();
-	int * CheckFolder(std::string, cv::PCA);
+	ClassTest(std::string, std::string, System::Windows::Forms::DataVisualization::Charting::Chart^);
 };
 

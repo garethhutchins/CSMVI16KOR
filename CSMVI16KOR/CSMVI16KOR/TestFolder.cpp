@@ -181,7 +181,7 @@ TestFolder::TestFolder(std::string path, std::string temp, std::string Type, Sys
 
 
 	//Unlabelled
-	fileName = temp + "/unlabelled/unlabelled.dat";
+	fileName = temp + "/Nothing/Nothing.dat";
 	fs.open(fileName, cv::FileStorage::READ);
 	cv::Mat unlabelled;
 	fs["mean"] >> unlabelled;
