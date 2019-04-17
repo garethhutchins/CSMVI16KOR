@@ -3,7 +3,7 @@
 public class TrainEDist
 {
 public:
-	TrainEDist(std::string, std::string, std::string);
+	TrainEDist(std::string, std::string, std::string, std::string);
 
 private:
 

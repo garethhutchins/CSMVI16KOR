@@ -1325,7 +1325,7 @@ private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart17;
 			this->txt_Threshold->Name = L"txt_Threshold";
 			this->txt_Threshold->Size = System::Drawing::Size(100, 20);
 			this->txt_Threshold->TabIndex = 1;
-			this->txt_Threshold->Text = L"1";
+			this->txt_Threshold->Text = L"1.5";
 			// 
 			// label28
 			// 
@@ -2281,99 +2281,99 @@ private: System::Void btn_class_Click(System::Object^  sender, System::EventArgs
 	std::string dp = tDir + "/depth";
 
 	//Train the SVM
-	TrainSVM::TrainSVM(im, lbl_Status);
+	TrainSVM::TrainSVM(im, lbl_Status,"images");
 	
-	TrainSVM::TrainSVM(dp, lbl_Status);
+	TrainSVM::TrainSVM(dp, lbl_Status,"depth");
 
 	//Means
 	//Android
 	lbl_Status->Text = "Calculating Android EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Android", "Android", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Android", "Android", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Android", "Android", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Android", "Android", tDir + "/depth", "depth");
 	//Baby
 	lbl_Status->Text = "Calculating Baby EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Baby", "Baby", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Baby", "Baby", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Baby", "Baby", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Baby", "Baby", tDir + "/depth", "depth");
 
 	//Blackberry
 	lbl_Status->Text = "Calculating Blackberry EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Blackberry", "Blackberry", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Blackberry", "Blackberry", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Blackberry", "Blackberry", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Blackberry", "Blackberry", tDir + "/depth", "depth");
 
 	//Camera
 	lbl_Status->Text = "Calculating Camera EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Camera", "Camera", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Camera", "Camera", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Camera", "Camera", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Camera", "Camera", tDir + "/depth", "depth");
 
 	//Car
 	lbl_Status->Text = "Calculating Car EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Car", "Car", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Car", "Car", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Car", "Car", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Car", "Car", tDir + "/depth", "depth");
 
 	//Coffee Tin
 	lbl_Status->Text = "Calculating Coffee Tin EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Coffee Tin", "Coffee Tin", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Coffee Tin", "Coffee Tin", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Coffee Tin", "Coffee Tin", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Coffee Tin", "Coffee Tin", tDir + "/depth", "depth");
 
 	//Diet Coke
 	lbl_Status->Text = "Calculating Diet Coke EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Diet Coke", "Diet Coke", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Diet Coke", "Diet Coke", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Diet Coke", "Diet Coke", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Diet Coke", "Diet Coke", tDir + "/depth", "depth");
 
 	//Dinosaur
 	lbl_Status->Text = "Calculating Dinosaur EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Dinosaur", "Dinosaur", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Dinosaur", "Dinosaur", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Dinosaur", "Dinosaur", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Dinosaur", "Dinosaur", tDir + "/depth", "depth");
 
 	//Dog
 	lbl_Status->Text = "Calculating Dog EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Dog", "Dog", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Dog", "Dog", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Dog", "Dog", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Dog", "Dog", tDir + "/depth", "depth");
 
 	//Dragon
 	lbl_Status->Text = "Calculating Dragon EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Dragon", "Dragon", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Dragon", "Dragon", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Dragon", "Dragon", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Dragon", "Dragon", tDir + "/depth", "depth");
 
 	//Duck
 	lbl_Status->Text = "Calculating Duck EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Duck", "Duck", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Duck", "Duck", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Duck", "Duck", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Duck", "Duck", tDir + "/depth", "depth");
 
 	//Keyboard
 	lbl_Status->Text = "Calculating Keyboard EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Keyboard", "Keyboard", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Keyboard", "Keyboard", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Keyboard", "Keyboard", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Keyboard", "Keyboard", tDir + "/depth", "depth");
 
 	//Koala
 	lbl_Status->Text = "Calculating Koala EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Koala", "Koala", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Koala", "Koala", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Koala", "Koala", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Koala", "Koala", tDir + "/depth", "depth");
 
 	//Mug
 	lbl_Status->Text = "Calculating Mug EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Mug", "Mug", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Mug", "Mug", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Mug", "Mug", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Mug", "Mug", tDir + "/depth", "depth");
 
 	//Nothing
 	lbl_Status->Text = "Calculating Nothing EDistance";
 	lbl_Status->Refresh();
-	TrainEDist::TrainEDist(im + "/Nothing", "Nothing", tDir + "/images");
-	TrainEDist::TrainEDist(dp + "/Nothing", "Nothing", tDir + "/depth");
+	TrainEDist::TrainEDist(im + "/Nothing", "Nothing", tDir + "/images", "images");
+	TrainEDist::TrainEDist(dp + "/Nothing", "Nothing", tDir + "/depth", "depth");
 
 	lbl_Status->Text = "Idle";
 	lbl_Status->Refresh();
@@ -2428,6 +2428,12 @@ private: System::Void btn_Image_Select_Click(System::Object^  sender, System::Ev
 private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  e) {
 	msclr::interop::marshal_context context;
 	std::string ti = context.marshal_as<std::string>(txt_Test_Image->Text);
+	String^ D = txt_Test_Image->Text;
+	//Attempting Depth Calibration
+	//D = D->Replace("images", "depth");
+	//std::string td = context.marshal_as<std::string>(D);
+	//cv::Mat dpth = imread(td, cv::IMREAD_GRAYSCALE);
+	//cv::threshold(dpth, dpth, 200, 255, cv::THRESH_TOZERO_INV);
 	cv::namedWindow("ImageP", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 	cv::Mat img = imread(ti, cv::IMREAD_GRAYSCALE);
 	//Apply Threshold
@@ -2477,6 +2483,7 @@ private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  
 	dst = ROI;
 
 	cv::imshow("ImageP", dst);
+	// No depth calibrationcv::imshow("ImageP", dpth);
 
 }
 private: System::Void btn_SH_Click(System::Object^  sender, System::EventArgs^  e) {

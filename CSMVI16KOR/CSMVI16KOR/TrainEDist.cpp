@@ -39,7 +39,7 @@ static  Mat createDataMatrix(const vector<Mat> &images)
 	cout << " DONE" << endl;
 	return data;
 }
-void readImages(string dirName, vector<Mat> & images) {
+void readImages(string dirName, vector<Mat> & images, std::string Type) {
 	cout << "Reading images from " << dirName;
 
 	// Add slash to directory name if missing
@@ -75,35 +75,48 @@ void readImages(string dirName, vector<Mat> & images) {
 					cout << "image " << path << " not read properly" << endl;
 				}
 				else
-					//Apply Edge Detection
-					Mat src, src_gray;
-				Mat dst, detected_edges;
+					//Apply Edge Detection if image
+					if (Type == "images") {
+						Mat src, src_gray;
+						Mat dst, detected_edges;
 
-				int edgeThresh = 1;
-				int const max_lowThreshold = 100;
-				int ratio = 3;
-				int kernel_size = 3;
-				char* window_name = "Edge Map";
-				//Threshold
-				img = img * EThresh;
+						int edgeThresh = 1;
+						int const max_lowThreshold = 100;
+						int ratio = 3;
+						int kernel_size = 3;
+						char* window_name = "Edge Map";
+						//Threshold
+						img = img * EThresh;
 
-				//Resize
-				double Ss = ES / 100;
-				cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+						//Resize
+						double Ss = ES / 100;
+						cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
 
-				cv::blur(img, detected_edges, cv::Size(3, 3));
+						cv::blur(img, detected_edges, cv::Size(3, 3));
 
-				/// Canny detector
-				cv::Canny(detected_edges, detected_edges, ECT, ECT*ratio, kernel_size);
+						/// Canny detector
+						cv::Canny(detected_edges, detected_edges, ECT, ECT*ratio, kernel_size);
 
-				/// Using Canny's output as a mask, we display our result
-				dst = cv::Scalar::all(0);
+						/// Using Canny's output as a mask, we display our result
+						dst = cv::Scalar::all(0);
 
-				img.copyTo(dst, detected_edges);
-				cv::Mat ROI(dst, cv::Rect(Ex1, Ey1, Ex2, Ey2));
-				ROI.convertTo(ROI, CV_32F);
+						img.copyTo(dst, detected_edges);
+						//Crop
+						cv::Mat ROI(dst, cv::Rect(Ex1, Ey1, Ex2, Ey2));
+						ROI.convertTo(ROI, CV_32F);
 
-				images.push_back(ROI);
+						images.push_back(ROI);
+					}
+					else {
+						//Resize
+						double Ss = ES / 100;
+						cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+						cv::Mat ROI(img, cv::Rect(Ex1, Ey1, Ex2, Ey2));
+						ROI.convertTo(ROI, CV_32F);
+
+						images.push_back(ROI);
+					}
+					
 				
 			}
 		}
@@ -116,7 +129,7 @@ void readImages(string dirName, vector<Mat> & images) {
 	cout << "... " << images.size() << " files read" << endl;
 }
 
-TrainEDist::TrainEDist(std::string path, std::string label, std::string Trainpath)
+TrainEDist::TrainEDist(std::string path, std::string label, std::string Trainpath, std::string type)
 {
 	//Load Image Processing Settings
 	std::string fileName = Trainpath + "/ImageProc.dat";
@@ -131,7 +144,7 @@ TrainEDist::TrainEDist(std::string path, std::string label, std::string Trainpat
 	fs["y2"] >> Ey2;
 	fs.release();
 	vector<Mat> images;
-	readImages(path, images);
+	readImages(path, images,type);
 	int numRows = images.size();
 	Mat data = createDataMatrix(images);
 	data.convertTo(data, CV_32F);

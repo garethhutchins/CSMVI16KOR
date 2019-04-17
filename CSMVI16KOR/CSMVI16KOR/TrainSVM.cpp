@@ -20,7 +20,7 @@ int Rx1, Rx2, Ry1, Ry2;
 
 
 
-void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int CurrentLabel) {
+void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int CurrentLabel, std::string Type) {
 	cout << "Reading images from " << dirName;
 
 	// Add slash to directory name if missing
@@ -57,53 +57,118 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 					//cout << "image " << path << " not read properly" << endl;
 				}
 				else {
-					//Apply Edge Detection
-					Mat src, src_gray;
-					Mat dst, detected_edges;
 
-					int edgeThresh = 1;
-					int const max_lowThreshold = 100;
-					int ratio = 3;
-					int kernel_size = 3;
-					char* window_name = "Edge Map";
-					//Threshold
-					img = img * Thresh;
+					//Apply Edge Detection if image
+					if (Type == "images") {
+						Mat src, src_gray;
+						Mat dst, detected_edges;
 
-					//Resize
-					double Ss = S / 100;
-					cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+						int edgeThresh = 1;
+						int const max_lowThreshold = 100;
+						int ratio = 3;
+						int kernel_size = 3;
+						char* window_name = "Edge Map";
+						//Threshold
+						img = img * Thresh;
 
-					cv::blur(img, detected_edges, cv::Size(3, 3));
+						//Resize
+						double Ss = S / 100;
+						cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
 
-					/// Canny detector
-					cv::Canny(detected_edges, detected_edges, CT, CT*ratio, kernel_size);
+						cv::blur(img, detected_edges, cv::Size(3, 3));
 
-					/// Using Canny's output as a mask, we display our result
-					dst = cv::Scalar::all(0);
+						/// Canny detector
+						cv::Canny(detected_edges, detected_edges, CT, CT*ratio, kernel_size);
 
-					img.copyTo(dst, detected_edges);
-					cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
-					//dst = ROI;
+						/// Using Canny's output as a mask, we display our result
+						dst = cv::Scalar::all(0);
 
-					//HOGDescriptor hog;
-					//vector<float> descriptors_train;
-					//cv::imwrite(dirName +"/t.png", dst);
-					//Mat imgR = imread(dirName + "/t.png", cv::IMREAD_GRAYSCALE);
-					//imgR.convertTo(imgR, CV_32F);
-					//hog.compute(imgR, descriptors_train,Size(8, 8), Size(0, 0));
-					//Mat HogMat;
+						img.copyTo(dst, detected_edges);
+						//Crop
+						cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+						ROI.convertTo(ROI, CV_32F);
+
+						images.push_back(ROI);
+						cv::Mat ROI2(dst, cv::Rect(Rx1 - 5, Ry1, Rx2, Ry2));
+						ROI2.convertTo(ROI2, CV_32F);
+						images.push_back(ROI2);
+						cv::Mat ROI3(dst, cv::Rect(Rx1, Ry1 + 5, Rx2, Ry2));
+						ROI3.convertTo(ROI3, CV_32F);
+						images.push_back(ROI3);
+						cv::Mat ROI4(dst, cv::Rect(Rx1 - 5, Ry1 + 5, Rx2, Ry2));
+						ROI4.convertTo(ROI4, CV_32F);
+						images.push_back(ROI4);
+						cv::Mat ROI5(dst, cv::Rect(Rx1 - 10, Ry1, Rx2, Ry2));
+						ROI5.convertTo(ROI5, CV_32F);
+						images.push_back(ROI5);
+						cv::Mat ROI6(dst, cv::Rect(Rx1, Ry1 + 10, Rx2, Ry2));
+						ROI6.convertTo(ROI6, CV_32F);
+						images.push_back(ROI6);
+						cv::Mat ROI7(dst, cv::Rect(Rx1 - 10, Ry1 + 10, Rx2, Ry2));
+						ROI7.convertTo(ROI7, CV_32F);
+						images.push_back(ROI7);
+						cv::Mat ROI8(dst, cv::Rect(Rx1 - 15, Ry1, Rx2, Ry2));
+						ROI8.convertTo(ROI8, CV_32F);
+						images.push_back(ROI8);
+						cv::Mat ROI9(dst, cv::Rect(Rx1, Ry1 + 15, Rx2, Ry2));
+						ROI9.convertTo(ROI9, CV_32F);
+						images.push_back(ROI9);
+						cv::Mat ROI10(dst, cv::Rect(Rx1 - 15, Ry1 + 15, Rx2, Ry2));
+						ROI10.convertTo(ROI10, CV_32F);
+						images.push_back(ROI10);
+					}
+					else {
+						//Resize
+						double Ss = S / 100;
+						cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+						cv::Mat ROI(img, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+						ROI.convertTo(ROI, CV_32F);
+						images.push_back(ROI);
+						cv::Mat ROI2(img, cv::Rect(Rx1 - 5, Ry1, Rx2, Ry2));
+						ROI2.convertTo(ROI2, CV_32F);
+						images.push_back(ROI2);
+						cv::Mat ROI3(img, cv::Rect(Rx1, Ry1 + 5, Rx2, Ry2));
+						ROI3.convertTo(ROI3, CV_32F);
+						images.push_back(ROI3);
+						cv::Mat ROI4(img, cv::Rect(Rx1 - 5, Ry1 + 5, Rx2, Ry2));
+						ROI4.convertTo(ROI4, CV_32F);
+						images.push_back(ROI4);
+						cv::Mat ROI5(img, cv::Rect(Rx1 - 10, Ry1, Rx2, Ry2));
+						ROI5.convertTo(ROI5, CV_32F);
+						images.push_back(ROI5);
+						cv::Mat ROI6(img, cv::Rect(Rx1, Ry1 + 10, Rx2, Ry2));
+						ROI6.convertTo(ROI6, CV_32F);
+						images.push_back(ROI6);
+						cv::Mat ROI7(img, cv::Rect(Rx1 - 10, Ry1 + 10, Rx2, Ry2));
+						ROI7.convertTo(ROI7, CV_32F);
+						images.push_back(ROI7);
+						cv::Mat ROI8(img, cv::Rect(Rx1 - 15, Ry1, Rx2, Ry2));
+						ROI8.convertTo(ROI8, CV_32F);
+						images.push_back(ROI8);
+						cv::Mat ROI9(img, cv::Rect(Rx1, Ry1 + 15, Rx2, Ry2));
+						ROI9.convertTo(ROI9, CV_32F);
+						images.push_back(ROI9);
+						cv::Mat ROI10(img, cv::Rect(Rx1 - 15, Ry1 + 15, Rx2, Ry2));
+						ROI10.convertTo(ROI10, CV_32F);
+						images.push_back(ROI10);
+
+					}
 					
-					//for (int i = 0; i < descriptors_train.size(); i++) {
-						//Mat TMat = Mat(1,1, CV_32F, descriptors_train.at(i));
-						//HogMat.push_back(TMat);
-					//}
-					ROI.convertTo(ROI, CV_32F);
-						
-					images.push_back(ROI);
+					
 				}
 					
 				
 				cv::Mat Labs = cv::Mat(1, 1, CV_32SC1, CurrentLabel);
+				//Push back an equal number for the image windows
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
+				labels.push_back(Labs);
 				labels.push_back(Labs);
 
 			}
@@ -152,7 +217,7 @@ static Mat createLabelMatrix(const vector<Mat> & labels) {
 
 }
 
-TrainSVM::TrainSVM(std::string path, System::Windows::Forms::Label^ LS) {
+TrainSVM::TrainSVM(std::string path, System::Windows::Forms::Label^ LS, std::string Type) {
 	vector<Mat> images;
 	vector<Mat> labels;
 	//Load the Image Processing Settings
@@ -172,49 +237,49 @@ TrainSVM::TrainSVM(std::string path, System::Windows::Forms::Label^ LS) {
 	//Add all of the Images
 	LS->Text = "Reading Android Images";
 	LS->Refresh();
-	readImages(path + "/Android", images, labels, 1);
+	readImages(path + "/Android", images, labels, 1, Type);
 	LS->Text = "Reading Baby Images";
 	LS->Refresh();
-	readImages(path + "/Baby", images, labels, 2);
+	readImages(path + "/Baby", images, labels, 2, Type);
 	LS->Text = "Reading Blackberry Images";
 	LS->Refresh();
-	readImages(path + "/Blackberry", images, labels, 3);
+	readImages(path + "/Blackberry", images, labels, 3, Type);
 	LS->Text = "Reading Camera Images";
 	LS->Refresh();
-	readImages(path + "/Camera", images, labels, 4);
+	readImages(path + "/Camera", images, labels, 4, Type);
 	LS->Text = "Reading Car Images";
 	LS->Refresh();
-	readImages(path + "/Car", images, labels, 5);
+	readImages(path + "/Car", images, labels, 5, Type);
 	LS->Text = "Reading Coffee Tin Images";
 	LS->Refresh();
-	readImages(path + "/Coffee Tin", images, labels, 6);
+	readImages(path + "/Coffee Tin", images, labels, 6, Type);
 	LS->Text = "Reading Diet Coke Images";
 	LS->Refresh();
-	readImages(path + "/Diet Coke", images, labels, 7);
+	readImages(path + "/Diet Coke", images, labels, 7, Type);
 	LS->Text = "Reading Dinosaur Images";
 	LS->Refresh();
-	readImages(path + "/Dinosaur", images, labels, 8);
+	readImages(path + "/Dinosaur", images, labels, 8, Type);
 	LS->Text = "Reading Dog Images";
 	LS->Refresh();
-	readImages(path + "/Dog", images, labels, 9);
-	LS->Text = "Reading Gragon Images";
+	readImages(path + "/Dog", images, labels, 9, Type);
+	LS->Text = "Reading Dragon Images";
 	LS->Refresh();
-	readImages(path + "/Dragon", images, labels, 10);
+	readImages(path + "/Dragon", images, labels, 10, Type);
 	LS->Text = "Reading Duck Images";
 	LS->Refresh();
-	readImages(path + "/Duck", images, labels, 11);
+	readImages(path + "/Duck", images, labels, 11, Type);
 	LS->Text = "Reading Keyboard Images";
 	LS->Refresh();
-	readImages(path + "/Keyboard", images, labels, 12);
+	readImages(path + "/Keyboard", images, labels, 12, Type);
 	LS->Text = "Reading Koala Images";
 	LS->Refresh();
-	readImages(path + "/Koala", images, labels, 13);
+	readImages(path + "/Koala", images, labels, 13, Type);
 	LS->Text = "Reading Mug Images";
 	LS->Refresh();
-	readImages(path + "/Mug", images, labels, 14);
+	readImages(path + "/Mug", images, labels, 14, Type);
 	LS->Text = "Reading Nothing Images";
 	LS->Refresh();
-	readImages(path + "/Nothing", images, labels, 15);
+	readImages(path + "/Nothing", images, labels, 15, Type);
 	int numRows = images.size();
 	Size sz = images[0].size();
 	LS->Text = "Creating Data Matrix";
@@ -234,7 +299,7 @@ TrainSVM::TrainSVM(std::string path, System::Windows::Forms::Label^ LS) {
 	svm->setKernel(ml::SVM::LINEAR);
 	svm->setGamma(3);
 	svm->setDegree(3);
-
+	
 	//Now perform PCA on the HOG Matrix
 	// do the PCA, and retain only 50 eigenvecs:
 	LS->Text = "Performing PCA";

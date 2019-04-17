@@ -97,7 +97,7 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 	Ifs["y1"] >> Ry1;
 	Ifs["y2"] >> Ry2;
 	Ifs.release();
-
+	
 	//Load the PCA
 	LS->Text = "Loading Depth PCA";
 	LS->Refresh();
@@ -151,6 +151,7 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 	cv::moveWindow("RGB", 1000, 0);
 	cv::namedWindow("Depth", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 	cv::moveWindow("Depth", 1000, 500);
+	cv::namedWindow("Sil", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 	//This is for seeing the Canny Results
 	//cv::namedWindow("DepthC", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 
@@ -201,85 +202,23 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 			//std::string iFile = TrainingPath + "/image.png";
 			cv::Mat Grey;
 			cv::cvtColor(currentRGB, Grey, cv::COLOR_BGR2GRAY);
-			//cv::imwrite(iFile, Grey);
-
-
-
-			//depth
-			//std::string dFile = TrainingPath + "/depth.png";
-			//cv::imwrite(dFile, currentDepth);
-			//Mat img = imread(TrainingPath + "/image.png", cv::IMREAD_GRAYSCALE);
-			//Mat depth = imread(TrainingPath + "/depth.png", cv::IMREAD_GRAYSCALE);
-			//Get the Probability for Depths
-			//depth
-
-			//Get the Hog
-			//HOGDescriptor Dhog;
-			//std::vector<float> descriptors_train_D;
-			//Dhog.compute(depth, descriptors_train_D, Size(64, 48), Size(0, 0));
-			//Mat HogMatD;
-
-			//for (int i = 0; i < descriptors_train_D.size(); i++) {
-				//Mat TMat = Mat(1, 1, CV_32F, descriptors_train_D.at(i));
-				//HogMatD.push_back(TMat);
-			//}
-
-			//Mat Dres;
-			//HogMatD = HogMatD.t();
-			Mat src, src_gray;
+			//Check the type of stream before applying conversion
+			Mat Image;
+			Mat Ires;
 			Mat dst, detected_edges;
+
+			//Images
 
 			int edgeThresh = 1;
 			int const max_lowThreshold = 100;
 			int ratio = 3;
 			int kernel_size = 3;
 			char* window_name = "Edge Map";
-			//Threshold
-			currentDepth = currentDepth * Thresh;
 
-			//Resize
-			double Ss = S / 100;
-			cv::resize(currentDepth, currentDepth, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
-
-			cv::blur(currentDepth, detected_edges, cv::Size(3, 3));
-
-			/// Canny detector
-			cv::Canny(detected_edges, detected_edges, CT, CT*ratio, kernel_size);
-
-			/// Using Canny's output as a mask, we display our result
-			dst = cv::Scalar::all(0);
-
-			currentDepth.copyTo(dst, detected_edges);
-			cv::imshow("DepthC", dst);
-			cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
-			ROI.convertTo(ROI, CV_32F);
-			Mat RS = ROI.reshape(1, 1);
-			RS.convertTo(RS, CV_32F);
-			//Now reduce the HogMat with the PCA Projetions
-			Mat DRed = DepthPCA.project(RS);
-			DRed.convertTo(DRed, CV_32F);
-			Mat Dres;
-			float Dresponse = svmD->predict(DRed, Dres, 0);
-			std::cout << "SVM Depth Output = " << Dres.at<float>(0) << std::endl;
-
-			Mat Image;
-			Mat Ires;
-			//HOGDescriptor Ihog;
-			//std::vector<float> descriptors_train_I;
-			//Ihog.compute(img, descriptors_train_I, Size(64, 48), Size(0, 0));
-			//Mat HogMatI;
-
-			//for (int i = 0; i < descriptors_train_I.size(); i++) {
-				//Mat TMat = Mat(1, 1, CV_32F, descriptors_train_I.at(i));
-				//HogMatI.push_back(TMat);
-			//}
-			//HogMatI = HogMatI.t();
-			//Mat IRed = ImagePCA.project(HogMatI);
-			//Threshold
 			Grey = Grey * Thresh;
 
 			//Resize
-			Ss = S / 100;
+			double Ss = S / 100;
 			cv::resize(Grey, Grey, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
 
 			cv::blur(Grey, detected_edges, cv::Size(3, 3));
@@ -291,19 +230,55 @@ SVMTest::SVMTest(std::string TrainingPath, std::string ImagePath, System::Window
 			dst = cv::Scalar::all(0);
 
 			Grey.copyTo(dst, detected_edges);
-			cv::Mat ROD(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
-			ROD.convertTo(ROD, CV_32F);
-			Mat RSD = ROD.reshape(1, 1);
+			cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+			ROI.convertTo(ROI, CV_32F);
+			Mat RS = ROI.reshape(1, 1);
 			//Now reduce the HogMat with the PCA Projetions
-			RS = RSD.reshape(1, 1);
+
 			RS.convertTo(RS, CV_32F);
 			Mat IRed = ImagePCA.project(RS);
 			IRed.convertTo(IRed, CV_32F);
 			float Iresponse = svmI->predict(IRed, Ires, 0);
 			std::cout << "SVM Image Output = " << Ires.at<float>(0) << std::endl;
-			GetLabel(Dres.at<float>(0), DL);
-			GetLabel(Ires.at<float>(0),IL);
 
+			GetLabel(Ires.at<float>(0), IL);
+			
+			//Depth
+			
+
+			//Resize
+			Ss = S / 100;
+
+			cv::resize(currentDepth, currentDepth, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+			cv::Mat SCD;
+
+			cv::Mat t1, t2;
+			//Just the object
+			cv::threshold(currentDepth, t1, 80, 255, cv::THRESH_TOZERO);
+			//Everything but object
+			cv::threshold(currentDepth, t2, 80, 255, cv::THRESH_TOZERO_INV);
+			
+			//Invert that so that the outline is white
+			cv::Mat OM, OM2;
+			currentDepth.copyTo(OM, t1);
+			int oldValue = 0;
+			int newValue = 255;
+			OM.setTo(newValue, OM == oldValue);
+			OM.copyTo(OM2, t2);
+			cv::imshow("Sil", OM2);
+
+			cv::Mat ROID(OM2, cv::Rect(Rx1, Ry1, Rx2, Ry2));
+			ROID.convertTo(ROID, CV_32F);
+			Mat RSD = ROID.reshape(1, 1);
+			RSD.convertTo(RSD, CV_32F);
+			Mat DRed = DepthPCA.project(RSD);
+			DRed.convertTo(DRed, CV_32F);
+			
+			
+			Mat Dres;
+			float Dresponse = svmD->predict(DRed, Dres, 0);
+			std::cout << "SVM Depth Output = " << Dres.at<float>(0) << std::endl;
+			GetLabel(Dres.at<float>(0), DL);
 		}
 		
 		OneInTwenty++;

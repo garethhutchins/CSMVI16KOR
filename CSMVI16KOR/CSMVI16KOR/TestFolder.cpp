@@ -17,6 +17,7 @@ double TES;
 float TEThresh;
 int TECT;
 int TERx1, TERx2, TERy1, TERy2;
+
 TestFolder::TestFolder(std::string path, std::string temp, std::string Type, System::Windows::Forms::DataVisualization::Charting::Chart^  chart1, System::Windows::Forms::Label^ IL)
 {
 	//Set the graph
@@ -269,6 +270,7 @@ TestFolder::TestFolder(std::string path, std::string temp, std::string Type, Sys
 		//Images
 		//Threshold
 		cv::Mat img;
+		cv::Mat ROI2;
 		if (Type == "images") {
 			Grey = Grey * TEThresh;
 
@@ -284,103 +286,129 @@ TestFolder::TestFolder(std::string path, std::string temp, std::string Type, Sys
 			/// Using Canny's output as a mask, we display our result
 			dst = cv::Scalar::all(0);
 			Grey.copyTo(dst, detected_edges);
+			std::vector<cv::Mat> images;
+			cv::Mat dst2;
+			dst.copyTo(dst2);
+
+			cv::Mat ROI(dst2, cv::Rect(TERx1, TERy1, TERx2, TERy2));
+			ROI.convertTo(ROI, CV_32F);
+			ROI.copyTo(ROI2);
 		}
 		else {
 			//Type is depth
-			img = currentDepth * TEThresh;
+			
 			//Resize
+			cv::Mat D;
+			currentDepth.copyTo(D);
+
 			double Ss = TES / 100;
-			cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+			cv::resize(D, D, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
 
-			cv::blur(img, detected_edges, cv::Size(3, 3));
+			cv::Mat SCD;
 
-			/// Canny detector
-			cv::Canny(detected_edges, detected_edges, TECT, TECT*ratio, kernel_size);
+			cv::Mat t1, t2;
+			//Just the object
+			cv::threshold(D, t1, 80, 255, cv::THRESH_TOZERO);
+			//Everything but object
+			cv::threshold(D, t2, 80, 255, cv::THRESH_TOZERO_INV);
+			
+			//Invert that so that the outline is white
+			cv::Mat OM;
+			D.copyTo(OM, t1);
+			int oldValue = 0;
+			int newValue = 255;
+			OM.setTo(newValue, OM == oldValue);
+			OM.copyTo(dst, t2);
+		
+			dst.convertTo(dst, CV_32F);
+			std::vector<cv::Mat> images;
+			cv::Mat dst2;
+			dst.copyTo(dst2);
 
-			/// Using Canny's output as a mask, we display our result
-			dst = cv::Scalar::all(0);
-			img.copyTo(dst, detected_edges);
+			cv::Mat ROI(dst2, cv::Rect(TERx1, TERy1, TERx2, TERy2));
+			ROI.convertTo(ROI, CV_32F);
+			ROI.copyTo(ROI2);
 		}
 		
 		
 		
-		cv::Mat ROI(dst, cv::Rect(TERx1, TERy1, TERx2, TERy2));
-		ROI.convertTo(ROI, CV_32F);
+		
+		//Now get the Euclidean distance for the image compared to the other means
 
 		EDistance E;
 		double Tot = 0;
-
-		double DAndroid = E.GetDistance(ROI, Android_mu);
+		
+		double DAndroid = E.GetDistance(ROI2, Android_mu);
 		Tot = Tot + DAndroid;
 		std::string D = std::to_string(DAndroid);
 		std::cout << "Android " << Type << " " << D << std::endl;
 
-		double DBaby = E.GetDistance(ROI, Baby);
+		double DBaby = E.GetDistance(ROI2, Baby);
 		Tot = Tot + DBaby;
 		D = std::to_string(DBaby);
 		std::cout << "Baby " << Type << " " << D << std::endl;
 
-		double DBlackberry = E.GetDistance(ROI, Blackberry);
+		double DBlackberry = E.GetDistance(ROI2, Blackberry);
 		Tot = Tot + DBlackberry;
 		D = std::to_string(DBlackberry);
 		std::cout << "Blackberry " << Type << " " << D << std::endl;
 
-		double DCamera = E.GetDistance(ROI, Camera);
+		double DCamera = E.GetDistance(ROI2, Camera);
 		Tot = Tot + DCamera;
 		D = std::to_string(DCamera);
 		std::cout << "Camera " << Type << " " << D << std::endl;
 
-		double Dcar = E.GetDistance(ROI, Car);
+		double Dcar = E.GetDistance(ROI2, Car);
 		Tot = Tot + Dcar;
 		D = std::to_string(Dcar);
 		std::cout << "Car " << Type << " " << D << std::endl;
 
-		double DCof = E.GetDistance(ROI, CoffeeTin);
+		double DCof = E.GetDistance(ROI2, CoffeeTin);
 		Tot = Tot + DCof;
 		D = std::to_string(DCof);
 		std::cout << "Coffee Tin " << Type << " " << D << std::endl;
 
-		double DDiet = E.GetDistance(ROI, DietCoke);
+		double DDiet = E.GetDistance(ROI2, DietCoke);
 		Tot = Tot + DDiet;
 		D = std::to_string(DDiet);
 		std::cout << "Diet Coke " << Type << " " << D << std::endl;
 
-		double DDino = E.GetDistance(ROI, Dinosaur);
+		double DDino = E.GetDistance(ROI2, Dinosaur);
 		Tot = Tot + DDino;
 		D = std::to_string(DDino);
 		std::cout << "Dinosaur " << Type << " " << D << std::endl;
 
-		double DDog = E.GetDistance(ROI, Dog);
+		double DDog = E.GetDistance(ROI2, Dog);
 		Tot = Tot + DDog;
 		D = std::to_string(DDog);
 		std::cout << "Dog " << Type << " " << D << std::endl;
 
-		double DDragon = E.GetDistance(ROI, Dragon);
+		double DDragon = E.GetDistance(ROI2, Dragon);
 		Tot = Tot + DDragon;
 		D = std::to_string(DDragon);
 		std::cout << "Dragon " << Type << " " << D << std::endl;
 
-		double DDuck = E.GetDistance(ROI, Duck);
+		double DDuck = E.GetDistance(ROI2, Duck);
 		Tot = Tot + DDuck;
 		D = std::to_string(DDuck);
 		std::cout << "Duck " << Type << " " << D << std::endl;
 
-		double DKey = E.GetDistance(ROI, Keyboard);
+		double DKey = E.GetDistance(ROI2, Keyboard);
 		Tot = Tot + DKey;
 		D = std::to_string(DKey);
 		std::cout << "Keyboard " << Type << " " << D << std::endl;
 
-		double DKoala = E.GetDistance(ROI, Koala);
+		double DKoala = E.GetDistance(ROI2, Koala);
 		Tot = Tot + DKoala;
 		D = std::to_string(DKoala);
 		std::cout << "Koala " << Type << " " << D << std::endl;
 
-		double DMug = E.GetDistance(ROI, Mug);
+		double DMug = E.GetDistance(ROI2, Mug);
 		Tot = Tot + DMug;
 		D = std::to_string(DMug);
 		std::cout << "Mug " << Type << " " << D << std::endl;
 
-		double DUL = E.GetDistance(ROI, unlabelled);
+		double DUL = E.GetDistance(ROI2, unlabelled);
 		Tot = Tot + DUL;
 		D = std::to_string(DUL);
 		std::cout << "Nothing " << Type << " " << D << std::endl;
@@ -420,6 +448,7 @@ TestFolder::TestFolder(std::string path, std::string temp, std::string Type, Sys
 		chart1->Series["Depth"]->Points->AddXY(obj[12], val[12]);
 		chart1->Series["Depth"]->Points->AddXY(obj[13], val[13]);
 		chart1->Series["Depth"]->Points->AddXY(obj[14], val[14]);
+		chart1->Refresh();
 		// Check for keyboard input
 
 		
@@ -434,6 +463,7 @@ TestFolder::TestFolder(std::string path, std::string temp, std::string Type, Sys
 			}
 		}
 		IL->Text = High;
+		IL->Refresh();
 		key = cv::waitKey(10);
 	}
 

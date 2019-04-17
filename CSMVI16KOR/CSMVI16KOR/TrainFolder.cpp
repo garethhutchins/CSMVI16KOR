@@ -61,20 +61,32 @@ TrainFolder::TrainFolder(std::string path, std::string temp)
 		// if it has been updated
 		if (status & State::UPDATED_DEPTH)
 			currentDepth = wrap.Depth;
-
+		cv::Mat SCD;
+		
+		cv::Mat t1, t2;
+		//Just the object
+		cv::threshold(currentDepth, t1, 80, 255, cv::THRESH_TOZERO);
+		//Everything but object
+		cv::threshold(currentDepth, t2, 80, 255, cv::THRESH_TOZERO_INV);
+		cv::cvtColor(currentRGB, SCD, cv::COLOR_BGR2GRAY);
+		//Invert that so that the outline is white
+		cv::Mat OM, OM2;
+		SCD.copyTo(OM, t1);
+		int oldValue = 0;
+		int newValue = 255;
+		OM.setTo(newValue, OM == oldValue);
+		OM.copyTo(OM2, t2);
 		// Show the images in the windows
 		cv::imshow("RGB", currentRGB);
-		cv::imshow("Depth", currentDepth);
+		cv::imshow("Depth", OM2);
 		std::string iFile = temp + "/images/" + std::to_string(Frame) + ".png";
 		cv::Mat Grey;
 		cv::cvtColor(currentRGB, Grey, cv::COLOR_BGR2GRAY);
 		cv::imwrite(iFile, Grey);
-		
-		
 
 		//depth
 		std::string dFile = temp + "/depth/" + std::to_string(Frame) + ".png";
-		cv::imwrite(dFile, currentDepth);
+		cv::imwrite(dFile, OM2);
 		
 		// Check for keyboard input
 		key = cv::waitKey(10);
