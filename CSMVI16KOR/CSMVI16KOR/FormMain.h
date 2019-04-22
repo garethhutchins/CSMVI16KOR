@@ -1,5 +1,6 @@
 
 #pragma once
+//FormMain.h
 #include "FormMain.h"
 #include <string>
 #include <msclr\marshal_cppstd.h>
@@ -2148,18 +2149,22 @@ private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart17;
 
 		}
 #pragma endregion
+		//FormMain Code
 	private: System::Void btn_trn_folder_Click(System::Object^  sender, System::EventArgs^  e) {
+		//Browse for the training folder
 		TrainDlg->SelectedPath = "";
 		TrainDlg->ShowDialog();
 		txt_trainFldr->Text = TrainDlg->SelectedPath;	
 	}
 private: System::Void btn_run_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Run the Distance Training
 	msclr::interop::marshal_context context;
 	std::string tf = context.marshal_as<std::string>(txt_trainFldr->Text);
 	std::string ft = context.marshal_as<std::string>(txt_tmp->Text);
 	TrainFolder::TrainFolder(tf,ft);
 }
 private: System::Void btn_temp_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Select the temp train folder and return the select dir
 	TrainDlg->SelectedPath = "";
 	TrainDlg->ShowDialog();
 	txt_tmp->Text = TrainDlg->SelectedPath;
@@ -2406,6 +2411,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	lbl_Status->Refresh();
 }
 private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
+	//Tes the SVM Classificatin
 	msclr::interop::marshal_context context;
 	std::string tf = context.marshal_as<std::string>(txt_test->Text);
 	std::string ft = context.marshal_as<std::string>(txt_trn->Text);
@@ -2414,14 +2420,17 @@ private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs
 	lbl_Status->Refresh();
 }
 private: System::Void btn_Image_Select_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Select Image for Image Processing
 	openFileDialog1->ShowDialog();
 	txt_Test_Image->Text = openFileDialog1->FileName;
 	msclr::interop::marshal_context context;
 	std::string ti = context.marshal_as<std::string>(txt_Test_Image->Text);
+	//Show the image fram
 	cv::namedWindow("Image", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 	cv::Mat img = imread(ti, cv::IMREAD_GRAYSCALE);
 	cv::imshow("Image", img);
 	int CT = std::stof(context.marshal_as<std::string>(txt_CT->Text));
+	//Show the result of the Canny Edge detection
 	Canny C;
 	C.CannyImage(img, CT);
 }
@@ -2429,18 +2438,14 @@ private: System::Void btn_IS_Click(System::Object^  sender, System::EventArgs^  
 	msclr::interop::marshal_context context;
 	std::string ti = context.marshal_as<std::string>(txt_Test_Image->Text);
 	String^ D = txt_Test_Image->Text;
-	//Attempting Depth Calibration
-	//D = D->Replace("images", "depth");
-	//std::string td = context.marshal_as<std::string>(D);
-	//cv::Mat dpth = imread(td, cv::IMREAD_GRAYSCALE);
-	//cv::threshold(dpth, dpth, 200, 255, cv::THRESH_TOZERO_INV);
+
 	cv::namedWindow("ImageP", cv::WindowFlags::WINDOW_AUTOSIZE | cv::WindowFlags::WINDOW_GUI_EXPANDED);
 	cv::Mat img = imread(ti, cv::IMREAD_GRAYSCALE);
 	//Apply Threshold
 	//Convert to float
 	
 	float Thresh = std::stof(context.marshal_as<std::string>(txt_Threshold->Text));
-	
+	//Aply the Thresholding
 	img = img * Thresh;
 
 	//Crop
@@ -2490,6 +2495,7 @@ private: System::Void btn_SH_Click(System::Object^  sender, System::EventArgs^  
 
 }
 private: System::Void button1_Click_2(System::Object^  sender, System::EventArgs^  e) {
+	//Save the image processing settings to the training folder
 	msclr::interop::marshal_context context;
 	std::string path = context.marshal_as<std::string>(txt_tmp->Text);
 	float Thresh = std::stof(context.marshal_as<std::string>(txt_Threshold->Text));
@@ -2528,12 +2534,15 @@ private: System::Void btn_ClassTestFolder_Click(System::Object^  sender, System:
 	txt_ClassTrain->Text = TrainDlg->SelectedPath;
 }
 private: System::Void btn_ClassTest_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+	//Peform the CVM confusion 
 	msclr::interop::marshal_context context;
 	std::string path = context.marshal_as<std::string>(txt_ClassTrain->Text);
 	//Now run the classification Confusion on the split images
+
 	lbl_Status->Text = "Testing Android";
+	//Update the statud label
 	lbl_Status->Refresh();
+	//Show all labels on the chart
 	chart3->ChartAreas[0]->AxisX->Interval = 1;
 	ClassTest::ClassTest(path, "Android", chart3);
 	lbl_Status->Text = "Testing Baby";

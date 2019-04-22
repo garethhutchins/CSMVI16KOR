@@ -1,3 +1,4 @@
+//SVMTest.cpp
 #include "SVMTest.h"
 #include "TrainSVM.h"
 #include "freenect-playback-wrapper.h"

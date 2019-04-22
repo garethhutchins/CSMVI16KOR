@@ -1,3 +1,4 @@
+//TrainSVM.cpp
 #include "TrainSVM.h"
 #include "freenect-playback-wrapper.h"
 #include <Unknwn.h>    
@@ -73,9 +74,11 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 
 						//Resize
 						double Ss = S / 100;
-						cv::resize(img, img, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
+						Mat tIMG;
+						img.copyTo(tIMG);
+						cv::resize(tIMG, tIMG, cv::Size(), Ss, Ss, cv::INTER_LINEAR);
 
-						cv::blur(img, detected_edges, cv::Size(3, 3));
+						cv::blur(tIMG, detected_edges, cv::Size(3, 3));
 
 						/// Canny detector
 						cv::Canny(detected_edges, detected_edges, CT, CT*ratio, kernel_size);
@@ -83,7 +86,7 @@ void readImages(string dirName, vector<Mat> & images, vector<Mat> & labels,int C
 						/// Using Canny's output as a mask, we display our result
 						dst = cv::Scalar::all(0);
 
-						img.copyTo(dst, detected_edges);
+						tIMG.copyTo(dst, detected_edges);
 						//Crop
 						cv::Mat ROI(dst, cv::Rect(Rx1, Ry1, Rx2, Ry2));
 						ROI.convertTo(ROI, CV_32F);
